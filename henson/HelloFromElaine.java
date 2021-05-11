@@ -5,6 +5,6 @@ public class HelloFromElaine {
 
     public static void main(String[] args) {
 
-        System.out.println("Hello, my name is Elaine Henson.");
+        System.out.println("Hello, my name is Elaine.");
     }
 }
