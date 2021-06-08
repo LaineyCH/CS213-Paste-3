@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Baker\'s Box</string>
+    <string name="readButton">Read from DB</string>
+    <string name="writeButton">Write to DB</string>
 </resources>
