@@ -5,6 +5,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.widget.LinearLayout;
 
 public class EditRecipeActivity extends AppCompatActivity {
 
@@ -12,7 +13,7 @@ public class EditRecipeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_recipe2);
-        ConstraintLayout li=(ConstraintLayout)findViewById(R.id.layout4);
+        LinearLayout li=(LinearLayout)findViewById(R.id.layout5);
         li.setBackgroundColor(Color.parseColor("#7BEEE4"));
     }
 }
