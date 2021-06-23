@@ -7,21 +7,24 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.LinearLayout;
 
-
-public class RecipeActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recipe2);
-        ConstraintLayout li=(ConstraintLayout) findViewById(R.id.layout2);
+        setContentView(R.layout.activity_main);
+        ConstraintLayout li=(ConstraintLayout)findViewById(R.id.layout1);
         li.setBackgroundColor(Color.parseColor("#7BEEE4"));
     }
 
-    public void createRecipe(View view) {
-        Intent intent = new Intent(this,EditRecipeActivity.class);
+    public void goToRecipes(View view){
+        Intent intent = new Intent(this,RecipeActivity.class);
+        startActivity(intent);
+    }
+
+    public void goToIngredients(View view){
+        Intent intent = new Intent(this,IngredientsActivity.class);
         startActivity(intent);
     }
 }

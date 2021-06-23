@@ -9,6 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BakersBox">
+        <activity android:name=".viewRecipeActivity"></activity>
+        <activity android:name=".EditRecipeActivity" />
+        <activity android:name=".EditIngredientActivity" />
+        <activity android:name=".IngredientsActivity" />
+        <activity
+            android:name=".RecipeActivity"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="andoird.support.PARENT_ACTIVITY"
+                android:value="paste3.bakersbox.MainActivity" />
+        </activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
