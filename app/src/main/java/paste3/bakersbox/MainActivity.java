@@ -34,12 +34,15 @@ public class MainActivity extends AppCompatActivity {
         myRef = database.getReference("BBStorage");
     }
 
+
+    // Sends data to the Firebase Cloud Database
     public void writeToCloud(View view) {
 
         DatabaseReference ingredientRef = myRef.child("ingredients");
         DatabaseReference recipeRef = myRef.child("recipe");
         DatabaseReference unitRef = myRef.child("unit");
 
+        // The 10 Unit Objects needed.
         new Unit("ml", 1000000).upload(unitRef);
         new Unit("l", 1000).upload(unitRef);
         new Unit("cup", 4000).upload(unitRef);
@@ -55,8 +58,9 @@ public class MainActivity extends AppCompatActivity {
         recipeRef.setValue("RecipesList");
     }
 
+    // Fetches the Unit objects form the Firebase Cloud Database.
     public void fetchUnits(View view) {
-        Log.d("Fetch", "fetching units");
+        Log.d("Fetch", "fetching units"); // Debugging
         myRef.child("unit").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
@@ -70,19 +74,4 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-    public void basicRead(View view) {
-
-        myRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if (!task.isSuccessful()) {
-                    Log.e("firebase", "Error getting data", task.getException());
-                } else {
-                    Log.d("firebase", String.valueOf(task.getResult().getValue()));
-                }
-            }
-        });
-    }
-
 }

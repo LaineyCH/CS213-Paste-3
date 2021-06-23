@@ -2,19 +2,24 @@ package paste3.bakersbox;
 
 import com.google.firebase.database.DatabaseReference;
 
+/*
+ * Unit Class
+ */
 public class Unit {
 
     private String _unitLabel;
     private float _siQuantity;
 
-    public Unit() {
-        this._unitLabel = "";
-        this._siQuantity = 1;
-    }
-
+    // Main constructor for Unit
     public Unit(String unitLabel, float siQuantity) {
         this._unitLabel = unitLabel;
         this._siQuantity = siQuantity;
+    }
+
+    // Secondary constructor that creates a "blank" Unit object
+    public Unit() {
+        this._unitLabel = "";
+        this._siQuantity = 1;
     }
 
     public String getUnitLabel() {
@@ -33,6 +38,7 @@ public class Unit {
         this._siQuantity = siQuantity;
     }
 
+    // Conversion needed to go from the units as purchased or specified by a recipe, to the base unit.
     public float convertTo(Unit unit, float quantity){
         return this.getSiQuantity() / unit.getSiQuantity() * quantity;
     }
