@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance(
                 "https://baker-s-box-default-rtdb.europe-west1.firebasedatabase.app/");
         myRef = database.getReference("BBStorage");
+        UnitManager.setDbRef(myRef.child("unit"));
     }
 
 
@@ -54,24 +55,14 @@ public class MainActivity extends AppCompatActivity {
         new Unit("oz", (float) 35.27).upload(unitRef);
         new Unit("count", 1).upload(unitRef);
 
-        ingredientRef.setValue("IngredientList");
+        IngredientManager.addIngredient("Plain Flour", "g", "kg", (float) 1.5, (float)1.80 );
+        IngredientManager.addIngredient("Milk", "ml", "l", (float) 2.27, (float)1.10 );
+        IngredientManager.addIngredient("Butter", "g", "g", (float) 150, (float)1.80 );
+        IngredientManager.addIngredient("Baking Powder", "g", "g", (float) 50, (float)1.00 );
+        IngredientManager.addIngredient("Eggs", "count", "count", (float) 12, (float)2.05 );
+
+        ingredientRef.setValue(IngredientManager.getIngredientMap());
         recipeRef.setValue("RecipesList");
     }
 
-    // Fetches the Unit objects form the Firebase Cloud Database.
-    public void fetchUnits(View view) {
-        Log.d("Fetch", "fetching units"); // Debugging
-        myRef.child("unit").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                for (DataSnapshot unitSnap : snapshot.getChildren()) {
-                    Unit unit = unitSnap.getValue(Unit.class);
-                    Log.d("Unit", unit.getUnitLabel());
-                }
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
-    }
 }

@@ -1,5 +1,8 @@
 package paste3.bakersbox;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /*
  * Ingredient class
  */
@@ -48,5 +51,13 @@ public class Ingredient {
         this._unit = UnitManager.getUnit(thisUnitLabel);
         Unit userUnit = UnitManager.getUnit(userUnitLabel);
         return this._unit.convertTo(userUnit, quantity);
+    }
+
+    public Map<String, Object> toMap() {
+        Map<String, Object> ingredientMap = new HashMap<>();
+        ingredientMap.put("ingredientName", _ingredientName);
+        ingredientMap.put("atomicPrice", _atomicPrice);
+        ingredientMap.put("unit", _unit.getUnitLabel());
+        return ingredientMap;
     }
 }
