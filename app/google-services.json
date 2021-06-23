@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "144808444216",
+    "project_id": "baker-s-box",
+    "storage_bucket": "baker-s-box.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:144808444216:android:986fc885dee82df1f781cd",
+        "android_client_info": {
+          "package_name": "paste3.bakersbox"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "144808444216-75ljmk2v1al78h6mbpisthqflg328uep.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBieSvzxWzVMA5J7ERdRO1IfiS89DCcuCY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "144808444216-75ljmk2v1al78h6mbpisthqflg328uep.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
