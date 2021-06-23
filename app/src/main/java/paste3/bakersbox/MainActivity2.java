@@ -1,24 +1,15 @@
 package paste3.bakersbox;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DataSnapshot;
-
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity2 extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
     private DatabaseReference myRef;
@@ -26,18 +17,20 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main2);
 
         // Create an instance of the Firebase Database
         FirebaseDatabase database = FirebaseDatabase.getInstance(
                 "https://baker-s-box-default-rtdb.europe-west1.firebasedatabase.app/");
         myRef = database.getReference("BBStorage");
-        UnitManager.setDbRef(myRef.child("unit"));
+        UnitManager.setDbRefUnit(myRef.child("unit"));
+        //IngredientManager.setDbRefIngredient(myRef.child("ingredients"));
     }
-
 
     // Sends data to the Firebase Cloud Database
     public void writeToCloud(View view) {
+
+        //IngredientManager.saveIngredients();
 
         DatabaseReference ingredientRef = myRef.child("ingredients");
         DatabaseReference recipeRef = myRef.child("recipe");

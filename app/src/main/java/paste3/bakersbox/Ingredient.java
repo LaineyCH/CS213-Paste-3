@@ -9,11 +9,11 @@ import java.util.Map;
 public class Ingredient {
 
     private String _ingredientName;
-    private Float _atomicPrice;
+    private float _atomicPrice;
     private Unit _unit; //ml or g or count
 
-    // Constructor
-    public Ingredient(String ingredientName, String thisUnitLabel, String userUnitLabel, Float quantity, Float price) {
+    // Main Constructor
+    public Ingredient(String ingredientName, String thisUnitLabel, String userUnitLabel, float quantity, float price) {
         this._ingredientName = ingredientName;
 
         // the base unit for this ingredient
@@ -25,6 +25,13 @@ public class Ingredient {
         // the conversion needed to calculate the atomic price for the ingredient, based on it's base unit.
         float convertedQuantity = this._unit.convertTo(userUnit, quantity);
         _atomicPrice = price / convertedQuantity;
+    }
+
+    // "From Database" Constructor
+    public Ingredient(Map<String, Object> ingredientMap) {
+        this._ingredientName = (String) ingredientMap.get("ingredientName");
+        this._atomicPrice = ((Double) ingredientMap.get("atomicPrice")).floatValue();
+        this._unit = UnitManager.getUnit((String) ingredientMap.get("unit"));
     }
 
     public String get_ingredientName() {
