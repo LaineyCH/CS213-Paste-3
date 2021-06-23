@@ -2,17 +2,74 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <Button
+        android:id="@+id/shopping_lists1"
+        android:layout_width="218dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="52dp"
+        android:text="Shopping Lists"
+        android:backgroundTint="#430354"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/quotes1" />
 
+    <Button
+        android:id="@+id/quotes1"
+        android:layout_width="218dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="52dp"
+        android:text="Quotes"
+        android:backgroundTint="#430354"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ingredients1" />
+
+    <Button
+        android:id="@+id/ingredients1"
+        android:layout_width="218dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="52dp"
+        android:onClick="goToIngredients"
+        android:backgroundTint="#430354"
+        android:text="Ingredients"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recipes1" />
+
+    <Button
+        android:id="@+id/recipes1"
+        android:layout_width="218dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="52dp"
+        android:backgroundTint="#430354"
+        android:onClick="goToRecipes"
+        android:text="Recipes"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title1" />
+
+    <TextView
+        android:id="@+id/title1"
+        android:layout_width="214dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="86dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:text="Baker's Box"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
