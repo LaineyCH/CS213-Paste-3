@@ -15,30 +15,34 @@ public class Ingredient {
     // Main Constructor
     public Ingredient(String ingredientName, String thisUnitLabel, String userUnitLabel, float quantity, float price) {
         this._ingredientName = ingredientName;
-
         // the base unit for this ingredient
         this._unit = UnitManager.getUnit(thisUnitLabel);
-
         // the unit the ingredient was purchased as, or that is required for a specific recipe.
         Unit userUnit = UnitManager.getUnit(userUnitLabel);
-
         // the conversion needed to calculate the atomic price for the ingredient, based on it's base unit.
         float convertedQuantity = this._unit.convertTo(userUnit, quantity);
         _atomicPrice = price / convertedQuantity;
     }
 
+    // Blank Constructor
+    public Ingredient() {
+        this._ingredientName = "";
+        this._atomicPrice = 0;
+        this._unit = null;
+    }
+
     // "From Database" Constructor
     public Ingredient(Map<String, Object> ingredientMap) {
         this._ingredientName = (String) ingredientMap.get("ingredientName");
-        this._atomicPrice = ((Double) ingredientMap.get("atomicPrice")).floatValue();
+        this._atomicPrice = ((Number) ingredientMap.get("atomicPrice")).floatValue();
         this._unit = UnitManager.getUnit((String) ingredientMap.get("unit"));
     }
 
-    public String get_ingredientName() {
+    public String getIngredientName() {
         return _ingredientName;
     }
 
-    public void set_ingredientName(String ingredientName) {
+    public void setIngredientName(String ingredientName) {
         this._ingredientName = ingredientName;
     }
 
@@ -46,7 +50,7 @@ public class Ingredient {
         return _atomicPrice;
     }
 
-    public void set_atomicPrice(Float price, Float quantity) {
+    public void setAtomicPrice(Float price, Float quantity) {
         this._atomicPrice = price / quantity; // do full calculation for atomic price.
     }
 
@@ -54,7 +58,7 @@ public class Ingredient {
         return _unit;
     }
 
-    public float set_unit(String thisUnitLabel, String userUnitLabel, Float quantity) {
+    public float setUnit(String thisUnitLabel, String userUnitLabel, Float quantity) {
         this._unit = UnitManager.getUnit(thisUnitLabel);
         Unit userUnit = UnitManager.getUnit(userUnitLabel);
         return this._unit.convertTo(userUnit, quantity);

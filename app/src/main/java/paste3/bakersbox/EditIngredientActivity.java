@@ -5,6 +5,9 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.RadioButton;
 
 public class EditIngredientActivity extends AppCompatActivity {
 
@@ -14,5 +17,27 @@ public class EditIngredientActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_ingredient);
         ConstraintLayout li=(ConstraintLayout)findViewById(R.id.layout4);
         li.setBackgroundColor(Color.parseColor("#7BEEE4"));
+    }
+
+    // Triggered by the submit button in the edit ingredient activity
+    public void submitIngredient(View view) {
+
+        // Get all EditText inputs and parse to string or float as needed
+
+        EditText inputIngredientName = findViewById(R.id.ingredientNameInput);
+        String ingredientName = inputIngredientName.getText().toString();
+
+        EditText inputQuantity = findViewById(R.id.quantityNumber1);
+        float quantity = Float.parseFloat(inputQuantity.getText().toString());
+
+        EditText inputPrice = findViewById(R.id.priceInput);
+        float price = Float.parseFloat(inputQuantity.getText().toString());
+
+        //RadioButton - needs to be worked out
+        String userUnitLabel = "l";
+        String unitFromRadioButton = "ml";
+
+        // Create new recipe
+        IngredientManager.addIngredient(ingredientName, unitFromRadioButton, userUnitLabel, quantity, price);
     }
 }

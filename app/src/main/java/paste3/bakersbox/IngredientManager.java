@@ -7,50 +7,49 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
-import java.lang.ref.WeakReference;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 /*
  * Ingredient Manager creates ingredients, and maintains the Ingredient Map
  */
 public class IngredientManager {
-    private static final Map<String, Ingredient> ingredientsMap = new HashMap<>();
-    private static WeakReference<DatabaseReference> dbRefIngredient = new WeakReference<>(null);
+    private static final ConcurrentMap<String, Ingredient> ingredientsMap = new ConcurrentHashMap<>();
+    public static DatabaseReference dbRefIngredient = null;
 
-
-    public static WeakReference<DatabaseReference> getDbRef() {
-        return dbRefIngredient;
+    public static ConcurrentMap<String, Ingredient> getIngredientsMap() {
+        return ingredientsMap;
     }
 
-    public static void setDbRefIngredient(DatabaseReference dbRef) {
-        IngredientManager.dbRefIngredient = new WeakReference<>(dbRef);
-        populateIngredientMap();
+    public static void setDbRefIngredient(DatabaseReference dbRef, OnInitialised onInitialised) {
+        IngredientManager.dbRefIngredient = dbRef;
+        populateIngredientMap(onInitialised);
     }
 
     /*
      * Make sure the Unit Map contains the Unit object. If not, fetch them from the database.
      */
-    public static void populateIngredientMap() {
-        Log.d("Fetch", "fetching units"); // Debugging
+    public static void populateIngredientMap(OnInitialised callback) {
+        Log.d("Fetch", "fetching ingredients"); // Debugging
 
         // Fetches the Unit objects form the Firebase Cloud Database.
-        DatabaseReference _dbRefIngredient = dbRefIngredient.get();
         if (dbRefIngredient == null) {
             Log.d("dbRefIngredient", "Database reference not available.");
             return;
         }
-        _dbRefIngredient.addValueEventListener(new ValueEventListener() {
+        dbRefIngredient.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 for (DataSnapshot unitSnap : snapshot.getChildren()) {
                     Map<String, Object> ingredientMap = (Map<String, Object>) unitSnap.getValue();
                     Ingredient ingredient = new Ingredient(ingredientMap);
 
-                    Log.d("Ingredient", ingredient.get_ingredientName()); // Debugging
+                    Log.d("Ingredient", ingredient.getIngredientName()); // Debugging
 
-                    ingredientsMap.put(ingredient.get_ingredientName(), ingredient);
+                    ingredientsMap.put(ingredient.getIngredientName(), ingredient);
                 }
+                callback.onInitialised();
             }
 
             @Override
@@ -72,8 +71,12 @@ public class IngredientManager {
     }
 
     // Returns the Ingredient that matches the key, from the Ingredient Map.
-    public static Ingredient findIngredient(String ingredientLabel) {
-        return ingredientsMap.get(ingredientLabel);
+    public static Ingredient getIngredient(String ingredientLabel) {
+        Ingredient ingredient = ingredientsMap.get(ingredientLabel);
+        if(ingredient == null){
+            throw new RuntimeException(String.format("Missing ingredient: '%s'", ingredientLabel));
+        }
+        return ingredient;
     }
 
     // Used when an Ingredient already exists, but values need to be changed.
@@ -81,12 +84,12 @@ public class IngredientManager {
         Ingredient ingredient = ingredientsMap.get(ingredientName);
         Unit thisUnit = UnitManager.getUnit(thisUnitLabel);
         assert ingredient != null; // Debugging
-        float convertedQuantity = ingredient.set_unit(thisUnitLabel, userUnitLabel, quantity);
-        ingredient.set_atomicPrice(price, convertedQuantity);
+        float convertedQuantity = ingredient.setUnit(thisUnitLabel, userUnitLabel, quantity);
+        ingredient.setAtomicPrice(price, convertedQuantity);
     }
 
-    public static Map<String, Object> getIngredientMap() {
-        Map<String, Object> myMap = new HashMap<>();
+    public static Map<String, Object> getSimplifiedIngredientMap() {
+        Map<String, Object> myMap = new ConcurrentHashMap<>();
         for (Map.Entry<String, Ingredient> entry: ingredientsMap.entrySet()) {
             myMap.put(entry.getKey(), entry.getValue().toMap());
         }
@@ -95,18 +98,11 @@ public class IngredientManager {
 
     // Sends ingredient map to the Firebase Cloud Database
     public static void saveIngredients() {
-
-        IngredientManager.addIngredient("Plain Flour", "g", "kg", (float) 1.5, (float)1.80 );
-        IngredientManager.addIngredient("Milk", "ml", "l", (float) 2.27, (float)1.10 );
-        IngredientManager.addIngredient("Butter", "g", "g", (float) 150, (float)1.80 );
-        IngredientManager.addIngredient("Baking Powder", "g", "g", (float) 50, (float)1.00 );
-        IngredientManager.addIngredient("Eggs", "count", "count", (float) 12, (float)2.05 );
-
-        DatabaseReference _dbRefIngredient = dbRefIngredient.get();
         if (dbRefIngredient == null) {
             Log.d("dbRefIngredient", "Database reference not available.");
             return;
         }
-        _dbRefIngredient.setValue(getIngredientMap());
+        dbRefIngredient.setValue(getSimplifiedIngredientMap());
     }
+
 }
