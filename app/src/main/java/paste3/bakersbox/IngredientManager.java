@@ -22,6 +22,7 @@ public class IngredientManager {
         return ingredientsMap;
     }
 
+    // Sets the Database reference and populates the Ingredient Map from the Database
     public static void setDbRefIngredient(DatabaseReference dbRef, OnInitialised onInitialised) {
         IngredientManager.dbRefIngredient = dbRef;
         populateIngredientMap(onInitialised);
@@ -41,17 +42,19 @@ public class IngredientManager {
         dbRefIngredient.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
+                // Loops through the data retrieved from the Database
                 for (DataSnapshot unitSnap : snapshot.getChildren()) {
                     Map<String, Object> ingredientMap = (Map<String, Object>) unitSnap.getValue();
+                    // Creates an Ingredient object from the data
                     Ingredient ingredient = new Ingredient(ingredientMap);
 
                     Log.d("Ingredient", ingredient.getIngredientName()); // Debugging
 
+                    // Adds the Ingredient to the Ingredient Map
                     ingredientsMap.put(ingredient.getIngredientName(), ingredient);
                 }
                 callback.onInitialised();
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
@@ -88,6 +91,8 @@ public class IngredientManager {
         ingredient.setAtomicPrice(price, convertedQuantity);
     }
 
+    // Coverts each Ingredient Object in the Ingredient Map to a simplified object for sending to
+    // the database (a custom toMap() is called on Unit Objects within each Ingredient Object).
     public static Map<String, Object> getSimplifiedIngredientMap() {
         Map<String, Object> myMap = new ConcurrentHashMap<>();
         for (Map.Entry<String, Ingredient> entry: ingredientsMap.entrySet()) {
@@ -96,7 +101,7 @@ public class IngredientManager {
         return myMap;
     }
 
-    // Sends ingredient map to the Firebase Cloud Database
+    // Sends the simplified ingredient map to the Firebase Cloud Database
     public static void saveIngredients() {
         if (dbRefIngredient == null) {
             Log.d("dbRefIngredient", "Database reference not available.");

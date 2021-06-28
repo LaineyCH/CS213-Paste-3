@@ -83,7 +83,8 @@ public class EditRecipeActivity extends AppCompatActivity {
         String method  = inputMethod.getText().toString();
         Log.d("Method", method);
 
-        // Add to the recipe map in the recipe manager
+        // Send retrieved data to the Recipe Manager, including the recipeIngredientList, to create
+        // the recipe and add it to the Recipe Map
         RecipeManager.addRecipe(recipeName, recipeIngredientList, prepTime, cookTime,
                 numberServings, typeServing, method);
     }

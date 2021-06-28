@@ -40,20 +40,23 @@ public class Recipe {
     }
 
     // "From Database" Constructor
-    public Recipe(Map<String, Object> ingredientmap) {
-        this._recipeName = (String) ingredientmap.get("recipeName");
-        this.recipeItems = RecipeIngredient.getRecipeItemList((List<Object>) ingredientmap.get("recipeItems"));
-        this.prepTime = ((Number) ingredientmap.get("prepTime")).floatValue();
-        this.cookTime = ((Number) ingredientmap.get("cookTime")).floatValue();
-        this.cost = ((Number) ingredientmap.get("cost")).floatValue();
-        this.numberServings = ((Number) ingredientmap.get("numberServings")).floatValue();
-        this.typeServing = (String) ingredientmap.get("typeServing");
-        this.method = (String) ingredientmap.get("method");
+    public Recipe(Map<String, Object> ingredientMap) {
+        this._recipeName = (String) ingredientMap.get("recipeName");
+        this.recipeItems = RecipeIngredient.getRecipeItemList((List<Object>) ingredientMap.get("recipeItems"));
+        this.prepTime = ((Number) ingredientMap.get("prepTime")).floatValue();
+        this.cookTime = ((Number) ingredientMap.get("cookTime")).floatValue();
+        this.cost = ((Number) ingredientMap.get("cost")).floatValue();
+        this.numberServings = ((Number) ingredientMap.get("numberServings")).floatValue();
+        this.typeServing = (String) ingredientMap.get("typeServing");
+        this.method = (String) ingredientMap.get("method");
     }
 
+    // Turns a Recipe object into a map, so that the recipeIngredients don't contain ingredient and
+    // Unit objects, for saving to the Database.
     public Map<String, Object> toMap() {
         Map<String, Object> recipeMap = new HashMap<>();
         recipeMap.put("recipeName", _recipeName);
+        // The recipeIngredient list is simplified
         recipeMap.put("recipeItems", getSimplifiedRecipeIngredientList());
         recipeMap.put("prepTime", prepTime);
         recipeMap.put("cookTime", cookTime);
@@ -63,6 +66,16 @@ public class Recipe {
         recipeMap.put("method", method);
 
         return recipeMap;
+    }
+
+    // Simplifies the recipeIngredient List so that it doesn't contain Ingredient and Unit objects.
+    // There are custom toMap() functions for Ingredient and Unit.
+    public List<Object> getSimplifiedRecipeIngredientList() {
+        List<Object> myList = new ArrayList<>();
+        for (RecipeIngredient recipeIngredient : this.getRecipeItems()) {
+            myList.add(recipeIngredient.toMap());
+        }
+        return myList;
     }
 
     public String getRecipeName() {
@@ -79,14 +92,6 @@ public class Recipe {
 
     public void setRecipeItems(List<RecipeIngredient> recipeItems) {
         this.recipeItems = recipeItems;
-    }
-
-    public List<Object> getSimplifiedRecipeIngredientList() {
-        List<Object> myList = new ArrayList<>();
-        for (RecipeIngredient recipeIngredient : this.getRecipeItems()) {
-           myList.add(recipeIngredient.toMap());
-        }
-        return myList;
     }
 
     public float getPrepTime() {
@@ -138,36 +143,37 @@ public class Recipe {
     }
 
 
-    /*
-    public void testRecipe(){
-        prepTime = 5;
-        RecipeIngredient ingredient1 = new RecipeIngredient("Eggs",3.0f,0.9f,"ml");
-        RecipeIngredient ingredient2 = new RecipeIngredient("bacon",1.0f,1.23f,"kg");
-        RecipeIngredient ingredient3 = new RecipeIngredient("bacon",3.4f,2.54f,"kg");
-        RecipeIngredient ingredient4 = new RecipeIngredient("bacon",2.3f,3.59f,"kg");
-        recipeItems.add(ingredient1);
-        recipeItems.add(ingredient2);
-        recipeItems.add(ingredient3);
-        recipeItems.add(ingredient4);
-        cookTime = 3;
-        cost = (float) 5.5;
-        numberServings = (float) 1.0;
-        typeServing = "Large";
-        method = "cook";
-    }
 
-    public void scaleRecipe() {
-        int recipeScale = 2;
-        numberServings *= recipeScale;
-        for(int i = 0; i < recipeItems.size();i++){
-            recipeItems.get(i).quantity*=recipeScale;
-            Log.d("Name",recipeItems.get(i).recipeIngredientName);
-            Log.d("Unit",recipeItems.get(i).unit.getUnitLabel());
-            Log.d("Quantity",Float.toString(recipeItems.get(i).quantity));
-            Log.d("Atomic Price",Float.toString(recipeItems.get(i).atomicPrice));
-            Log.d("Multiplier",Float.toString(recipeItems.get(i).calcPrice()*recipeScale));
-        }
-    }
+      // Debugging code
+//    public void testRecipe(){
+//        prepTime = 5;
+//        RecipeIngredient ingredient1 = new RecipeIngredient("Eggs",3.0f,0.9f,"ml");
+//        RecipeIngredient ingredient2 = new RecipeIngredient("bacon",1.0f,1.23f,"kg");
+//        RecipeIngredient ingredient3 = new RecipeIngredient("bacon",3.4f,2.54f,"kg");
+//        RecipeIngredient ingredient4 = new RecipeIngredient("bacon",2.3f,3.59f,"kg");
+//        recipeItems.add(ingredient1);
+//        recipeItems.add(ingredient2);
+//        recipeItems.add(ingredient3);
+//        recipeItems.add(ingredient4);
+//        cookTime = 3;
+//        cost = (float) 5.5;
+//        numberServings = (float) 1.0;
+//        typeServing = "Large";
+//        method = "cook";
+//    }
+//
+//    public void scaleRecipe() {
+//        int recipeScale = 2;
+//        numberServings *= recipeScale;
+//        for(int i = 0; i < recipeItems.size();i++){
+//            recipeItems.get(i).quantity*=recipeScale;
+//            Log.d("Name",recipeItems.get(i).recipeIngredientName);
+//            Log.d("Unit",recipeItems.get(i).unit.getUnitLabel());
+//            Log.d("Quantity",Float.toString(recipeItems.get(i).quantity));
+//            Log.d("Atomic Price",Float.toString(recipeItems.get(i).atomicPrice));
+//            Log.d("Multiplier",Float.toString(recipeItems.get(i).calcPrice()*recipeScale));
+//        }
+//    }
 
- */
+
 }

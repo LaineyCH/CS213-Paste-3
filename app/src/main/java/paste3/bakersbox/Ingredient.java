@@ -35,7 +35,20 @@ public class Ingredient {
     public Ingredient(Map<String, Object> ingredientMap) {
         this._ingredientName = (String) ingredientMap.get("ingredientName");
         this._atomicPrice = ((Number) ingredientMap.get("atomicPrice")).floatValue();
+        // The Unit Object is added back using its unitLabel
         this._unit = UnitManager.getUnit((String) ingredientMap.get("unit"));
+    }
+
+    // Turns an ingredient object into a map that doesn't contain unit objects, for saving to the
+    // Database.
+    public Map<String, Object> toMap() {
+        Map<String, Object> ingredientMap = new HashMap<>();
+        ingredientMap.put("ingredientName", _ingredientName);
+        ingredientMap.put("atomicPrice", _atomicPrice);
+        //The Unit Object is recorded in the map's key : value structure, with its value
+        // being the string "unitLabel"
+        ingredientMap.put("unit", _unit.getUnitLabel());
+        return ingredientMap;
     }
 
     public String getIngredientName() {
@@ -58,17 +71,12 @@ public class Ingredient {
         return _unit;
     }
 
+    // Sets the Unit for this Ingredient, and returns the conversion needed to calculate the
+    // atomic cost.
     public float setUnit(String thisUnitLabel, String userUnitLabel, Float quantity) {
         this._unit = UnitManager.getUnit(thisUnitLabel);
         Unit userUnit = UnitManager.getUnit(userUnitLabel);
         return this._unit.convertTo(userUnit, quantity);
     }
 
-    public Map<String, Object> toMap() {
-        Map<String, Object> ingredientMap = new HashMap<>();
-        ingredientMap.put("ingredientName", _ingredientName);
-        ingredientMap.put("atomicPrice", _atomicPrice);
-        ingredientMap.put("unit", _unit.getUnitLabel());
-        return ingredientMap;
-    }
 }

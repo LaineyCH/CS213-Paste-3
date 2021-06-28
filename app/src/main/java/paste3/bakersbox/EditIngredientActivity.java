@@ -37,7 +37,8 @@ public class EditIngredientActivity extends AppCompatActivity {
         String userUnitLabel = "l";
         String unitFromRadioButton = "ml";
 
-        // Create new recipe
+        // Send retrieved data to the Ingredient Manager to create the new ingredient and add it to
+        // the Ingredient Map
         IngredientManager.addIngredient(ingredientName, unitFromRadioButton, userUnitLabel, quantity, price);
     }
 }

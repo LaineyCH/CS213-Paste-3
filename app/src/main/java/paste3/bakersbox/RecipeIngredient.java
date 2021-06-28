@@ -29,20 +29,28 @@ public class RecipeIngredient {
         this._unit = UnitManager.getUnit((String) recipeIngredientMap.get("unit"));
     }
 
+    // Turns each recipeIngredient object into a map, so that they don't contain ingredient and
+    // Unit objects, for saving to the Database.
     public Map<String, Object> toMap() {
         Map<String, Object> recipeIngredientMap = new HashMap<>();
+        //The Ingredient Object is recorded in the map's key : value structure, with its value
+        // being the string "ingredientName"
         recipeIngredientMap.put("ingredientName", _ingredient.getIngredientName());
         recipeIngredientMap.put("quantity", _quantity);
+        //The Unit Object is recorded in the map's key : value structure, with its value
+        // being the string "unitLabel"
         recipeIngredientMap.put("unit", _unit.getUnitLabel());
         return recipeIngredientMap;
     }
 
+    // Turns a list of recipeItems (simplified map )into a list of recipeIngredient Objects.
     public static List<RecipeIngredient> getRecipeItemList(List<Object> recipeItem) {
         List<RecipeIngredient> recipeIngredientList = new ArrayList<>();
         if (recipeItem == null) {
             Log.d("RecipeItemList is null", "");
         } else {
             for (Object item : recipeItem) {
+                // Loops through the list of recipeItem names
                 Map<String, Object> itemMap = (Map<String, Object>) item;
                 String ingredientName = (String) itemMap.get("ingredientName");
                 Ingredient ingredient = IngredientManager.getIngredient(ingredientName);
@@ -54,6 +62,12 @@ public class RecipeIngredient {
             }
         }
         return recipeIngredientList;
+    }
+
+    // Calculates the price of the recipeIngredient.
+    public float calcPrice(){
+        float convertedQuantity = _ingredient.get_unit().convertTo(_unit, _quantity);
+        return convertedQuantity * _ingredient.get_atomicPrice();
     }
 
     public Ingredient getIngredient() {
@@ -78,12 +92,6 @@ public class RecipeIngredient {
 
     public void setUnit(Unit unit) {
         this._unit = unit;
-    }
-
-    public float calcPrice(){
-        float convertedQuantity = _ingredient.get_unit().convertTo(_unit, _quantity);
-        convertedQuantity *= _ingredient.get_atomicPrice();
-        return convertedQuantity;
     }
 
 }
