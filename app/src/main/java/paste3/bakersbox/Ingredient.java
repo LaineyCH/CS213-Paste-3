@@ -10,7 +10,7 @@ public class Ingredient {
 
     private String _ingredientName;
     private float _atomicPrice;
-    private Unit _unit; //ml or g or count
+    private Unit _unit; // "ml" for wet, "g" for dry, or "count"
 
     // Main Constructor
     public Ingredient(String ingredientName, String thisUnitLabel, String userUnitLabel, float quantity, float price) {

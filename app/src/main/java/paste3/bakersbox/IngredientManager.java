@@ -32,7 +32,7 @@ public class IngredientManager {
      * Make sure the Unit Map contains the Unit object. If not, fetch them from the database.
      */
     public static void populateIngredientMap(OnInitialised callback) {
-        Log.d("Fetch", "fetching ingredients"); // Debugging
+//        Log.d("Fetch", "fetching ingredients"); // Debugging
 
         // Fetches the Unit objects form the Firebase Cloud Database.
         if (dbRefIngredient == null) {

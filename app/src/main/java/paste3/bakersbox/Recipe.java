@@ -1,5 +1,7 @@
 package paste3.bakersbox;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,10 +13,10 @@ public class Recipe {
     List<RecipeIngredient> recipeItems;
     float prepTime;
     float cookTime;
-    float cost;
     float numberServings;
     String typeServing;
     String method;
+    float cost;  // not set in constructor
 
     // Main Constructor
     public Recipe(String recipeName, List<RecipeIngredient> recipeItems, float prepTime,
@@ -78,6 +80,24 @@ public class Recipe {
         return myList;
     }
 
+    // Scales the recipe by a speified amount, increasing the quantities, and effectively the
+    // price as well.
+    public void scaleRecipe(int scale) {
+        numberServings *= scale;
+
+        // Debugging
+        for(int i = 0; i < recipeItems.size();i++){
+            recipeItems.get(i).setQuantity(scale);
+            Log.d("Name",recipeItems.get(i).getIngredient().getIngredientName());
+            Log.d("Unit",recipeItems.get(i).getUnit().getUnitLabel());
+            Log.d("Quantity",Float.toString(recipeItems.get(i).getQuantity()));
+            Log.d("Atomic Price",Float.toString(recipeItems.get(i).getIngredient().get_atomicPrice()));
+            Log.d("Multiplier",Float.toString(recipeItems.get(i).calcPrice() * scale));
+        } // end Debugging
+
+        setCost(); // cost for the recipe
+    }
+
     public String getRecipeName() {
         return _recipeName;
     }
@@ -114,8 +134,14 @@ public class Recipe {
         return cost;
     }
 
-    public void setCost(float cost) {
-        this.cost = cost;
+    // Calculates the cost of the recipe by looping through the recipeItem list and add the price
+    // of each item.
+    public void setCost() {
+        float totalCost = 0;
+        for (RecipeIngredient recipeIngredient : recipeItems) {
+            totalCost += recipeIngredient.calcPrice();
+        }
+        this.cost = totalCost;
     }
 
     public float getNumberServings() {
@@ -162,18 +188,7 @@ public class Recipe {
 //        method = "cook";
 //    }
 //
-//    public void scaleRecipe() {
-//        int recipeScale = 2;
-//        numberServings *= recipeScale;
-//        for(int i = 0; i < recipeItems.size();i++){
-//            recipeItems.get(i).quantity*=recipeScale;
-//            Log.d("Name",recipeItems.get(i).recipeIngredientName);
-//            Log.d("Unit",recipeItems.get(i).unit.getUnitLabel());
-//            Log.d("Quantity",Float.toString(recipeItems.get(i).quantity));
-//            Log.d("Atomic Price",Float.toString(recipeItems.get(i).atomicPrice));
-//            Log.d("Multiplier",Float.toString(recipeItems.get(i).calcPrice()*recipeScale));
-//        }
-//    }
+
 
 
 }

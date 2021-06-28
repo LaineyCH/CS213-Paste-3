@@ -19,7 +19,7 @@ public class RecipeIngredient {
     public RecipeIngredient(Ingredient ingredient, float quantity, Unit unit){
         this._ingredient = ingredient;
         this._quantity = quantity;
-        this._unit = unit;
+        this._unit = unit;  // the Unit specified by the recipe
     }
 
     // "From Database" Constructor
