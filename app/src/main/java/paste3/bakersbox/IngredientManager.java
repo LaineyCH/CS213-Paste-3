@@ -62,15 +62,19 @@ public class IngredientManager {
     }
 
     // Triggered by the submit button of the Ingredient Activity.
-    public static void addIngredient(String ingredientName, String thisUnitLabel, String userUnitLabel, Float quantity, Float price) {
+    public static void addIngredient(String ingredientName, String thisUnitLabel, String userUnitLabel,
+                                     Float quantity, Float price) {
         // if ingredient doesn't already exist in the ingredient map, add the new ingredient.
         if (ingredientsMap.get(ingredientName) == null) {
             Ingredient ingredient = new Ingredient(ingredientName, thisUnitLabel, userUnitLabel, quantity, price);
             ingredientsMap.put(ingredientName, ingredient);
+
+            Log.d("New Ingredient", ingredient.getIngredientName());  // Debugging
         } else {
             // otherwise, if the ingredient already exists in the ingredient map, edit it.
             editIngredient(ingredientName, thisUnitLabel, userUnitLabel, quantity, price);
         }
+        saveIngredients();  // Debugging - need to decide when to save to database
     }
 
     // Returns the Ingredient that matches the key, from the Ingredient Map.

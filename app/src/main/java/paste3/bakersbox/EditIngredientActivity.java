@@ -34,11 +34,9 @@ public class EditIngredientActivity extends AppCompatActivity {
         float price = Float.parseFloat(inputQuantity.getText().toString());
 
         //RadioButton - needs to be worked out
-        String userUnitLabel = "l";
-        String unitFromRadioButton = "ml";
 
         // Send retrieved data to the Ingredient Manager to create the new ingredient and add it to
         // the Ingredient Map
-        IngredientManager.addIngredient(ingredientName, unitFromRadioButton, userUnitLabel, quantity, price);
+        IngredientManager.addIngredient(ingredientName, "ml", "l", quantity, price);
     }
 }
