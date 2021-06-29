@@ -19,6 +19,29 @@ public class EditIngredientActivity extends AppCompatActivity {
         li.setBackgroundColor(Color.parseColor("#7BEEE4"));
     }
 
+    String radioButton = "";
+
+    // Finds out which radio button was checked
+    public void onRadioButtonClicked(View view) {
+        // Is a button checked?
+        boolean checked = ((RadioButton) view).isChecked();
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.dryButton:
+                if (checked)
+                    radioButton = "g";
+                break;
+            case R.id.wetButton:
+                if (checked)
+                    radioButton = "ml";
+                break;
+            case R.id.countedButton:
+                if (checked)
+                    radioButton = "count";
+                break;
+        }
+    }
+
     // Triggered by the submit button in the edit ingredient activity
     public void submitIngredient(View view) {
 
@@ -33,10 +56,12 @@ public class EditIngredientActivity extends AppCompatActivity {
         EditText inputPrice = findViewById(R.id.priceInput);
         float price = Float.parseFloat(inputQuantity.getText().toString());
 
-        //RadioButton - needs to be worked out
+        EditText userInputUnit = findViewById(R.id.userInputUnit);
+        String userUnit = userInputUnit.getText().toString();
 
         // Send retrieved data to the Ingredient Manager to create the new ingredient and add it to
         // the Ingredient Map
-        IngredientManager.addIngredient(ingredientName, "ml", "l", quantity, price);
+        IngredientManager.addIngredient(ingredientName, radioButton, userUnit, quantity, price);
     }
+
 }
