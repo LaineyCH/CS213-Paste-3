@@ -7,6 +7,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -16,6 +18,7 @@ import java.util.concurrent.ConcurrentMap;
  */
 public class IngredientManager {
     private static final ConcurrentMap<String, Ingredient> ingredientsMap = new ConcurrentHashMap<>();
+    private static List<String> ingredientNameList = new ArrayList<>();
     public static DatabaseReference dbRefIngredient = null;
 
     public static ConcurrentMap<String, Ingredient> getIngredientsMap() {
@@ -112,6 +115,15 @@ public class IngredientManager {
             return;
         }
         dbRefIngredient.setValue(getSimplifiedIngredientMap());
+    }
+
+    public static List<String> getIngredientNameList() {
+        Map<String, Object> myMap = new ConcurrentHashMap<>();
+        for (Map.Entry<String, Ingredient> entry: ingredientsMap.entrySet()) {
+            ingredientNameList.add(entry.getValue().getIngredientName());
+        }
+        return ingredientNameList;
+
     }
 
 }
