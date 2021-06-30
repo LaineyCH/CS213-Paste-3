@@ -20,6 +20,7 @@ public class EditIngredientActivity extends AppCompatActivity {
     }
 
     String radioButton = "";
+    String spinnerUnit = "";
 
     // Finds out which radio button was checked
     public void onRadioButtonClicked(View view) {
@@ -61,7 +62,16 @@ public class EditIngredientActivity extends AppCompatActivity {
 
         // Send retrieved data to the Ingredient Manager to create the new ingredient and add it to
         // the Ingredient Map
-        IngredientManager.addIngredient(ingredientName, radioButton, userUnit, quantity, price);
+        IngredientManager.addIngredient(ingredientName, radioButton, spinnerUnit, quantity, price);
     }
+
+    //put code here - spinner(View view)
+    // Check against  Variable radioButton by will == String "ml" || "g" || "count"
+    // if ml display in the spinner wet ingredient labels,
+    // if g display in the spinner dry ingredient labels
+    // or if count display in the spinner count ingredient labels
+
+    //Selection of spinner save to variable spinnerUnit as string
+
 
 }
