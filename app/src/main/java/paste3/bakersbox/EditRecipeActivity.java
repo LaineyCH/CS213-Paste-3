@@ -1,30 +1,75 @@
 package paste3.bakersbox;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
+import android.widget.AdapterView.OnItemSelectedListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-public class EditRecipeActivity extends AppCompatActivity {
+public class EditRecipeActivity extends AppCompatActivity implements OnItemSelectedListener {
 
+    Spinner spinner;
+    String spinnerSelection;
+    String unitLabel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_recipe2);
-        LinearLayout li=(LinearLayout)findViewById(R.id.layout5);
+        LinearLayout li=(LinearLayout)findViewById(R.id.editRecipe);
         li.setBackgroundColor(Color.parseColor("#7BEEE4"));
+        spinner = findViewById(R.id.unitSpinner);
+
+        // Spinner click listener
+        spinner.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
+        unitLabel = spinnerSelection;
+
+        // Spinner Drop down elements
+        List<String> units = new ArrayList<String>();
+        //fluids
+        units.add("ml");
+        units.add("l");
+        units.add("cup");
+        units.add("Tbsp");
+        units.add("tsp");
+
+        //weight
+        units.add("g");
+        units.add("kg");
+        units.add("lb");
+        units.add("oz");
+
+        //count
+        units.add("g");
+
+        // Creating adapter for spinner
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, units);
+
+        // Drop down layout style - list view with radio button
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // attaching data adapter to spinner
+        spinner.setAdapter(dataAdapter);
+
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        // On selecting a spinner item
+        spinnerSelection = parent.getItemAtPosition(position).toString();
+        Log.d("Dropdown value",spinnerSelection);
+    }
+    public void onNothingSelected(AdapterView<?> arg0) {
+    }
     // Initialise recipe ingredient list
     List<RecipeIngredient> recipeIngredientList = new ArrayList<>();
 
@@ -40,10 +85,11 @@ public class EditRecipeActivity extends AppCompatActivity {
         Ingredient ingredient = IngredientManager.getIngredient(ingredientName);
 
         EditText inputQuantity = findViewById(R.id.quantityInput);
+        //String unitLabel = spinner.getSelectedItem().toString();
         float quantity  = Float.parseFloat(inputQuantity.getText().toString());
-
-        EditText inputUnit = findViewById(R.id.unitInput);
-        String unitLabel  = inputUnit.getText().toString();
+        //EditText inputUnit = findViewById(R.id.unitInput);
+        //String unitLabel  = inputUnit.getText().toString();
+        Log.d("PrintUnitLabel",unitLabel);
         Unit unit = UnitManager.getUnit(unitLabel);
         Log.d("Add U to RecipeIngred", unit.getUnitLabel());  // Debugging
 
@@ -87,6 +133,9 @@ public class EditRecipeActivity extends AppCompatActivity {
         // the recipe and add it to the Recipe Map
         RecipeManager.addRecipe(recipeName, recipeIngredientList, prepTime, cookTime,
                 numberServings, typeServing, method);
+    }
+    public void goBack(View view) {
+        super.onBackPressed();
     }
 
     //add code for the spinners - activity_edit_recipe2.xml

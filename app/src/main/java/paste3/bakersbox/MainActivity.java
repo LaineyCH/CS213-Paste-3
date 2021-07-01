@@ -11,8 +11,6 @@ import android.view.View;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import android.util.Log;  // needed for debugging
-import java.util.Map;     // needed for debugging
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ConstraintLayout li=(ConstraintLayout)findViewById(R.id.layout1);
+        ConstraintLayout li=(ConstraintLayout)findViewById(R.id.mainActivity);
         li.setBackgroundColor(Color.parseColor("#7BEEE4"));
 
         // Create an instance of the Firebase Database

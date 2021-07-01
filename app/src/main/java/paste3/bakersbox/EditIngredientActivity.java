@@ -65,6 +65,9 @@ public class EditIngredientActivity extends AppCompatActivity {
         IngredientManager.addIngredient(ingredientName, radioButton, spinnerUnit, quantity, price);
     }
 
+    public void goBack(View view) {
+        super.onBackPressed();
+    }
     //put code here - spinner(View view)
     // Check against  Variable radioButton by will == String "ml" || "g" || "count"
     // if ml display in the spinner wet ingredient labels,
@@ -72,6 +75,5 @@ public class EditIngredientActivity extends AppCompatActivity {
     // or if count display in the spinner count ingredient labels
 
     //Selection of spinner save to variable spinnerUnit as string
-
 
 }
