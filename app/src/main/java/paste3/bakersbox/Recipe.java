@@ -16,7 +16,7 @@ public class Recipe {
     float numberServings;
     String typeServing;
     String method;
-    float cost;  // not set in constructor
+    float cost;  // set via setCost function in the mai constructor
 
     // Main Constructor
     public Recipe(String recipeName, List<RecipeIngredient> recipeItems, float prepTime,
@@ -28,6 +28,7 @@ public class Recipe {
         this.numberServings = numberServings;
         this.typeServing = typeServing;
         this.method = method;
+        setCost();
     }
 
     // Blank Constructor

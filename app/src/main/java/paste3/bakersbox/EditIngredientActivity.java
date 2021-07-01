@@ -5,6 +5,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -15,7 +16,7 @@ public class EditIngredientActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_ingredient);
-        ConstraintLayout li=(ConstraintLayout)findViewById(R.id.layout4);
+        ConstraintLayout li=(ConstraintLayout)findViewById(R.id.editIngredient);
         li.setBackgroundColor(Color.parseColor("#7BEEE4"));
     }
 
@@ -55,19 +56,16 @@ public class EditIngredientActivity extends AppCompatActivity {
         float quantity = Float.parseFloat(inputQuantity.getText().toString());
 
         EditText inputPrice = findViewById(R.id.priceInput);
-        float price = Float.parseFloat(inputQuantity.getText().toString());
+        float price = Float.parseFloat(inputPrice.getText().toString());
 
         EditText userInputUnit = findViewById(R.id.userInputUnit);
         String userUnit = userInputUnit.getText().toString();
 
         // Send retrieved data to the Ingredient Manager to create the new ingredient and add it to
         // the Ingredient Map
-        IngredientManager.addIngredient(ingredientName, radioButton, spinnerUnit, quantity, price);
+        IngredientManager.addIngredient(ingredientName, radioButton, userUnit, quantity, price);
     }
 
-    public void goBack(View view) {
-        super.onBackPressed();
-    }
     //put code here - spinner(View view)
     // Check against  Variable radioButton by will == String "ml" || "g" || "count"
     // if ml display in the spinner wet ingredient labels,
@@ -75,5 +73,4 @@ public class EditIngredientActivity extends AppCompatActivity {
     // or if count display in the spinner count ingredient labels
 
     //Selection of spinner save to variable spinnerUnit as string
-
 }

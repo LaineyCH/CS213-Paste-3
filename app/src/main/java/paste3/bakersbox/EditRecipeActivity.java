@@ -18,10 +18,14 @@ import java.util.List;
 
 public class EditRecipeActivity extends AppCompatActivity implements OnItemSelectedListener {
 
+    // Initialise recipe ingredient list
+    List<RecipeIngredient> recipeIngredientList = new ArrayList<>();
+
     Spinner spinner;
     String spinnerSelection;
     String unitLabel;
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_recipe2);
@@ -35,20 +39,21 @@ public class EditRecipeActivity extends AppCompatActivity implements OnItemSelec
 
         // Spinner Drop down elements
         List<String> units = new ArrayList<String>();
-        //fluids
+
+        // Wet ingredients
         units.add("ml");
         units.add("l");
         units.add("cup");
         units.add("Tbsp");
         units.add("tsp");
 
-        //weight
+        // Dry ingredients
         units.add("g");
         units.add("kg");
         units.add("lb");
         units.add("oz");
 
-        //count
+        // Counted ingredients
         units.add("g");
 
         // Creating adapter for spinner
@@ -66,13 +71,11 @@ public class EditRecipeActivity extends AppCompatActivity implements OnItemSelec
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         // On selecting a spinner item
         spinnerSelection = parent.getItemAtPosition(position).toString();
-        Log.d("Dropdown value",spinnerSelection);
+        Log.d("Dropdown value", spinnerSelection);
     }
+
     public void onNothingSelected(AdapterView<?> arg0) {
     }
-    // Initialise recipe ingredient list
-    List<RecipeIngredient> recipeIngredientList = new ArrayList<>();
-
 
     // Triggered by the add ingredient button in the edit ingredient activity
     public void addRecipeIngredient(View view) {
@@ -85,12 +88,17 @@ public class EditRecipeActivity extends AppCompatActivity implements OnItemSelec
         Ingredient ingredient = IngredientManager.getIngredient(ingredientName);
 
         EditText inputQuantity = findViewById(R.id.quantityInput);
-        //String unitLabel = spinner.getSelectedItem().toString();
         float quantity  = Float.parseFloat(inputQuantity.getText().toString());
+
+        //String unitLabel = spinner.getSelectedItem().toString();
         //EditText inputUnit = findViewById(R.id.unitInput);
         //String unitLabel  = inputUnit.getText().toString();
-        Log.d("PrintUnitLabel",unitLabel);
+
+        // Adding hard coded unitLabel to test adding a recipe
+        unitLabel = "g";
         Unit unit = UnitManager.getUnit(unitLabel);
+
+        Log.d("PrintUnitLabel",unitLabel); // Debugging
         Log.d("Add U to RecipeIngred", unit.getUnitLabel());  // Debugging
 
         // Create a new RecipeIngredient
@@ -134,10 +142,10 @@ public class EditRecipeActivity extends AppCompatActivity implements OnItemSelec
         RecipeManager.addRecipe(recipeName, recipeIngredientList, prepTime, cookTime,
                 numberServings, typeServing, method);
     }
+
     public void goBack(View view) {
         super.onBackPressed();
     }
-
     //add code for the spinners - activity_edit_recipe2.xml
     // use ingredientNameList to populate the ingredient Spinner on the edit page activity_edit_recepie.2
 
