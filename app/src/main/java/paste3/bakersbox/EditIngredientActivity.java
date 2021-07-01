@@ -1,5 +1,6 @@
 package paste3.bakersbox;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -15,7 +16,7 @@ public class EditIngredientActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_ingredient);
-        ConstraintLayout li=(ConstraintLayout)findViewById(R.id.layout4);
+        ConstraintLayout li=(ConstraintLayout)findViewById(R.id.editIngredient);
         li.setBackgroundColor(Color.parseColor("#7BEEE4"));
     }
 
@@ -62,6 +63,10 @@ public class EditIngredientActivity extends AppCompatActivity {
         // Send retrieved data to the Ingredient Manager to create the new ingredient and add it to
         // the Ingredient Map
         IngredientManager.addIngredient(ingredientName, radioButton, userUnit, quantity, price);
+    }
+
+    public void goBack(View view) {
+        super.onBackPressed();
     }
 
 }
