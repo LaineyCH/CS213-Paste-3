@@ -138,4 +138,7 @@ public class EditRecipeActivity extends AppCompatActivity implements OnItemSelec
         super.onBackPressed();
     }
 
+    //add code for the spinners - activity_edit_recipe2.xml
+    // use ingredientNameList to populate the ingredient Spinner on the edit page activity_edit_recepie.2
+
 }
