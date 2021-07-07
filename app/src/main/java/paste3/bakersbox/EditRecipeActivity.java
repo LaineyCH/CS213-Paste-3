@@ -16,7 +16,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EditRecipeActivity extends AppCompatActivity implements OnItemSelectedListener {
+public class EditRecipeActivity extends AppCompatActivity {
 
     // Initialise recipe ingredient list
     List<RecipeIngredient> recipeIngredientList = new ArrayList<>();
@@ -36,12 +36,32 @@ public class EditRecipeActivity extends AppCompatActivity implements OnItemSelec
         // UNIT SPINNER
         unitSpinner = findViewById(R.id.unitSpinner);
         // Unit Spinner click listener
-        unitSpinner.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
+        unitSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                // On selecting a spinner item
+                unitSpinnerSelection = parent.getItemAtPosition(position).toString();
+                Log.d("Dropdown value", unitSpinnerSelection); // Debugging
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+        });
 
         // INGREDIENT SPINNER
         ingredientSpinner = findViewById(R.id.ingredientSpinner);
         // Ingredient Spinner click listener
-        ingredientSpinner.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
+        ingredientSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                onIngredientItemSelected(parent, position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+        });
         // Creating adapter for Ingredient spinner
         ArrayAdapter<String> ingredientDataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, IngredientManager.getIngredientNameList());
         // Drop down layout style
@@ -51,8 +71,7 @@ public class EditRecipeActivity extends AppCompatActivity implements OnItemSelec
 
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+    public void onIngredientItemSelected(AdapterView<?> parent, int position) {
 
         String ingredientName = ingredientSpinner.getSelectedItem().toString();
         String ingredientLabel = IngredientManager.getIngredient(ingredientName).getUnit().getUnitLabel();
@@ -85,13 +104,6 @@ public class EditRecipeActivity extends AppCompatActivity implements OnItemSelec
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // attaching data adapter to unit spinner
         unitSpinner.setAdapter(dataAdapter);
-
-        // On selecting a spinner item
-        unitSpinnerSelection = parent.getItemAtPosition(position).toString();
-        Log.d("Dropdown value", unitSpinnerSelection);
-    }
-
-    public void onNothingSelected(AdapterView<?> arg0) {
     }
 
     // Triggered by the add ingredient button in the edit ingredient activity
