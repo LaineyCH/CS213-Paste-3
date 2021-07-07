@@ -106,6 +106,8 @@ public class EditRecipeActivity extends AppCompatActivity implements OnItemSelec
 
         // Add recipe ingredient to the recipe ingredient list
         recipeIngredientList.add(recipeIngredient);
+
+        // Clear fields
     }
 
     // Triggered by the submit button in the edit ingredient activity
@@ -141,6 +143,8 @@ public class EditRecipeActivity extends AppCompatActivity implements OnItemSelec
         // the recipe and add it to the Recipe Map
         RecipeManager.addRecipe(recipeName, recipeIngredientList, prepTime, cookTime,
                 numberServings, typeServing, method);
+
+
     }
 
     public void goBack(View view) {
