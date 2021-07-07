@@ -1,6 +1,7 @@
 package paste3.bakersbox;
 
 import android.util.Log;
+import android.widget.EditText;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -123,7 +124,6 @@ public class IngredientManager {
             ingredientNameList.add(entry.getValue().getIngredientName());
         }
         return ingredientNameList;
-
     }
 
 }

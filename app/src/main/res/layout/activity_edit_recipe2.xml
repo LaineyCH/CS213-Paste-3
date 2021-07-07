@@ -65,11 +65,11 @@
                 android:layout_height="45dp"
                 android:layout_marginStart="220dp"
                 android:layout_marginLeft="220dp"
-                android:layout_marginTop="16dp"
-                android:textStyle="bold"
+                android:layout_marginTop="12dp"
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:text="Time (minutes)"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ingredientName9" />
 
@@ -77,29 +77,29 @@
                 android:id="@+id/ingredientName9"
                 android:layout_width="133dp"
                 android:layout_height="52dp"
-                android:layout_marginTop="844dp"
+                android:layout_marginTop="12dp"
                 android:layout_marginEnd="36dp"
-                android:textStyle="bold"
                 android:layout_marginRight="36dp"
                 android:text="Cook/Bake Time:"
                 android:textSize="22sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/methodInput" />
 
             <TextView
                 android:id="@+id/ingredientName7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="852dp"
+                android:layout_marginTop="12dp"
                 android:layout_marginEnd="252dp"
                 android:layout_marginRight="252dp"
                 android:text="Prep Time"
-                android:textStyle="bold"
                 android:textSize="22sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/methodInput" />
 
             <TextView
                 android:id="@+id/ingredientName4"
@@ -119,15 +119,15 @@
                 android:id="@+id/ingredientName10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="964dp"
+                android:layout_marginTop="12dp"
                 android:layout_marginEnd="36dp"
                 android:layout_marginRight="36dp"
                 android:text="Serving Type:"
-                android:textStyle="bold"
                 android:textSize="22sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/cookTimeInput" />
 
             <TextView
                 android:id="@+id/price"
@@ -149,10 +149,9 @@
                 android:layout_marginStart="44dp"
                 android:layout_marginLeft="44dp"
                 android:layout_marginTop="532dp"
-                android:textStyle="bold"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text="Quantity"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -168,6 +167,7 @@
                 android:backgroundTint="#7A06AC"
                 android:onClick="addRecipeIngredient"
                 android:text="Add Ingredient"
+                android:textColor="#ffffff"
                 android:textSize="22sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -191,6 +191,7 @@
                 android:backgroundTint="#7A06AC"
                 android:onClick="submitRecipe"
                 android:text="Add Recipe"
+                android:textColor="#ffffff"
                 android:textSize="22sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -284,13 +285,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
-                android:textStyle="bold"
                 android:layout_marginTop="332dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text="Recipe Name"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.51"
                 app:layout_constraintStart_toStartOf="parent"
@@ -298,15 +298,17 @@
 
             <EditText
                 android:id="@+id/methodInput"
+                app:autoSizeTextType="uniform"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="84dp"
+                android:autoSizeMinTextSize="12sp"
+                android:inputType="textMultiLine"
+                android:autoSizeMaxTextSize="100sp"
                 android:layout_marginRight="84dp"
                 android:layout_marginBottom="284dp"
                 android:ems="10"
                 android:textStyle="bold"
-                android:inputType="textPersonName"
-                android:text="Name"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ingredientName3"
@@ -318,11 +320,11 @@
                 android:layout_height="45dp"
                 android:layout_marginStart="44dp"
                 android:layout_marginLeft="44dp"
-                android:layout_marginTop="32dp"
-                android:textStyle="bold"
+                android:layout_marginTop="12dp"
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:text="Time (minutes)"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ingredientName7" />
 
@@ -360,9 +362,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:ems="10"
-                android:textStyle="bold"
                 android:inputType="textPersonName"
-                android:text="Ingredient Name"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.51"
                 app:layout_constraintStart_toStartOf="parent"
@@ -383,6 +384,7 @@
                 android:backgroundTint="#7A06AC"
                 android:onClick="goBack"
                 android:text="Back"
+                android:textColor="#ffffff"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

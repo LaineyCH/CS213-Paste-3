@@ -21,6 +21,7 @@
         android:onClick="submitIngredient"
         android:text="Add Ingredient"
         android:textSize="22sp"
+        android:textColor="#ffffff"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -183,6 +184,7 @@
             android:layout_marginRight="32dp"
             android:onClick="onRadioButtonClicked"
             android:text="Wet Ingredient"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dryButton" />
@@ -275,6 +277,7 @@
         android:backgroundTint="#7A06AC"
         android:textStyle="bold"
         android:onClick="goBack"
+        android:textColor="#ffffff"
         android:text="Back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
