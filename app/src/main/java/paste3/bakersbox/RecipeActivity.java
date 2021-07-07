@@ -24,6 +24,11 @@ public class RecipeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void viewRecipe(View view) {
+        Intent intent = new Intent(this,viewRecipeActivity.class);
+        startActivity(intent);
+    }
+
     public void goBack(View view) {
         super.onBackPressed();
     }

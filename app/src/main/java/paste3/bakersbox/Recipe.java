@@ -81,9 +81,9 @@ public class Recipe {
         return myList;
     }
 
-    // Scales the recipe by a speified amount, increasing the quantities, and effectively the
+    // Scales the recipe by a specified amount, increasing the quantities, and effectively the
     // price as well.
-    public void scaleRecipe(int scale) {
+    public void scaleRecipe(float scale) {
         numberServings *= scale;
 
         // Debugging

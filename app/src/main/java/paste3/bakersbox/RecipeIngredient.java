@@ -83,7 +83,7 @@ public class RecipeIngredient {
     }
 
     public void setQuantity(float quantity) {
-        this._quantity = quantity;
+        this._quantity *= quantity;
     }
 
     public Unit getUnit() {

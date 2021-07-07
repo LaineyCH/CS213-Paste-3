@@ -46,6 +46,7 @@
         android:layout_marginRight="32dp"
         android:backgroundTint="#7A06AC"
         android:text="Find Ingredient"
+        android:textColor="#ffffff"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,6 +65,7 @@
         android:backgroundTint="#7A06AC"
         android:onClick="goToPurchase"
         android:text="Enter Purchased Ingredients"
+        android:textColor="#ffffff"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
@@ -77,6 +79,7 @@
         android:backgroundTint="#7A06AC"
         android:onClick="goBack"
         android:text="Back"
+        android:textColor="#ffffff"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

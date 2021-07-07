@@ -106,6 +106,9 @@ public class EditRecipeActivity extends AppCompatActivity implements OnItemSelec
 
         // Add recipe ingredient to the recipe ingredient list
         recipeIngredientList.add(recipeIngredient);
+
+        inputIngredientName.setText("");
+        inputQuantity.setText("");
     }
 
     // Triggered by the submit button in the edit ingredient activity
