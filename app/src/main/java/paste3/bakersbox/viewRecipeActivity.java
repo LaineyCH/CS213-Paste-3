@@ -21,7 +21,8 @@ public class viewRecipeActivity extends AppCompatActivity {
     TextView methodsOutput = findViewById(R.id.methodOutput);
 
     //get recipe
-    Recipe recipe = new Recipe();
+    //Recipe recipe = new Recipe();
+    Recipe recipe = RecipeManager.getRecipe("Test Recipe");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +52,10 @@ public class viewRecipeActivity extends AppCompatActivity {
     public void scaleRecipe(View view) {
         String recipeScaleString = scaleAmount.getText().toString();
         float recipeScale = Float.parseFloat(recipeScaleString);
-        recipe.scaleRecipe(recipeScale);
-        servingSize.setText(String.valueOf(recipe.numberServings));
-        costOutput.setText(String.valueOf(recipe.cost));
+        // the scaleRecipe() function returns a new Recipe object that is scaled.
+        Recipe scaledRecipe = recipe.scaleRecipe(recipeScale);
+        servingSize.setText(String.valueOf(scaledRecipe.numberServings));
+        costOutput.setText(String.valueOf(scaledRecipe.cost));
     }
 
     public void goBack(View view) {

@@ -9,6 +9,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -108,5 +109,23 @@ public class RecipeManager {
             return;
         }
         dbRefRecipe.setValue(getSimplifiedRecipeMap());
+    }
+
+    // Returns the Recipe that matches the key, from the Recipe Map.
+    public static Recipe getRecipe(String recipeName) {
+        Recipe recipe = recipeMap.get(recipeName);
+        if(recipe == null){
+            throw new RuntimeException(String.format("Missing recipe: '%s'", recipeName));
+        }
+        return recipe;
+    }
+
+    // Returns a list of all the recipes by their recipeName
+    public static List<String> getRecipeNameList() {
+        List<String> recipeNameList = new ArrayList<>();
+        for (Map.Entry<String, Recipe> entry: recipeMap.entrySet()) {
+            recipeNameList.add(entry.getValue().getRecipeName());
+        }
+        return recipeNameList;
     }
 }

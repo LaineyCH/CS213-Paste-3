@@ -82,21 +82,24 @@ public class Recipe {
     }
 
     // Scales the recipe by a specified amount, increasing the quantities, and effectively the
-    // price as well.
-    public void scaleRecipe(float scale) {
-        numberServings *= scale;
+    // price as well. Returns the new scaled recipe.
+    public Recipe scaleRecipe(float scale) {
+        Recipe scaledRecipe = this;
+        scaledRecipe.numberServings = numberServings * scale;
 
-        // Debugging
+        // Scale each of the recipeItems
         for(int i = 0; i < recipeItems.size();i++){
             recipeItems.get(i).setQuantity(scale);
+
+            // Debugging
             Log.d("Name",recipeItems.get(i).getIngredient().getIngredientName());
             Log.d("Unit",recipeItems.get(i).getUnit().getUnitLabel());
             Log.d("Quantity",Float.toString(recipeItems.get(i).getQuantity()));
-            Log.d("Atomic Price",Float.toString(recipeItems.get(i).getIngredient().get_atomicPrice()));
             Log.d("Multiplier",Float.toString(recipeItems.get(i).calcPrice() * scale));
-        } // end Debugging
+        }
 
-        setCost(); // cost for the recipe
+        scaledRecipe.setCost(); // cost for the new scaled recipe
+        return scaledRecipe;
     }
 
     public String getRecipeName() {

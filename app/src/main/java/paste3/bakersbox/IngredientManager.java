@@ -19,7 +19,6 @@ import java.util.concurrent.ConcurrentMap;
  */
 public class IngredientManager {
     private static final ConcurrentMap<String, Ingredient> ingredientsMap = new ConcurrentHashMap<>();
-    private static List<String> ingredientNameList = new ArrayList<>();
     public static DatabaseReference dbRefIngredient = null;
 
     public static ConcurrentMap<String, Ingredient> getIngredientsMap() {
@@ -119,7 +118,7 @@ public class IngredientManager {
     }
 
     public static List<String> getIngredientNameList() {
-        Map<String, Object> myMap = new ConcurrentHashMap<>();
+        List<String> ingredientNameList = new ArrayList<>();
         for (Map.Entry<String, Ingredient> entry: ingredientsMap.entrySet()) {
             ingredientNameList.add(entry.getValue().getIngredientName());
         }
