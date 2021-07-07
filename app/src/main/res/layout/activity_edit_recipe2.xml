@@ -356,19 +356,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ingredientName10" />
 
-            <EditText
-                android:id="@+id/ingredientNameInput2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.51"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ingredientName2" />
-
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline2"
                 android:layout_width="wrap_content"
@@ -397,6 +384,15 @@
                 app:layout_constraintHorizontal_bias="0.564"
                 app:layout_constraintStart_toEndOf="@+id/quantityInput"
                 app:layout_constraintTop_toBottomOf="@+id/price" />
+
+            <Spinner
+                android:id="@+id/ingredientSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ingredientName2" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

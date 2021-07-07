@@ -18,6 +18,8 @@ public class EditIngredientActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_ingredient);
         ConstraintLayout li=(ConstraintLayout)findViewById(R.id.editIngredient);
         li.setBackgroundColor(Color.parseColor("#7BEEE4"));
+
+
     }
 
     String radioButton = "";

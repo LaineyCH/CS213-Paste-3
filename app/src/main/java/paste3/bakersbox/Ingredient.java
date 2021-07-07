@@ -67,7 +67,7 @@ public class Ingredient {
         this._atomicPrice = price / quantity; // do full calculation for atomic price.
     }
 
-    public Unit get_unit() {
+    public Unit getUnit() {
         return _unit;
     }
 
