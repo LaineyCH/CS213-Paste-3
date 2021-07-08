@@ -25,7 +25,7 @@ public class RecipeIngredient {
     // "From Database" Constructor
     public RecipeIngredient(Map<String, Object> recipeIngredientMap) {
         this._ingredient = IngredientManager.getIngredient((String) recipeIngredientMap.get("ingredientName"));
-        this._quantity = ((Double) recipeIngredientMap.get("quantity")).floatValue();
+        this._quantity = ((Number) recipeIngredientMap.get("quantity")).floatValue();
         this._unit = UnitManager.getUnit((String) recipeIngredientMap.get("unit"));
     }
 
@@ -52,13 +52,15 @@ public class RecipeIngredient {
             for (Object item : recipeItem) {
                 // Loops through the list of recipeItem names
                 Map<String, Object> itemMap = (Map<String, Object>) item;
-                String ingredientName = (String) itemMap.get("ingredientName");
-                Ingredient ingredient = IngredientManager.getIngredient(ingredientName);
+//                String ingredientName = (String) itemMap.get("ingredientName");
+//                Ingredient ingredient = IngredientManager.getIngredient(ingredientName);
+//
+//                float quantity = ((Number) itemMap.get("quantity")).floatValue();
+//
+//                String unitLabel = (String) itemMap.get("unit");
+//                Unit unit = UnitManager.getUnit(unitLabel);
 
-                float quantity = ((Number) itemMap.get("quantity")).floatValue();
-
-                String unitLabel = (String) itemMap.get("unit");
-                Unit unit = UnitManager.getUnit(unitLabel);
+                recipeIngredientList.add(new RecipeIngredient(itemMap));
             }
         }
         return recipeIngredientList;

@@ -28,9 +28,8 @@ public class viewRecipeActivity extends AppCompatActivity {
     TextView ingredientsOutput;
     TextView methodsOutput;
     Spinner recipeSpinner;
-    //get recipe
-    //Recipe recipe = new Recipe();
-    Recipe recipe = RecipeManager.getRecipe("New Recipe");
+
+    Recipe recipe = new Recipe();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,11 +48,50 @@ public class viewRecipeActivity extends AppCompatActivity {
         scaleAmount = findViewById(R.id.scaleAmount);
         ingredientsOutput = findViewById(R.id.ingredientsOuput);
         methodsOutput = findViewById(R.id.methodOutput);
-/*
-        // INGREDIENT SPINNER
+
+
+        // RECIPE SPINNER
         recipeSpinner = findViewById(R.id.recipeSpinner);
         // Ingredient Spinner click listener
-        //recipeSpinner.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
+        recipeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String recipeSpinnerSelection = parent.getItemAtPosition(position).toString();
+                recipe = RecipeManager.getRecipe(recipeSpinnerSelection);
+
+                //outputs
+                StringBuilder ingredientsOutputString = new StringBuilder();
+                name.setText(recipe.getRecipeName());
+                prep.setText(String.valueOf(recipe.prepTime));
+                bakingTime.setText(String.valueOf(recipe.cookTime));
+                servingSize.setText(String.valueOf(recipe.numberServings));
+                costOutput.setText(String.valueOf(recipe.cost));
+                scaleAmount.setText("1");
+
+                Log.d("Before loop","Loop 1"); // Debugging
+                Log.d("Check for RecipeItems", recipe.getRecipeItems().toString()); // Debugging
+                //put ingredients in one string
+                for (RecipeIngredient item : recipe.getRecipeItems()) {
+                    Log.d("Check ingredients", item.getIngredient().getIngredientName()); // Debugging
+                    ingredientsOutputString.append("")
+                            .append(item.getQuantity()).append(" ")
+                            .append(item.getUnit().getUnitLabel()).append(" ")
+                            .append(item.getIngredient().getIngredientName())
+                            .append("\n");
+                }
+//                for(int i = 0; i < recipe.recipeItems.size(); i++){
+//                    ingredientsOutputString += "" + String.valueOf(recipe.recipeItems.get(i)._quantity) + " " + recipe.recipeItems.get(i)._unit + " " +
+//                            recipe.recipeItems.get(i)._ingredient._ingredientName + "\n";
+//                    Log.d("Check ingredients",ingredientsOutputString);
+//                }
+                ingredientsOutput.setText(ingredientsOutputString.toString());
+                methodsOutput.setText(recipe.method);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+        });
         // Creating adapter for Ingredient spinner
         ArrayAdapter<String> recipeDataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, RecipeManager.getRecipeNameList());
         // Drop down layout style
@@ -61,25 +99,6 @@ public class viewRecipeActivity extends AppCompatActivity {
         // attaching data adapter to ingredient spinner
         recipeSpinner.setAdapter(recipeDataAdapter);
 
- */
-        //outputs
-        String ingredientsOutputString = "";
-        name.setText(recipe._recipeName);
-        prep.setText(String.valueOf(recipe.prepTime));
-        bakingTime.setText(String.valueOf(recipe.cookTime));
-        servingSize.setText(String.valueOf(recipe.numberServings));
-        costOutput.setText(String.valueOf(recipe.cost));
-        scaleAmount.setText("1");
-
-        Log.d("Before loop","Loop 1");
-        //put ingredients in one string
-        for(int i = 0; i < recipe.recipeItems.size(); i++){
-            ingredientsOutputString += "" + String.valueOf(recipe.recipeItems.get(i)._quantity) + " " + recipe.recipeItems.get(i)._unit + " " +
-                    recipe.recipeItems.get(i)._ingredient._ingredientName + "\n";
-            Log.d("Check ingredients",ingredientsOutputString);
-        }
-        ingredientsOutput.setText(ingredientsOutputString);
-        methodsOutput.setText(recipe.method);
     }
 
     public void scaleRecipe(View view) {

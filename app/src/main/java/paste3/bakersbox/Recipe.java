@@ -43,15 +43,15 @@ public class Recipe {
     }
 
     // "From Database" Constructor
-    public Recipe(Map<String, Object> ingredientMap) {
-        this._recipeName = (String) ingredientMap.get("recipeName");
-        this.recipeItems = RecipeIngredient.getRecipeItemList((List<Object>) ingredientMap.get("recipeItems"));
-        this.prepTime = ((Number) ingredientMap.get("prepTime")).floatValue();
-        this.cookTime = ((Number) ingredientMap.get("cookTime")).floatValue();
-        this.cost = ((Number) ingredientMap.get("cost")).floatValue();
-        this.numberServings = ((Number) ingredientMap.get("numberServings")).floatValue();
-        this.typeServing = (String) ingredientMap.get("typeServing");
-        this.method = (String) ingredientMap.get("method");
+    public Recipe(Map<String, Object> recipeMap) {
+        this._recipeName = (String) recipeMap.get("recipeName");
+        this.recipeItems = RecipeIngredient.getRecipeItemList((List<Object>) recipeMap.get("recipeItems"));
+        this.prepTime = ((Number) recipeMap.get("prepTime")).floatValue();
+        this.cookTime = ((Number) recipeMap.get("cookTime")).floatValue();
+        this.cost = ((Number) recipeMap.get("cost")).floatValue();
+        this.numberServings = ((Number) recipeMap.get("numberServings")).floatValue();
+        this.typeServing = (String) recipeMap.get("typeServing");
+        this.method = (String) recipeMap.get("method");
     }
 
     // Turns a Recipe object into a map, so that the recipeIngredients don't contain ingredient and
