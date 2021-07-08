@@ -84,8 +84,10 @@ public class Recipe {
     // Scales the recipe by a specified amount, increasing the quantities, and effectively the
     // price as well. Returns the new scaled recipe.
     public Recipe scaleRecipe(float scale) {
-        Recipe scaledRecipe = this;
-        scaledRecipe.numberServings = numberServings * scale;
+        //Recipe scaledRecipe = this;
+        //scaledRecipe.numberServings = numberServings * scale;
+
+        float numberOfServings = this.numberServings * scale;
 
         // Scale each of the recipeItems
         for(int i = 0; i < recipeItems.size();i++){
@@ -97,7 +99,7 @@ public class Recipe {
             Log.d("Quantity",Float.toString(recipeItems.get(i).getQuantity()));
             Log.d("Multiplier",Float.toString(recipeItems.get(i).calcPrice() * scale));
         }
-
+        Recipe scaledRecipe = new Recipe(this._recipeName,this.recipeItems,this.prepTime,this.cookTime,numberOfServings,this.typeServing,this.method);
         scaledRecipe.setCost(); // cost for the new scaled recipe
         return scaledRecipe;
     }

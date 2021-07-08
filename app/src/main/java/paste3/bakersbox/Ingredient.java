@@ -8,9 +8,9 @@ import java.util.Map;
  */
 public class Ingredient {
 
-    private String _ingredientName;
-    private float _atomicPrice;
-    private Unit _unit; // "ml" for wet, "g" for dry, or "count"
+    String _ingredientName;
+    float _atomicPrice;
+    Unit _unit; // "ml" for wet, "g" for dry, or "count"
 
     // Main Constructor
     public Ingredient(String ingredientName, String thisUnitLabel, String userUnitLabel, float quantity, float price) {
