@@ -28,6 +28,8 @@ public class viewRecipeActivity extends AppCompatActivity {
     TextView ingredientsOutput;
     TextView methodsOutput;
     Spinner recipeSpinner;
+    float roundCost;
+    StringBuilder ingredientsOutputString;
 
     Recipe recipe = new Recipe();
 
@@ -61,31 +63,34 @@ public class viewRecipeActivity extends AppCompatActivity {
                 recipe = RecipeManager.getRecipe(recipeSpinnerSelection);
 
                 //outputs
-                StringBuilder ingredientsOutputString = new StringBuilder();
+                //StringBuilder ingredientsOutputString = new StringBuilder();
                 name.setText(recipe.getRecipeName());
                 prep.setText(String.valueOf(recipe.prepTime));
                 bakingTime.setText(String.valueOf(recipe.cookTime));
                 servingSize.setText(String.valueOf(recipe.numberServings));
-                costOutput.setText(String.valueOf(recipe.cost));
+                roundCost = (float) (Math.round(recipe.cost * 100.0) / 100.0);
+                costOutput.setText("£" + String.valueOf(roundCost));
                 scaleAmount.setText("1");
 
                 Log.d("Before loop","Loop 1"); // Debugging
                 Log.d("Check for RecipeItems", recipe.getRecipeItems().toString()); // Debugging
                 //put ingredients in one string
-                for (RecipeIngredient item : recipe.getRecipeItems()) {
+                /*for (RecipeIngredient item : recipe.getRecipeItems()) {
                     Log.d("Check ingredients", item.getIngredient().getIngredientName()); // Debugging
                     ingredientsOutputString.append("")
                             .append(item.getQuantity()).append(" ")
                             .append(item.getUnit().getUnitLabel()).append(" ")
                             .append(item.getIngredient().getIngredientName())
                             .append("\n");
-                }
+                }*/
 //                for(int i = 0; i < recipe.recipeItems.size(); i++){
 //                    ingredientsOutputString += "" + String.valueOf(recipe.recipeItems.get(i)._quantity) + " " + recipe.recipeItems.get(i)._unit + " " +
 //                            recipe.recipeItems.get(i)._ingredient._ingredientName + "\n";
 //                    Log.d("Check ingredients",ingredientsOutputString);
 //                }
-                ingredientsOutput.setText(ingredientsOutputString.toString());
+
+                //ingredientsOutput.setText(ingredientsOutputString.toString());
+                displayIngredients(recipe);
                 methodsOutput.setText(recipe.method);
             }
 
@@ -104,12 +109,28 @@ public class viewRecipeActivity extends AppCompatActivity {
     public void scaleRecipe(View view) {
         String recipeScaleString = scaleAmount.getText().toString();
         float recipeScale = Float.parseFloat(recipeScaleString);
+        Recipe scaledRecipe = recipe;
         //the scaleRecipe() function returns a new Recipe object that is scaled.
-        Recipe scaledRecipe = recipe.scaleRecipe(recipeScale);
+        //Recipe scaledRecipe = recipe.scaleRecipe(recipeScale);
+        scaledRecipe = scaledRecipe.scaleRecipe(recipeScale);
         servingSize.setText(String.valueOf(scaledRecipe.numberServings));
-        costOutput.setText(String.valueOf(recipe.cost*recipeScale));
-
+        roundCost = (float) (Math.round(scaledRecipe.cost * 100.0) / 100.0);
+        costOutput.setText("£" + String.valueOf(roundCost));
+        displayIngredients(scaledRecipe);
         //costOutput.setText(String.valueOf(scaledRecipe.cost));
+    }
+
+    public void displayIngredients(Recipe recipeDisplay){
+        ingredientsOutputString = new StringBuilder();
+        for (RecipeIngredient item : recipeDisplay.getRecipeItems()) {
+            Log.d("Check ingredients", item.getIngredient().getIngredientName()); // Debugging
+            ingredientsOutputString.append("")
+                    .append(item.getQuantity()).append(" ")
+                    .append(item.getUnit().getUnitLabel()).append(" ")
+                    .append(item.getIngredient().getIngredientName())
+                    .append("\n");
+        }
+        ingredientsOutput.setText(ingredientsOutputString.toString());
     }
 
     public void goBack(View view) {
