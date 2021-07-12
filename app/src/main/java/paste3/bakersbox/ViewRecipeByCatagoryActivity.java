@@ -4,11 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class EditRecipeActivity extends AppCompatActivity {
+public class ViewRecipeByCatagoryActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_recipe);
+        setContentView(R.layout.activity_view_recipe_by_catagory);
     }
 }

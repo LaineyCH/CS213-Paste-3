@@ -17,7 +17,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class viewRecipeActivity extends AppCompatActivity {
+public class ViewRecipeActivity extends AppCompatActivity {
     //get all textView output names
     TextView name;
     TextView prep;
@@ -42,7 +42,6 @@ public class viewRecipeActivity extends AppCompatActivity {
         Context context;
         context = this;
         //get all textView output names
-        name = findViewById(R.id.recipeNameTitle);
         prep = findViewById(R.id.prepTimeOutput2);
         bakingTime = findViewById(R.id.bakingTimeOutput);
         servingSize = findViewById(R.id.servingSizeOutput);
@@ -64,12 +63,11 @@ public class viewRecipeActivity extends AppCompatActivity {
 
                 //outputs
                 //StringBuilder ingredientsOutputString = new StringBuilder();
-                name.setText(recipe.getRecipeName());
-                prep.setText(String.valueOf(recipe.prepTime));
-                bakingTime.setText(String.valueOf(recipe.cookTime));
-                servingSize.setText(String.valueOf(recipe.numberServings));
+                prep.setText(String.valueOf(recipe.prepTime) + " minutes");
+                bakingTime.setText(String.valueOf(recipe.cookTime) + " minutes");
+                servingSize.setText(String.valueOf(recipe.numberServings) + " " + recipe.typeServing);
                 roundCost = (float) (Math.round(recipe.cost * 100.0) / 100.0);
-                costOutput.setText("£" + String.valueOf(roundCost));
+                costOutput.setText(" £" + String.valueOf(roundCost));
                 scaleAmount.setText("1");
 
                 Log.d("Before loop","Loop 1"); // Debugging

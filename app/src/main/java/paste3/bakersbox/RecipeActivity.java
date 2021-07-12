@@ -20,12 +20,12 @@ public class RecipeActivity extends AppCompatActivity {
     }
 
     public void createRecipe(View view) {
-        Intent intent = new Intent(this,EditRecipeActivity.class);
+        Intent intent = new Intent(this, CreateRecipeActivity.class);
         startActivity(intent);
     }
 
     public void viewRecipe(View view) {
-        Intent intent = new Intent(this,viewRecipeActivity.class);
+        Intent intent = new Intent(this, ViewRecipeActivity.class);
         startActivity(intent);
     }
 

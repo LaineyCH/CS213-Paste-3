@@ -5,7 +5,7 @@
     android:id="@+id/viewRecipe"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".viewRecipeActivity">
+    tools:context=".ViewRecipeActivity">
 
     <ScrollView
         android:id="@+id/scrollView3"
@@ -25,15 +25,33 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/ingredientName6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginRight="32dp"
+                android:text="Scale Amount"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/methodOutput" />
+
             <Spinner
                 android:id="@+id/recipeSpinner"
                 android:layout_width="355dp"
-                android:layout_height="76dp"
-                android:layout_marginTop="12dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
                 android:layout_marginRight="24dp"
+                android:textSize="200sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recipeNameTitle" />
+                app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
             <ImageView
                 android:id="@+id/imageView2"
@@ -59,7 +77,24 @@
                 android:layout_marginEnd="116dp"
                 android:layout_marginRight="116dp"
                 android:text="Preparation time:"
-                android:textSize="22sp"
+                android:textColor="#000000"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recipeName2" />
+
+            <TextView
+                android:id="@+id/recipeName2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginRight="32dp"
+                android:text="recipeName"
+                android:textSize="42sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -86,8 +121,9 @@
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="100dp"
                 android:layout_marginRight="100dp"
+                android:textColor="#000000"
                 android:text="Number of servings:"
-                android:textSize="22sp"
+                android:textSize="32sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -102,7 +138,6 @@
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="116dp"
                 android:layout_marginRight="116dp"
-                android:text="prepTimeOutput"
                 android:textSize="22sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -137,10 +172,9 @@
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginRight="32dp"
-                android:text="Methods Placeholder"
+                android:autoSizeMaxTextSize="100sp"
                 android:autoSizeMinTextSize="12sp"
                 android:inputType="textMultiLine"
-                android:autoSizeMaxTextSize="100sp"
                 android:textSize="22sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -157,7 +191,6 @@
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="99dp"
                 android:layout_marginRight="99dp"
-                android:text="Ingredient Placeholder"
                 android:textSize="22sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -175,7 +208,8 @@
                 android:layout_marginEnd="32dp"
                 android:layout_marginRight="32dp"
                 android:text="Methods:"
-                android:textSize="22sp"
+                android:textColor="#000000"
+                android:textSize="32sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.497"
@@ -192,12 +226,13 @@
                 android:layout_marginEnd="140dp"
                 android:layout_marginRight="140dp"
                 android:text="Ingredients:"
-                android:textSize="22sp"
+                android:textSize="32sp"
+                android:textColor="#000000"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.333"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/scaleRecipe" />
+                app:layout_constraintTop_toBottomOf="@+id/ingredientName14" />
 
             <TextView
                 android:id="@+id/bakingTimeOutput"
@@ -208,28 +243,11 @@
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="100dp"
                 android:layout_marginRight="100dp"
-                android:text="bakingTimeOutput"
                 android:textSize="22sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ingredientName12" />
-
-            <TextView
-                android:id="@+id/recipeNameTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginLeft="32dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="32dp"
-                android:layout_marginRight="32dp"
-                android:text="recipeName"
-                android:textSize="42sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
             <TextView
                 android:id="@+id/costOutput"
@@ -238,7 +256,6 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="152dp"
                 android:layout_marginRight="152dp"
-                android:text="costOutput"
                 android:textSize="22sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -254,7 +271,8 @@
                 android:layout_marginEnd="100dp"
                 android:layout_marginRight="100dp"
                 android:text="Cooking or Baking Time:"
-                android:textSize="22sp"
+                android:textColor="#000000"
+                android:textSize="32sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -265,7 +283,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Cost:"
-                android:textSize="22sp"
+                android:textColor="#000000"
+                android:textSize="32sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/costOutput"
                 app:layout_constraintTop_toTopOf="@+id/costOutput" />
@@ -279,7 +298,6 @@
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="110dp"
                 android:layout_marginRight="110dp"
-                android:text="servingSizeOutput"
                 android:textSize="22sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -292,7 +310,7 @@
                 android:layout_height="49dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginLeft="32dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="12dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginRight="32dp"
                 android:ems="10"
@@ -300,7 +318,19 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/costOutput" />
+                app:layout_constraintTop_toBottomOf="@+id/ingredientName6" />
+
+            <Button
+                android:id="@+id/backButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#7A06AC"
+                android:onClick="goBack"
+                android:text="Edit"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
