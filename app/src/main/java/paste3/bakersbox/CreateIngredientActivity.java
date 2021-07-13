@@ -68,7 +68,7 @@ public class CreateIngredientActivity extends AppCompatActivity {
     }
 
     public void goBack(View view) {
-        super.onBackPressed();
+        this.finish();
     }
 
     //put code here - spinner(View view)

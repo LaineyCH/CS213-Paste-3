@@ -29,7 +29,7 @@ public class CreateRecipeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_recipe);
-        LinearLayout li=(LinearLayout)findViewById(R.id.editRecipe);
+        LinearLayout li=(LinearLayout)findViewById(R.id.createRecipe);
         li.setBackgroundColor(Color.parseColor("#7BEEE4"));
 
         // UNIT SPINNER
@@ -173,7 +173,7 @@ public class CreateRecipeActivity extends AppCompatActivity {
     }
 
     public void goBack(View view) {
-        super.onBackPressed();
+        this.finish();
     }
     //add code for the spinners - activity_edit_recipe2.xml
     // use ingredientNameList to populate the ingredient Spinner on the edit page activity_edit_recepie.2

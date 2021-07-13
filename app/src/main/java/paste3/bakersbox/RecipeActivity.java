@@ -29,7 +29,12 @@ public class RecipeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void viewRecipeCatagory(View view) {
+        Intent intent = new Intent(this, ViewRecipeByCategoryActivity.class);
+        startActivity(intent);
+    }
+
     public void goBack(View view) {
-        super.onBackPressed();
+        this.finish();
     }
 }

@@ -22,6 +22,6 @@ public class IngredientsActivity extends AppCompatActivity {
         startActivity(intent);
     }
     public void goBack(View view) {
-        super.onBackPressed();
+        this.finish();
     }
 }

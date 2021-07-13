@@ -77,8 +77,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void goToPicture(View view) {
+   /* public void goToPicture(View view) {
         Intent intent = new Intent(this,LoadPictureActivity.class);
         startActivity(intent);
-    }
+    }*/
 }

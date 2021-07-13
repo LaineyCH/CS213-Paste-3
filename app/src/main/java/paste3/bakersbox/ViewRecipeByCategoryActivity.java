@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class ViewRecipeActivity extends AppCompatActivity {
+public class ViewRecipeByCategoryActivity extends AppCompatActivity {
     //get all textView output names
     TextView name;
     TextView prep;
@@ -38,7 +38,7 @@ public class ViewRecipeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_recipe);
-        ConstraintLayout li=(ConstraintLayout)findViewById(R.id.viewCategory);
+        ConstraintLayout li = (ConstraintLayout) findViewById(R.id.viewCategory);
         li.setBackgroundColor(Color.parseColor("#7BEEE4"));
         Context context;
         context = this;
@@ -73,7 +73,7 @@ public class ViewRecipeActivity extends AppCompatActivity {
                 recipeCopy = recipe;
                 scaleAmount.setText("1");
 
-                Log.d("Before loop","Loop 1"); // Debugging
+                Log.d("Before loop", "Loop 1"); // Debugging
                 Log.d("Check for RecipeItems", recipe.getRecipeItems().toString()); // Debugging
                 //put ingredients in one string
                 /*for (RecipeIngredient item : recipe.getRecipeItems()) {
@@ -91,12 +91,13 @@ public class ViewRecipeActivity extends AppCompatActivity {
 //                }
 
                 //ingredientsOutput.setText(ingredientsOutputString.toString());
-                displayIngredients(recipe,1);
+                displayIngredients(recipe, 1);
                 methodsOutput.setText(recipe.method);
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {}
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
         });
         // Creating adapter for Ingredient spinner
         ArrayAdapter<String> recipeDataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, RecipeManager.getRecipeNameList());
@@ -122,16 +123,16 @@ public class ViewRecipeActivity extends AppCompatActivity {
         //Recipe scaledRecipe = recipe.scaleRecipe(recipeScale);
         //scaledRecipe = scaledRecipe.scaleRecipe(recipeScale);
         servingSize.setText(String.valueOf(servings));
-        roundCost = (float) (Math.round((recipe.cost*recipeScale) * 100.0) / 100.0);
+        roundCost = (float) (Math.round((recipe.cost * recipeScale) * 100.0) / 100.0);
         costOutput.setText("£" + String.valueOf(roundCost));
         Recipe scaledRecipe = recipe;
         scaledRecipe.cost = recipeCost;
         scaledRecipe.numberServings = servings;
-        displayIngredients(scaledRecipe,recipeScale);
+        displayIngredients(scaledRecipe, recipeScale);
         //costOutput.setText(String.valueOf(scaledRecipe.cost));
     }
 
-    public void displayIngredients(Recipe recipeDisplay,float recipeScale){
+    public void displayIngredients(Recipe recipeDisplay, float recipeScale) {
         ingredientsOutputString = new StringBuilder();
         for (RecipeIngredient item : recipeDisplay.getRecipeItems()) {
             Log.d("Check ingredients", item.getIngredient().getIngredientName()); // Debugging
@@ -149,8 +150,8 @@ public class ViewRecipeActivity extends AppCompatActivity {
     }
 
     public void editRecipe(View view) {
-        Intent intent = new Intent(this,EditRecipeActivity.class);
-        intent.putExtra("recipeName",recipe._recipeName);
+        Intent intent = new Intent(this, EditRecipeActivity.class);
+        intent.putExtra("recipeName", recipe._recipeName);
         startActivity(intent);
     }
 }
