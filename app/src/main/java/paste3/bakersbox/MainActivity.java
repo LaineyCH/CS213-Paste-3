@@ -11,7 +11,6 @@ import android.view.View;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -27,40 +26,32 @@ public class MainActivity extends AppCompatActivity {
 
         // Set the Database reference for Baker's Box
         DatabaseReference myRef = database.getReference("BBStorage");
+        DatabaseReference unitRef = myRef.child("unit");
+        DatabaseReference ingredientRef = myRef.child("ingredients");
+        DatabaseReference recipeRef = myRef.child("recipes");
+        DatabaseReference categoryRef =  myRef.child("categories");
 
         // Set Database reference for Unit storage. The OnInitialised interface ensures that the
         // Unit map is populated before the Ingredient map begins populating.
-        UnitManager.setDbRefUnit(myRef.child("unit"), new OnInitialised() {
+        UnitManager.setDbRefUnit(unitRef, new OnInitialised() {
             @Override
             public void onInitialised() {
 
-                  // Debugging - print a list of all the unit keys in the unit map
-//                Map<String, Unit> unitMap = UnitManager.getUnitMap();
-//                Log.d("UnitMapSize", String.format("%d",unitMap.size()));
-//                for (Map.Entry<String, Unit> unitEntry : unitMap.entrySet())  {
-//                    Log.d("Unit Map", unitEntry.getKey());
-//                } // end Debugging
-
                 // Set Database reference for Ingredient storage. The OnInitialised interface ensures
                 // that the Ingredient map is populated before the Recipe map begins populating.
-                IngredientManager.setDbRefIngredient(myRef.child("ingredients"), new OnInitialised() {
+                IngredientManager.setDbRefIngredient(ingredientRef, new OnInitialised() {
                     @Override
                     public void onInitialised() {
 
-                          // Debugging - print a list of all the ingredient keys in the ingredient map
-//                        Map<String, Ingredient> ingredientsMap = IngredientManager.getIngredientsMap();
-//                        for (Map.Entry<String, Ingredient> recipeEntry : ingredientsMap.entrySet())  {
-//                            Log.d("Ingredient Map", recipeEntry.getKey());
-//                        } // end Debugging
-
                         // Set Database reference for Recipe storage
-                        RecipeManager.setDbRefRecipe(myRef.child("recipes"));
+                        RecipeManager.setDbRefRecipe(recipeRef, new OnInitialised() {
+                            @Override
+                            public void onInitialised() {
 
-                        // Debugging - print a list of all the recipe keys in the recipe map
-//                      Map<String, Recipe> recipeMap = RecipeManager.getRecipeMap();
-//                      for (Map.Entry<String, Recipe> recipeEntry : recipeMap.entrySet())  {
-//                      Log.d("Recipe Map", unitEntry.getKey());
-//                      } // end Debugging
+                                // Set Database reference for Category storage
+                                RecipeManager.setDbRefCategory(categoryRef);
+                            }
+                        });
                     }
                 });
             }
@@ -77,8 +68,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-   /* public void goToPicture(View view) {
-        Intent intent = new Intent(this,LoadPictureActivity.class);
-        startActivity(intent);
-    }*/
+//    public void goToPicture(View view) {
+//        Intent intent = new Intent(this,LoadPictureActivity.class);
+//        startActivity(intent);
+//        }
 }

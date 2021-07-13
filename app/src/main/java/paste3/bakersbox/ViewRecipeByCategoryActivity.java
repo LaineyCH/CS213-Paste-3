@@ -26,6 +26,8 @@ public class ViewRecipeByCategoryActivity extends AppCompatActivity {
     TextView scaleAmount;
     TextView ingredientsOutput;
     TextView methodsOutput;
+    Spinner categorySpinner;
+    String categorySpinnerSelection = "Bar";
     Spinner recipeSpinner;
     float roundCost;
     StringBuilder ingredientsOutputString;
@@ -37,12 +39,13 @@ public class ViewRecipeByCategoryActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_recipe);
+        setContentView(R.layout.activity_view_recipe_by_category);
         ConstraintLayout li = (ConstraintLayout) findViewById(R.id.viewCategory);
         li.setBackgroundColor(Color.parseColor("#7BEEE4"));
         Context context;
         context = this;
         //get all textView output names
+        name = findViewById(R.id.recipeName3);
         prep = findViewById(R.id.prepTimeOutput2);
         bakingTime = findViewById(R.id.bakingTimeOutput);
         servingSize = findViewById(R.id.servingSizeOutput);
@@ -51,6 +54,29 @@ public class ViewRecipeByCategoryActivity extends AppCompatActivity {
         ingredientsOutput = findViewById(R.id.ingredientsOuput);
         methodsOutput = findViewById(R.id.methodOutput);
 
+        // CATEGORY SPINNER
+        categorySpinner = findViewById(R.id.categorySpinner2);
+        // Category Spinner click listener
+        categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                // On selecting a spinner item
+                categorySpinnerSelection = parent.getItemAtPosition(position).toString();
+                Log.d("Dropdown value", categorySpinnerSelection); // Debugging
+                onCategorySelected(parent, position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+        });
+        // Creating adapter for Category spinner
+        ArrayAdapter<String> categoryDataAdapter = new ArrayAdapter<String>
+                (this, android.R.layout.simple_spinner_item, RecipeManager.getCategoryList());
+        // Drop down layout style
+        categoryDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // attaching data adapter to ingredient spinner
+        categorySpinner.setAdapter(categoryDataAdapter);
 
         // RECIPE SPINNER
         recipeSpinner = findViewById(R.id.recipeSpinner);
@@ -61,6 +87,7 @@ public class ViewRecipeByCategoryActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String recipeSpinnerSelection = parent.getItemAtPosition(position).toString();
                 recipe = RecipeManager.getRecipe(recipeSpinnerSelection);
+                name.setText(recipe.getRecipeName());
 
                 //outputs
                 //StringBuilder ingredientsOutputString = new StringBuilder();
@@ -99,13 +126,21 @@ public class ViewRecipeByCategoryActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-        // Creating adapter for Ingredient spinner
-        ArrayAdapter<String> recipeDataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, RecipeManager.getRecipeNameList());
-        // Drop down layout style
-        recipeDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // attaching data adapter to ingredient spinner
-        recipeSpinner.setAdapter(recipeDataAdapter);
 
+    }
+
+    public void onCategorySelected(AdapterView<?> parent, int position) {
+
+        // Spinner Drop down elements
+        List<String> recipesNamesListPerCategory = RecipeManager.getRecipeListPerCategory(categorySpinnerSelection);
+        Log.d("recipesNamesListPerCat", recipesNamesListPerCategory.toString());
+
+        // Creating adapter for recipe names spinner
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, recipesNamesListPerCategory);
+        // Drop down layout style - list view with radio button
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // attaching data adapter to unit spinner
+        recipeSpinner.setAdapter(dataAdapter);
     }
 
     public void scaleRecipe(View view) {

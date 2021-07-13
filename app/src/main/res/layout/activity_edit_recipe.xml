@@ -242,7 +242,7 @@
                 app:layout_constraintHorizontal_bias="0.508"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recipeName2" />
+                app:layout_constraintTop_toBottomOf="@+id/recipeName3" />
 
             <TextView
                 android:id="@+id/ingredientName3"
@@ -394,7 +394,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/ingredientName2" />
 
             <TextView
-                android:id="@+id/recipeName2"
+                android:id="@+id/recipeName3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
