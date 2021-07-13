@@ -47,7 +47,7 @@ public class EditRecipeActivity extends AppCompatActivity {
         inputTypeServing = findViewById(R.id.servingTypeInput);
         inputMethod = findViewById(R.id.methodInput);
         ingredientsInput = findViewById(R.id.ingredientsInput);
-        recipeName = findViewById(R.id.recipeName2);
+        recipeName = findViewById(R.id.recipeName3);
         Intent intent = getIntent();
         String recipeNameInput = intent.getStringExtra("recipeName");
         recipe = RecipeManager.getRecipe(recipeNameInput);
@@ -98,6 +98,7 @@ public class EditRecipeActivity extends AppCompatActivity {
         for(int i = 0; i < recipe.recipeItems.size(); i++){
             ingredientsOutputString += "" + String.valueOf(recipe.recipeItems.get(i)._quantity) + " " + recipe.recipeItems.get(i).getUnit().getUnitLabel() + " " +
                     recipe.recipeItems.get(i)._ingredient._ingredientName + "\n";
+            recipeIngredientList.add(recipe.recipeItems.get(i));
         }
         ingredientsInput.setText(ingredientsOutputString);
     }
@@ -163,6 +164,15 @@ public class EditRecipeActivity extends AppCompatActivity {
 
         // Add recipe ingredient to the recipe ingredient list
         recipeIngredientList.add(recipeIngredient);
+        TextView ingredientsInput = findViewById(R.id.ingredientsInput);
+        String ingredientsOutputString = "";
+        for(int i = 0; i < recipeIngredientList.size(); i++){
+            ingredientsOutputString += "" + String.valueOf(recipeIngredientList.get(i)._quantity) + " " + recipeIngredientList.get(i).getUnit().getUnitLabel() + " " +
+                    recipeIngredientList.get(i)._ingredient._ingredientName + "\n";
+            Log.d("Check ingredients",ingredientsOutputString);
+        }
+
+        ingredientsInput.setText(ingredientsOutputString);
 
         // Clear fields after "add ingredient" button is clicked, ready for next ingredient to be added
         //inputIngredientName.setText("");

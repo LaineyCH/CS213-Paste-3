@@ -186,7 +186,7 @@ public class ViewRecipeByCategoryActivity extends AppCompatActivity {
 
     public void editRecipe(View view) {
         Intent intent = new Intent(this, EditRecipeActivity.class);
-        intent.putExtra("recipeName", recipe._recipeName);
+        intent.putExtra("recipeName", recipe.getRecipeName());
         startActivity(intent);
     }
 }

@@ -339,7 +339,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#7A06AC"
-                android:onClick="goBack"
+                android:onClick="editRecipe"
                 android:text="Edit"
                 android:textColor="#ffffff"
                 android:textStyle="bold"
