@@ -2,4 +2,7 @@
     <string name="app_name">Baker\'s Box</string>
     <string name="readButton">Fetch Units</string>
     <string name="writeButton">Write to DB</string>
+    <string name="add_photo">Add Photo</string>
+    <string name="this_will_be_based_on_image_user_selects">This will be based on image user selects</string>
+    <string name="Add_picture" />
 </resources>
