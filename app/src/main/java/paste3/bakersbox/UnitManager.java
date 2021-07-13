@@ -41,7 +41,7 @@ public class UnitManager {
     }
 
     public static void addUnit(Unit unit) {
-        Log.d("Adding Unit", unit.getUnitLabel()); // Debugging
+        //Log.d("Adding Unit", unit.getUnitLabel()); // Debugging
         unitMap.put(unit.getUnitLabel(), unit);
     }
 
@@ -73,7 +73,7 @@ public class UnitManager {
 
                     // Debugging
                     for (Map.Entry<String, Unit> unitEntry : unitMap.entrySet())  {
-                        Log.d("Unit Map after Add", unitEntry.getKey()); // Debugging
+                        //Log.d("Unit Map after Add", unitEntry.getKey()); // Debugging
                     }
                 }
                 callback.onInitialised();

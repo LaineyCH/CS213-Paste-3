@@ -43,6 +43,7 @@ public class ViewRecipeActivity extends AppCompatActivity {
         Context context;
         context = this;
         //get all textView output names
+        name = findViewById(R.id.recipeName3);
         prep = findViewById(R.id.prepTimeOutput2);
         bakingTime = findViewById(R.id.bakingTimeOutput);
         servingSize = findViewById(R.id.servingSizeOutput);
@@ -61,6 +62,7 @@ public class ViewRecipeActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String recipeSpinnerSelection = parent.getItemAtPosition(position).toString();
                 recipe = RecipeManager.getRecipe(recipeSpinnerSelection);
+                name.setText(recipe.getRecipeName());
 
                 //outputs
                 //StringBuilder ingredientsOutputString = new StringBuilder();

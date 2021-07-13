@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -33,7 +32,7 @@ public class EditRecipeActivity extends AppCompatActivity {
         inputTypeServing = findViewById(R.id.servingTypeInput);
         inputMethod = findViewById(R.id.methodInput);
         ingredientsInput = findViewById(R.id.ingredientsInput);
-        recipeName = findViewById(R.id.recipeName2);
+        recipeName = findViewById(R.id.recipeName3);
         Intent intent = getIntent();
         String recipeNameInput = intent.getStringExtra("recipeName");
         recipe = RecipeManager.getRecipe(recipeNameInput);

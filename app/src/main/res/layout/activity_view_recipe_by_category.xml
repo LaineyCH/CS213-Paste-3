@@ -26,7 +26,7 @@
             android:orientation="vertical">
 
             <Spinner
-                android:id="@+id/recipeSpinner2"
+                android:id="@+id/categorySpinner2"
                 android:layout_width="355dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
@@ -65,7 +65,7 @@
                 android:layout_marginRight="24dp"
                 android:textSize="200sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recipeSpinner2" />
+                app:layout_constraintTop_toBottomOf="@+id/categorySpinner2" />
 
             <ImageView
                 android:id="@+id/imageView2"
@@ -96,10 +96,10 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recipeName2" />
+                app:layout_constraintTop_toBottomOf="@+id/recipeName3" />
 
             <TextView
-                android:id="@+id/recipeName2"
+                android:id="@+id/recipeName3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"

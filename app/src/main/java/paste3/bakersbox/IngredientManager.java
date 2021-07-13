@@ -51,7 +51,7 @@ public class IngredientManager {
                     // Creates an Ingredient object from the data
                     Ingredient ingredient = new Ingredient(ingredientMap);
 
-                    Log.d("Ingredient", ingredient.getIngredientName()); // Debugging
+                    //Log.d("Ingredient", ingredient.getIngredientName()); // Debugging
 
                     // Adds the Ingredient to the Ingredient Map
                     ingredientsMap.put(ingredient.getIngredientName(), ingredient);

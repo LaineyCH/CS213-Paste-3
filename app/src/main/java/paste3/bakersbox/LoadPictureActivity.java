@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 public class LoadPictureActivity extends AppCompatActivity {
     private static final int GALLERY_REQUEST_CODE = 123;
 
-
     //Variables from app
     ImageView imageView;
     Button btnPick;

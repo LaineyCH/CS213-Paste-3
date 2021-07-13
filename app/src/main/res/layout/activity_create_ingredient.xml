@@ -112,18 +112,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ingredientName1" />
 
-    <EditText
-        android:id="@+id/userInputUnit"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:ems="10"
-        android:textStyle="bold"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toStartOf="@+id/priceInput"
-        app:layout_constraintStart_toEndOf="@+id/quantityNumber1"
-        app:layout_constraintTop_toBottomOf="@+id/userUnit" />
-
     <TextView
         android:id="@+id/ingredientType1"
         android:layout_width="wrap_content"
@@ -243,13 +231,9 @@
         android:layout_marginStart="33dp"
         android:layout_marginLeft="33dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="241dp"
-        android:layout_marginRight="241dp"
-        android:textStyle="bold"
         android:ems="10"
         android:inputType="numberDecimal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/quantity" />
 
@@ -257,17 +241,13 @@
         android:id="@+id/priceInput"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="94dp"
-        android:layout_marginLeft="94dp"
         android:layout_marginTop="10dp"
-        android:textStyle="bold"
         android:layout_marginEnd="33dp"
         android:layout_marginRight="33dp"
         android:ems="10"
         android:inputType="numberDecimal"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/price1" />
 
     <Button
@@ -281,5 +261,18 @@
         android:text="Back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/unitSpinner2"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/priceInput"
+        app:layout_constraintStart_toEndOf="@+id/quantityNumber1"
+        app:layout_constraintTop_toBottomOf="@+id/userUnit" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
