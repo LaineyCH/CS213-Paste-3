@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,9 +94,11 @@ public class CreateRecipeActivity extends AppCompatActivity {
                 units.add("kg");
                 units.add("lb");
                 units.add("oz");
+                break;
             case "count":
                 // Counted ingredients
                 units.add("count");
+                break;
         }
         // Creating adapter for unit spinner
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, units);
@@ -130,6 +133,15 @@ public class CreateRecipeActivity extends AppCompatActivity {
 
         // Add recipe ingredient to the recipe ingredient list
         recipeIngredientList.add(recipeIngredient);
+        TextView ingredientsInput = findViewById(R.id.ingredientsInput);
+        String ingredientsOutputString = "";
+        for(int i = 0; i < recipeIngredientList.size(); i++){
+            ingredientsOutputString += "" + String.valueOf(recipeIngredientList.get(i)._quantity) + " " + recipeIngredientList.get(i).getUnit().getUnitLabel() + " " +
+                    recipeIngredientList.get(i)._ingredient._ingredientName + "\n";
+            Log.d("Check ingredients",ingredientsOutputString);
+                }
+
+        ingredientsInput.setText(ingredientsOutputString);
 
         // Clear fields after "add ingredient" button is clicked, ready for next ingredient to be added
         //inputIngredientName.setText("");
