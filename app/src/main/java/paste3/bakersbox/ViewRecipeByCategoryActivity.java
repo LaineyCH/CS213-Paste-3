@@ -1,10 +1,10 @@
 package paste3.bakersbox;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,10 +14,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class viewRecipeActivity extends AppCompatActivity {
+public class ViewRecipeByCategoryActivity extends AppCompatActivity {
     //get all textView output names
     TextView name;
     TextView prep;
@@ -33,16 +32,17 @@ public class viewRecipeActivity extends AppCompatActivity {
 
     Recipe recipe = new Recipe();
 
+    Recipe recipeCopy = new Recipe();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_recipe);
-        ConstraintLayout li=(ConstraintLayout)findViewById(R.id.viewRecipe);
+        ConstraintLayout li = (ConstraintLayout) findViewById(R.id.viewCategory);
         li.setBackgroundColor(Color.parseColor("#7BEEE4"));
         Context context;
         context = this;
         //get all textView output names
-        name = findViewById(R.id.recipeNameTitle);
         prep = findViewById(R.id.prepTimeOutput2);
         bakingTime = findViewById(R.id.bakingTimeOutput);
         servingSize = findViewById(R.id.servingSizeOutput);
@@ -64,15 +64,16 @@ public class viewRecipeActivity extends AppCompatActivity {
 
                 //outputs
                 //StringBuilder ingredientsOutputString = new StringBuilder();
-                name.setText(recipe.getRecipeName());
-                prep.setText(String.valueOf(recipe.prepTime));
-                bakingTime.setText(String.valueOf(recipe.cookTime));
-                servingSize.setText(String.valueOf(recipe.numberServings));
+
+                prep.setText(String.valueOf(recipe.prepTime) + " minutes");
+                bakingTime.setText(String.valueOf(recipe.cookTime) + " minutes");
+                servingSize.setText(String.valueOf(recipe.numberServings) + " " + recipe.typeServing);
                 roundCost = (float) (Math.round(recipe.cost * 100.0) / 100.0);
-                costOutput.setText("£" + String.valueOf(roundCost));
+                costOutput.setText(" £" + String.valueOf(roundCost));
+                recipeCopy = recipe;
                 scaleAmount.setText("1");
 
-                Log.d("Before loop","Loop 1"); // Debugging
+                Log.d("Before loop", "Loop 1"); // Debugging
                 Log.d("Check for RecipeItems", recipe.getRecipeItems().toString()); // Debugging
                 //put ingredients in one string
                 /*for (RecipeIngredient item : recipe.getRecipeItems()) {
@@ -90,12 +91,13 @@ public class viewRecipeActivity extends AppCompatActivity {
 //                }
 
                 //ingredientsOutput.setText(ingredientsOutputString.toString());
-                displayIngredients(recipe);
+                displayIngredients(recipe, 1);
                 methodsOutput.setText(recipe.method);
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {}
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
         });
         // Creating adapter for Ingredient spinner
         ArrayAdapter<String> recipeDataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, RecipeManager.getRecipeNameList());
@@ -109,23 +111,33 @@ public class viewRecipeActivity extends AppCompatActivity {
     public void scaleRecipe(View view) {
         String recipeScaleString = scaleAmount.getText().toString();
         float recipeScale = Float.parseFloat(recipeScaleString);
-        Recipe scaledRecipe = recipe;
+        Log.d("scale", String.valueOf(recipeScale));
+        //Recipe scaledRecipe = recipe;
+        float recipeCost = recipeCopy.cost;
+        Log.d("Cost", String.valueOf(recipe.cost));
+        recipeCost *= recipeScale;
+        float servings = recipeCopy.numberServings;
+        servings *= recipeScale;
+        List<RecipeIngredient> ingredients = recipe.recipeItems;
         //the scaleRecipe() function returns a new Recipe object that is scaled.
         //Recipe scaledRecipe = recipe.scaleRecipe(recipeScale);
-        scaledRecipe = scaledRecipe.scaleRecipe(recipeScale);
-        servingSize.setText(String.valueOf(scaledRecipe.numberServings));
-        roundCost = (float) (Math.round(scaledRecipe.cost * 100.0) / 100.0);
+        //scaledRecipe = scaledRecipe.scaleRecipe(recipeScale);
+        servingSize.setText(String.valueOf(servings));
+        roundCost = (float) (Math.round((recipe.cost * recipeScale) * 100.0) / 100.0);
         costOutput.setText("£" + String.valueOf(roundCost));
-        displayIngredients(scaledRecipe);
+        Recipe scaledRecipe = recipe;
+        scaledRecipe.cost = recipeCost;
+        scaledRecipe.numberServings = servings;
+        displayIngredients(scaledRecipe, recipeScale);
         //costOutput.setText(String.valueOf(scaledRecipe.cost));
     }
 
-    public void displayIngredients(Recipe recipeDisplay){
+    public void displayIngredients(Recipe recipeDisplay, float recipeScale) {
         ingredientsOutputString = new StringBuilder();
         for (RecipeIngredient item : recipeDisplay.getRecipeItems()) {
             Log.d("Check ingredients", item.getIngredient().getIngredientName()); // Debugging
             ingredientsOutputString.append("")
-                    .append(item.getQuantity()).append(" ")
+                    .append(item.getQuantity() * recipeScale).append(" ")
                     .append(item.getUnit().getUnitLabel()).append(" ")
                     .append(item.getIngredient().getIngredientName())
                     .append("\n");
@@ -134,6 +146,12 @@ public class viewRecipeActivity extends AppCompatActivity {
     }
 
     public void goBack(View view) {
-        super.onBackPressed();
+        this.finish();
+    }
+
+    public void editRecipe(View view) {
+        Intent intent = new Intent(this, EditRecipeActivity.class);
+        intent.putExtra("recipeName", recipe._recipeName);
+        startActivity(intent);
     }
 }

@@ -1,6 +1,5 @@
 package paste3.bakersbox;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -19,10 +18,10 @@ public class IngredientsActivity extends AppCompatActivity {
         li.setBackgroundColor(Color.parseColor("#7BEEE4"));
     }
     public void goToPurchase(View view){
-        Intent intent = new Intent(this,EditIngredientActivity.class);
+        Intent intent = new Intent(this, CreateIngredientActivity.class);
         startActivity(intent);
     }
     public void goBack(View view) {
-        super.onBackPressed();
+        this.finish();
     }
 }

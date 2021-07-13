@@ -5,17 +5,16 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 
-public class EditIngredientActivity extends AppCompatActivity {
+public class CreateIngredientActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_ingredient);
+        setContentView(R.layout.activity_create_ingredient);
         ConstraintLayout li=(ConstraintLayout)findViewById(R.id.editIngredient);
         li.setBackgroundColor(Color.parseColor("#7BEEE4"));
 
@@ -69,7 +68,7 @@ public class EditIngredientActivity extends AppCompatActivity {
     }
 
     public void goBack(View view) {
-        super.onBackPressed();
+        this.finish();
     }
 
     //put code here - spinner(View view)
