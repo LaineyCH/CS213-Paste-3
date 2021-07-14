@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -176,7 +177,7 @@ public class CreateRecipeActivity extends AppCompatActivity {
     }
 
     // Triggered by the submit button in the edit ingredient activity
-    public void submitRecipe(View view) {
+    public void submitRecipe(View view) throws InterruptedException {
 
         // Get all EditText inputs and parse to string or float as needed
 
@@ -213,6 +214,10 @@ public class CreateRecipeActivity extends AppCompatActivity {
         RecipeManager.addRecipe(recipeName, recipeIngredientList, prepTime, cookTime,
                 numberServings, typeServing, method);
 
+        Toast toast = Toast.makeText(this,"Recipe Created",Toast.LENGTH_SHORT);
+        toast.show();
+        Thread.sleep(2000);
+        this.finish();
     }
 
     public void goBack(View view) {

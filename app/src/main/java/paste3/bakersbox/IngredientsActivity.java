@@ -21,6 +21,11 @@ public class IngredientsActivity extends AppCompatActivity {
         Intent intent = new Intent(this, CreateIngredientActivity.class);
         startActivity(intent);
     }
+
+    public void goToViewIngredient(View view) {
+        Intent intent = new Intent(this,ViewIngredientActivity.class);
+        startActivity(intent);
+    }
     public void goBack(View view) {
         this.finish();
     }

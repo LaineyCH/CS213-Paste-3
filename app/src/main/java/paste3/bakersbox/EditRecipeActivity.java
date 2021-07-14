@@ -47,7 +47,7 @@ public class EditRecipeActivity extends AppCompatActivity {
         inputTypeServing = findViewById(R.id.servingTypeInput);
         inputMethod = findViewById(R.id.methodInput);
         ingredientsInput = findViewById(R.id.ingredientsInput);
-        recipeName = findViewById(R.id.recipeName3);
+        recipeName = findViewById(R.id.ingredientNameHere);
         Intent intent = getIntent();
         String recipeNameInput = intent.getStringExtra("recipeName");
         recipe = RecipeManager.getRecipe(recipeNameInput);
