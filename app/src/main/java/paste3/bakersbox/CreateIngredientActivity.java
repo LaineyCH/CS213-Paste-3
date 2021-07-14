@@ -25,7 +25,7 @@ public class CreateIngredientActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_ingredient);
-        ConstraintLayout li = (ConstraintLayout) findViewById(R.id.editIngredient);
+        ConstraintLayout li = (ConstraintLayout) findViewById(R.id.createIngredient);
         li.setBackgroundColor(Color.parseColor("#7BEEE4"));
         //UNIT SPINNER
         unitSpinner = findViewById(R.id.unitSpinner2);
@@ -107,8 +107,9 @@ public class CreateIngredientActivity extends AppCompatActivity {
         //Send retrieved data to the Ingredient Manager to create the new ingredient and add it to
         // the Ingredient Map
         IngredientManager.addIngredient(ingredientName, radioButton, unitSpinnerSelection, quantity, price);
+        this.finish();
     }
     public void goBack(View view) {
-        super.onBackPressed();
+        this.finish();
     }
 }

@@ -43,18 +43,18 @@ public class ViewRecipeActivity extends AppCompatActivity {
         Context context;
         context = this;
         //get all textView output names
-        name = findViewById(R.id.recipeName3);
-        prep = findViewById(R.id.prepTimeOutput2);
-        bakingTime = findViewById(R.id.bakingTimeOutput);
-        servingSize = findViewById(R.id.servingSizeOutput);
+        name = findViewById(R.id.ingredientNameHere);
+        prep = findViewById(R.id.totalQuantityOutput);
+        bakingTime = findViewById(R.id.totalPriceOutput);
+        servingSize = findViewById(R.id.unitLabelOutput);
         costOutput = findViewById(R.id.costOutput);
         scaleAmount = findViewById(R.id.scaleAmount);
-        ingredientsOutput = findViewById(R.id.ingredientsOuput);
-        methodsOutput = findViewById(R.id.methodOutput);
+        ingredientsOutput = findViewById(R.id.atomicPriceOutput);
+        methodsOutput = findViewById(R.id.convertedUnitOutput);
 
 
         // RECIPE SPINNER
-        recipeSpinner = findViewById(R.id.recipeSpinner);
+        recipeSpinner = findViewById(R.id.ingredientSpinner2);
         // Ingredient Spinner click listener
         recipeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 

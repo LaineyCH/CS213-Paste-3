@@ -11,6 +11,9 @@ public class Ingredient {
     String _ingredientName;
     float _atomicPrice;
     Unit _unit; // "ml" for wet, "g" for dry, or "count"
+    float totalQuantity;
+    float totalPrice;
+    String inputLabel;
 
     // Main Constructor
     public Ingredient(String ingredientName, String thisUnitLabel, String userUnitLabel, float quantity, float price) {
@@ -22,6 +25,9 @@ public class Ingredient {
         // the conversion needed to calculate the atomic price for the ingredient, based on it's base unit.
         float convertedQuantity = this._unit.convertTo(userUnit, quantity);
         _atomicPrice = price / convertedQuantity;
+        totalQuantity = quantity;
+        totalPrice = price;
+        inputLabel = userUnitLabel;
     }
 
     // Blank Constructor
