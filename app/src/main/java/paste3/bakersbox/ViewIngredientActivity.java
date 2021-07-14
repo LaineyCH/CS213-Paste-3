@@ -6,28 +6,20 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ViewIngredientActivity extends AppCompatActivity {
 
-    List<RecipeIngredient> recipeIngredientList = new ArrayList<>();
     Spinner ingredientSpinner;
     Ingredient ingredient;
     TextView name;
-    TextView totalQuantity;
-    TextView totalPrice;
     TextView unitLabel;
     TextView atomicPrice;
-    TextView convertedUnit;
+    TextView pricePer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +29,9 @@ public class ViewIngredientActivity extends AppCompatActivity {
         li.setBackgroundColor(Color.parseColor("#7BEEE4"));
 
         name = findViewById(R.id.ingredientNameHere);
-        totalQuantity = findViewById(R.id.totalQuantityOutput);
-        totalPrice = findViewById(R.id.totalPriceOutput);
-        unitLabel = findViewById(R.id.unitLabelOutput);
         atomicPrice = findViewById(R.id.atomicPriceOutput);
-        convertedUnit = findViewById(R.id.convertedUnitOutput);
+        unitLabel = findViewById(R.id.unitLabelOutput2);
+        pricePer = findViewById(R.id.pricePer);
 
         // ingredient spinner
         ingredientSpinner = findViewById(R.id.ingredientSpinner2);
@@ -53,16 +43,27 @@ public class ViewIngredientActivity extends AppCompatActivity {
                 String IngredientSpinnerSelection = parent.getItemAtPosition(position).toString();
                 ingredient = IngredientManager.getIngredient(IngredientSpinnerSelection);
                 name.setText(ingredient.getIngredientName());
-                totalQuantity.setText(String.valueOf(ingredient.totalQuantity) + " " + ingredient.inputLabel);
-                totalPrice.setText(String.valueOf(ingredient.totalPrice * 100 / 100));
-                atomicPrice.setText(String.valueOf(ingredient.get_atomicPrice()));
-                convertedUnit.setText(ingredient.getUnit().getUnitLabel());
+                String atomicP = "£ " + String.valueOf(ingredient.get_atomicPrice());
+                atomicPrice.setText(atomicP);
+                String unitL = ingredient.getUnit().getUnitLabel();
+                unitLabel.setText(unitL);
+                String countPrice = "£ " + Math.round(ingredient.get_atomicPrice() * 100.0) / 100.0 + " each";
+                String mlPrice = "£ " + Math.round((ingredient.get_atomicPrice() * 100) * 100.0) / 100.0 + " per 100ml";
+                String gPrice = "£ " + Math.round((ingredient.get_atomicPrice() * 100) * 100.0) / 100.0 + " per 100g";
+                if (unitL.equals("count")) {
+                    pricePer.setText(countPrice);
+                } else if (unitL.equals("ml")) {
+                    pricePer.setText(mlPrice);
+                } else if (unitL.equals("g")) {
+                    pricePer.setText(gPrice);
+                }
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
+
         // Creating adapter for Ingredient spinner
         ArrayAdapter<String> recipeDataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, IngredientManager.getIngredientNameList());
         // Drop down layout style

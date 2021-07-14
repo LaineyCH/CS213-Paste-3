@@ -51,23 +51,6 @@
                 app:srcCompat="@drawable/bblogosmall" />
 
             <TextView
-                android:id="@+id/totalQuantity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="116dp"
-                android:layout_marginLeft="116dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="116dp"
-                android:layout_marginRight="116dp"
-                android:text="Total Quantity:"
-                android:textColor="#000000"
-                android:textSize="32sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ingredientNameHere" />
-
-            <TextView
                 android:id="@+id/ingredientNameHere"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -80,6 +63,7 @@
                 android:textColor="@color/black"
                 android:textSize="42sp"
                 android:textStyle="bold"
+                android:gravity="center_horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ingredientSpinner2" />
@@ -97,22 +81,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/totalQuantityOutput"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="116dp"
-                android:layout_marginLeft="116dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="116dp"
-                android:layout_marginRight="116dp"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/totalQuantity" />
-
-            <TextView
-                android:id="@+id/convertedUnitOutput"
+                android:id="@+id/unitLabelOutput2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
@@ -128,7 +97,26 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.492"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/convertedUnit" />
+                app:layout_constraintTop_toBottomOf="@+id/unitLabel2" />
+
+            <TextView
+                android:id="@+id/pricePer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginRight="32dp"
+                android:autoSizeMaxTextSize="100sp"
+                android:autoSizeMinTextSize="12sp"
+                android:inputType="textMultiLine"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.492"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pricePerLabel" />
 
             <TextView
                 android:id="@+id/atomicPriceOutput"
@@ -147,15 +135,15 @@
                 app:layout_constraintTop_toBottomOf="@+id/atomicPrice" />
 
             <TextView
-                android:id="@+id/convertedUnit"
+                android:id="@+id/unitLabel2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginLeft="32dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="32dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginRight="32dp"
-                android:text="Converted Unit:"
+                android:text="Unit of Measurement:"
                 android:textColor="#000000"
                 android:textSize="32sp"
                 android:textStyle="bold"
@@ -165,12 +153,30 @@
                 app:layout_constraintTop_toBottomOf="@+id/atomicPriceOutput" />
 
             <TextView
+                android:id="@+id/pricePerLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginRight="32dp"
+                android:text="Price Paid:"
+                android:textColor="#000000"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/unitLabelOutput2" />
+
+            <TextView
                 android:id="@+id/atomicPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginLeft="32dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="32dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginRight="32dp"
                 android:text="Atomic Price:"
@@ -180,39 +186,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.497"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/totalPriceOutput" />
-
-            <TextView
-                android:id="@+id/totalPriceOutput"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginLeft="32dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="32dp"
-                android:layout_marginRight="32dp"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/totalPrice" />
-
-            <TextView
-                android:id="@+id/totalPrice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="100dp"
-                android:layout_marginLeft="100dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="100dp"
-                android:layout_marginRight="100dp"
-                android:text="Total Price:"
-                android:textColor="#000000"
-                android:textSize="32sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/totalQuantityOutput" />
+                app:layout_constraintTop_toBottomOf="@+id/ingredientNameHere" />
 
             <Button
                 android:id="@+id/backButton2"

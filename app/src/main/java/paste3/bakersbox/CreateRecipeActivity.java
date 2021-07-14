@@ -165,7 +165,7 @@ public class CreateRecipeActivity extends AppCompatActivity {
         String ingredientsOutputString = "";
         for(int i = 0; i < recipeIngredientList.size(); i++){
             ingredientsOutputString += "" + String.valueOf(recipeIngredientList.get(i)._quantity) + " " + recipeIngredientList.get(i).getUnit().getUnitLabel() + " " +
-                    recipeIngredientList.get(i)._ingredient._ingredientName + "\n";
+                    recipeIngredientList.get(i).getIngredient().getIngredientName() + "\n";
             Log.d("Check ingredients",ingredientsOutputString);
                 }
 

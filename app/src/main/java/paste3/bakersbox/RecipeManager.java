@@ -96,20 +96,49 @@ public class RecipeManager {
     public static void addRecipe(String recipeName, List<RecipeIngredient> recipeIngredientList,
                                  float prepTime, float cookTime, float numberServings,
                                  String typeServing, String method) {
+//        // if ingredient doesn't already exist in the ingredient map, add the new ingredient.
+//        if (ingredientsMap.get(ingredientName) == null) {
+//            Ingredient ingredient = new Ingredient(ingredientName, thisUnitLabel, userUnitLabel, quantity, price);
+//            ingredientsMap.put(ingredientName, ingredient);
+//
+//            Log.d("New Ingredient", ingredient.getIngredientName());  // Debugging
+//        } else {
+//            // otherwise, if the ingredient already exists in the ingredient map, edit it.
+//            editIngredient(ingredientName, thisUnitLabel, userUnitLabel, quantity, price);
+//        }
+//        saveIngredients();  // Debugging - need to decide when to save to database
 
-        Log.d("New Recipe", "about to create");  // Debugging
 
-        // Creates a new recipe
-        Recipe recipe = new Recipe(recipeName, recipeIngredientList, prepTime, cookTime,
-                numberServings, typeServing, method);
+        if (recipeMap.get(recipeName) == null) {
 
-//        Log.d("New Recipe created", recipe.getMethod());  // Debugging
+            // Creates a new recipe if it doesn't already exist in the recipeMap
+            Recipe recipe = new Recipe(recipeName, recipeIngredientList, prepTime, cookTime,
+                    numberServings, typeServing, method);
+            // Adds new Recipe to the Recipe Map
+            recipeMap.put(recipe.getRecipeName(), recipe);
+        } else {
 
-        // Adds Recipe to the Recipe Map
-        recipeMap.put(recipe.getRecipeName(), recipe);
+            // Otherwise, update the recipe already in the recipeMap.
+            editRecipe(recipeName, recipeIngredientList, prepTime, cookTime, numberServings, typeServing, method);
+        }
 
-        saveRecipes();  // Debugging - need to decide when we want to save
+        // Save to database
+        saveRecipes();
+    }
 
+    // Update attributes of existing Recipe
+    public static void editRecipe(String recipeName, List<RecipeIngredient> recipeIngredientList,
+                                  float prepTime, float cookTime, float numberServings,
+                                  String typeServing, String method) {
+        Recipe editedRecipe = recipeMap.get(recipeName);
+        assert editedRecipe != null;
+        editedRecipe.recipeItems = recipeIngredientList;
+        editedRecipe.prepTime = prepTime;
+        editedRecipe.cookTime = cookTime;
+        editedRecipe.numberServings = numberServings;
+        editedRecipe.typeServing = typeServing;
+        editedRecipe.method = method;
+        editedRecipe.setCost();
     }
 
     // Creates a simplified Map of the Recipe Objects (so that there are no Ingredient, nor Unit
@@ -135,7 +164,7 @@ public class RecipeManager {
     public static Recipe getRecipe(String recipeName) {
         Recipe recipe = recipeMap.get(recipeName);
         if(recipe == null){
-            return RecipeManager.getRecipe("Pancakes");
+            return RecipeManager.getRecipe("Chocolate Cake");
             //throw new RuntimeException(String.format("Missing recipe: '%s'", recipeName));
         }
         return recipe;
@@ -196,6 +225,8 @@ public class RecipeManager {
     // Returns a list of the Categories in categoryMap (the key values of categoryMap).
     public static List<String> getRecipeListPerCategory(String category) {
         List<String> recipeListPerCategory = categoryMap.get(category);
+        assert recipeListPerCategory != null;
+        Collections.sort(recipeListPerCategory);
         Log.d("Recipe List Per Cat", recipeListPerCategory.toString());
         return recipeListPerCategory;
     }
@@ -227,7 +258,7 @@ public class RecipeManager {
     }
 
 
-    // Saves Initial Categories to the Firebase Cloud Database
+    // Saves Initial Categories to the Firebase Cloud Database - NOT IN USE
     public static void saveCategoriesToDatabase() {
         Log.d("Saving Categories", "To Database");
         Map<String, Object> initialCategoryMap = new HashMap<>();
@@ -238,18 +269,18 @@ public class RecipeManager {
         }
 
         //HashMap<String, String> emptyList = new HashMap<>();
-        initialCategoryMap.put("Bars", Arrays.asList(" "));
-        initialCategoryMap.put("Breads", Arrays.asList(" "));
-        initialCategoryMap.put("Cakes", Arrays.asList(" "));
-        initialCategoryMap.put("Cookies", Arrays.asList(" "));
-        initialCategoryMap.put("Cup Cakes", Arrays.asList(" "));
-        initialCategoryMap.put("Desserts", Arrays.asList(" "));
-        initialCategoryMap.put("Loaves", Arrays.asList(" "));
-        initialCategoryMap.put("Muffins", Arrays.asList(" "));
-        initialCategoryMap.put("Pies", Arrays.asList(" "));
-        initialCategoryMap.put("Pastries", Arrays.asList(" "));
-        initialCategoryMap.put("Savoury Snacks", Arrays.asList(" "));
-        initialCategoryMap.put("Tray Bakes", Arrays.asList(" "));
+        initialCategoryMap.put("Bars", Collections.singletonList(" "));
+        initialCategoryMap.put("Breads", Collections.singletonList(" "));
+        initialCategoryMap.put("Cakes", Collections.singletonList(" "));
+        initialCategoryMap.put("Cookies", Collections.singletonList(" "));
+        initialCategoryMap.put("Cup Cakes", Collections.singletonList(" "));
+        initialCategoryMap.put("Desserts", Collections.singletonList(" "));
+        initialCategoryMap.put("Loaves", Collections.singletonList(" "));
+        initialCategoryMap.put("Muffins", Collections.singletonList(" "));
+        initialCategoryMap.put("Pies", Collections.singletonList(" "));
+        initialCategoryMap.put("Pastries", Collections.singletonList(" "));
+        initialCategoryMap.put("Savoury Snacks", Collections.singletonList(" "));
+        initialCategoryMap.put("Tray Bakes", Collections.singletonList(" "));
 
         Log.d("Category Map", initialCategoryMap.toString());
 

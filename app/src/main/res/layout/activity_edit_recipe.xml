@@ -5,7 +5,7 @@
     android:id="@+id/editRecipe"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateRecipeActivity">
+    tools:context=".EditRecipeActivity">
 
     <ScrollView
         android:id="@+id/scrollView2"
@@ -205,7 +205,7 @@
                 android:layout_marginRight="25dp"
                 android:backgroundTint="#7A06AC"
                 android:onClick="addRecipeIngredient"
-                android:text="Add Ingredient"
+                android:text="Add / Change Ingredient"
                 android:textColor="#ffffff"
                 android:textSize="22sp"
                 android:textStyle="bold"
@@ -217,18 +217,38 @@
                 app:layout_constraintTop_toBottomOf="@+id/quantityInput" />
 
             <Button
+                android:id="@+id/addIngredientButton"
+                android:layout_width="325dp"
+                android:layout_height="62dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="25dp"
+                android:layout_marginRight="25dp"
+                android:backgroundTint="#7A06AC"
+                android:onClick="removeRecipeIngredient"
+                android:text="Remove Ingredient"
+                android:textColor="#ffffff"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.514"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/addIngredientButton2" />
+
+            <Button
                 android:id="@+id/editRecipeButton"
                 android:layout_width="385dp"
                 android:layout_height="74dp"
                 android:layout_marginStart="20dp"
-                android:layout_marginLeft="20dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="25dp"
-                android:layout_marginRight="25dp"
                 android:layout_marginBottom="4dp"
                 android:backgroundTint="#7A06AC"
                 android:onClick="submitRecipe"
-                android:text="Edit Recipe"
+                android:text="Save Changes"
                 android:textColor="#ffffff"
                 android:textSize="22sp"
                 android:textStyle="bold"
@@ -247,17 +267,17 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginLeft="32dp"
-                android:layout_marginTop="17dp"
+                android:layout_marginTop="12dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginRight="32dp"
                 android:text="Ingredients"
-                android:textSize="22sp"
                 android:textColor="#000000"
+                android:textSize="22sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/addIngredientButton2" />
+                app:layout_constraintTop_toBottomOf="@+id/addIngredientButton" />
 
             <TextView
                 android:id="@+id/ingredientName2"
@@ -284,13 +304,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginLeft="32dp"
-                android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginRight="32dp"
                 android:text="Method"
                 android:textColor="#000000"
-                android:textStyle="bold"
                 android:textSize="22sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.503"
                 app:layout_constraintRight_toRightOf="parent"
@@ -439,6 +458,7 @@
                 android:textColor="#000000"
                 android:textSize="42sp"
                 android:textStyle="bold"
+                android:gravity="center_horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/title5" />

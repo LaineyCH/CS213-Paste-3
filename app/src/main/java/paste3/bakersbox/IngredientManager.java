@@ -9,6 +9,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -117,11 +118,17 @@ public class IngredientManager {
         dbRefIngredient.setValue(getSimplifiedIngredientMap());
     }
 
+    public static void deleteIngredient(String ingredientName) {
+        ingredientsMap.remove(ingredientName);
+        saveIngredients();
+    }
+
     public static List<String> getIngredientNameList() {
         List<String> ingredientNameList = new ArrayList<>();
         for (Map.Entry<String, Ingredient> entry: ingredientsMap.entrySet()) {
             ingredientNameList.add(entry.getValue().getIngredientName());
         }
+        Collections.sort(ingredientNameList);
         return ingredientNameList;
     }
 

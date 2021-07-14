@@ -14,8 +14,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import java.util.List;
-
 public class ViewRecipeActivity extends AppCompatActivity {
     //get all textView output names
     TextView name;
@@ -29,6 +27,7 @@ public class ViewRecipeActivity extends AppCompatActivity {
     Spinner recipeSpinner;
     float roundCost;
     StringBuilder ingredientsOutputString;
+    float recipeScale = 1;
 
     Recipe recipe = new Recipe();
 
@@ -50,7 +49,7 @@ public class ViewRecipeActivity extends AppCompatActivity {
         costOutput = findViewById(R.id.costOutput);
         scaleAmount = findViewById(R.id.scaleAmount);
         ingredientsOutput = findViewById(R.id.atomicPriceOutput);
-        methodsOutput = findViewById(R.id.convertedUnitOutput);
+        methodsOutput = findViewById(R.id.unitLabelOutput2);
 
 
         // RECIPE SPINNER
@@ -64,36 +63,15 @@ public class ViewRecipeActivity extends AppCompatActivity {
                 recipe = RecipeManager.getRecipe(recipeSpinnerSelection);
                 name.setText(recipe.getRecipeName());
 
-                //outputs
-                //StringBuilder ingredientsOutputString = new StringBuilder();
-
-                prep.setText(String.valueOf(recipe.prepTime) + " minutes");
-                bakingTime.setText(String.valueOf(recipe.cookTime) + " minutes");
-                servingSize.setText(String.valueOf(recipe.numberServings) + " " + recipe.typeServing);
-                roundCost = (float) (Math.round(recipe.cost * 100.0) / 100.0);
-                costOutput.setText(" £" + String.valueOf(roundCost));
-                recipeCopy = recipe;
+                // Set outputs for Recipe
+                displayRecipe();
                 scaleAmount.setText("1");
 
                 Log.d("Before loop","Loop 1"); // Debugging
                 Log.d("Check for RecipeItems", recipe.getRecipeItems().toString()); // Debugging
-                //put ingredients in one string
-                /*for (RecipeIngredient item : recipe.getRecipeItems()) {
-                    Log.d("Check ingredients", item.getIngredient().getIngredientName()); // Debugging
-                    ingredientsOutputString.append("")
-                            .append(item.getQuantity()).append(" ")
-                            .append(item.getUnit().getUnitLabel()).append(" ")
-                            .append(item.getIngredient().getIngredientName())
-                            .append("\n");
-                }*/
-//                for(int i = 0; i < recipe.recipeItems.size(); i++){
-//                    ingredientsOutputString += "" + String.valueOf(recipe.recipeItems.get(i)._quantity) + " " + recipe.recipeItems.get(i)._unit + " " +
-//                            recipe.recipeItems.get(i)._ingredient._ingredientName + "\n";
-//                    Log.d("Check ingredients",ingredientsOutputString);
-//                }
 
-                //ingredientsOutput.setText(ingredientsOutputString.toString());
-                displayIngredients(recipe,1);
+                // Call function to put all recipe's ingredients into 1 string and display.
+                displayIngredients();
                 methodsOutput.setText(recipe.method);
             }
 
@@ -111,31 +89,42 @@ public class ViewRecipeActivity extends AppCompatActivity {
 
     public void scaleRecipe(View view) {
         String recipeScaleString = scaleAmount.getText().toString();
-        float recipeScale = Float.parseFloat(recipeScaleString);
+        recipeScale = Float.parseFloat(recipeScaleString);
         Log.d("scale", String.valueOf(recipeScale));
-        //Recipe scaledRecipe = recipe;
-        float recipeCost = recipeCopy.cost;
-        Log.d("Cost", String.valueOf(recipe.cost));
-        recipeCost *= recipeScale;
-        float servings = recipeCopy.numberServings;
-        servings *= recipeScale;
-        List<RecipeIngredient> ingredients = recipe.recipeItems;
-        //the scaleRecipe() function returns a new Recipe object that is scaled.
-        //Recipe scaledRecipe = recipe.scaleRecipe(recipeScale);
-        //scaledRecipe = scaledRecipe.scaleRecipe(recipeScale);
-        servingSize.setText(String.valueOf(servings));
-        roundCost = (float) (Math.round((recipe.cost*recipeScale) * 100.0) / 100.0);
-        costOutput.setText("£" + String.valueOf(roundCost));
-        Recipe scaledRecipe = recipe;
-        scaledRecipe.cost = recipeCost;
-        scaledRecipe.numberServings = servings;
-        displayIngredients(scaledRecipe,recipeScale);
-        //costOutput.setText(String.valueOf(scaledRecipe.cost));
+        displayRecipe();
+        displayIngredients();
+
+//        //Recipe scaledRecipe = recipe;
+//        float recipeCost = recipeCopy.cost;
+//        Log.d("Cost", String.valueOf(recipe.cost));
+//        recipeCost *= recipeScale;
+//        float servings = recipeCopy.numberServings;
+//        servings *= recipeScale;
+//        List<RecipeIngredient> ingredients = recipe.recipeItems;
+//        //the scaleRecipe() function returns a new Recipe object that is scaled.
+//        //Recipe scaledRecipe = recipe.scaleRecipe(recipeScale);
+//        //scaledRecipe = scaledRecipe.scaleRecipe(recipeScale);
+//        servingSize.setText(String.valueOf(servings));
+//        roundCost = (float) (Math.round((recipe.cost*recipeScale) * 100.0) / 100.0);
+//        costOutput.setText("£" + String.valueOf(roundCost));
+//        Recipe scaledRecipe = recipe;
+//        scaledRecipe.cost = recipeCost;
+//        scaledRecipe.numberServings = servings;
+//        displayIngredients(scaledRecipe);
+//        //costOutput.setText(String.valueOf(scaledRecipe.cost));
     }
 
-    public void displayIngredients(Recipe recipeDisplay,float recipeScale){
+    public void displayRecipe() {
+        prep.setText(String.valueOf(recipe.prepTime) + " minutes");
+        bakingTime.setText(String.valueOf(recipe.cookTime) + " minutes");
+        servingSize.setText(String.valueOf(recipe.numberServings * recipeScale) + " " + recipe.typeServing);
+        roundCost = (float) (Math.round(recipe.cost * recipeScale * 100.0) / 100.0);
+        costOutput.setText(" £" + String.valueOf(roundCost));
+    }
+
+    public void displayIngredients() {
         ingredientsOutputString = new StringBuilder();
-        for (RecipeIngredient item : recipeDisplay.getRecipeItems()) {
+        for (RecipeIngredient item : recipe.getRecipeItems()) {
             Log.d("Check ingredients", item.getIngredient().getIngredientName()); // Debugging
             ingredientsOutputString.append("")
                     .append(item.getQuantity() * recipeScale).append(" ")
@@ -152,7 +141,7 @@ public class ViewRecipeActivity extends AppCompatActivity {
 
     public void editRecipe(View view) {
         Intent intent = new Intent(this,EditRecipeActivity.class);
-        intent.putExtra("recipeName",recipe._recipeName);
+        intent.putExtra("recipeName",recipe.getRecipeName());
         startActivity(intent);
     }
 }

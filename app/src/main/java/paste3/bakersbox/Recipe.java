@@ -9,7 +9,7 @@ import java.util.Map;
 
 
 public class Recipe {
-    String _recipeName;
+    private String _recipeName;
     List<RecipeIngredient> recipeItems;
     float prepTime;
     float cookTime;

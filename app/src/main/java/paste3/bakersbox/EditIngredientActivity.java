@@ -110,6 +110,7 @@ public class EditIngredientActivity extends AppCompatActivity {
         // attaching data adapter to unit spinner
         unitSpinner.setAdapter(dataAdapter);
     }
+
     // Triggered by the submit button in the edit ingredient activity
     public void editIngredientButton(View view) {
         // Get all EditText inputs and parse to string or float as needed
@@ -124,6 +125,7 @@ public class EditIngredientActivity extends AppCompatActivity {
         IngredientManager.addIngredient(ingredientName, radioButton, unitSpinnerSelection, quantity, price);
         this.finish();
     }
+
     public void goBack(View view) {
         this.finish();
     }
