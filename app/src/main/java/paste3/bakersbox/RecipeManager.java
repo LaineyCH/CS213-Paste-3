@@ -22,10 +22,15 @@ import java.util.concurrent.ConcurrentMap;
 public class RecipeManager {
     private static final ConcurrentMap<String, Recipe> recipeMap = new ConcurrentHashMap<>();
     private static final ConcurrentMap<String, List<String>> categoryMap = new ConcurrentHashMap<>();
-    public static List<String> shoppingList = new ArrayList<>();
+    private static OnListChangedListener onShoppingListLoaded = null;
+    public static List<ShoppingListItem> shoppingList = new ArrayList<>();
     public static DatabaseReference dbRefRecipe = null;
     public static DatabaseReference dbRefCategory = null;
     public static DatabaseReference dbRefShoppingList = null;
+
+    public static void setOnShoppingListLoaded(OnListChangedListener onShoppingListLoaded) {
+        RecipeManager.onShoppingListLoaded = onShoppingListLoaded;
+    }
 
     // Sets the Database reference and populates the Recipe Map from the Database
     public static void setDbRefRecipe(DatabaseReference dbRef, OnInitialised onInitialised) {
@@ -225,13 +230,16 @@ public class RecipeManager {
                 shoppingList.clear();
                 //  Loops through the data retrieved from the Database
                 for (DataSnapshot categorySnap : snapshot.getChildren()) {
-                    String item = categorySnap.getValue(String.class);
+                    ShoppingListItem item = categorySnap.getValue(ShoppingListItem.class);
                     if (item == null) {
                         Log.d("Shopping list loaded null", "");
                         continue;
                     }
                     // Adds the item to the shopping list
                     shoppingList.add(item);
+                }
+                if (onShoppingListLoaded != null) {
+                    onShoppingListLoaded.onListChanged();
                 }
             }
             @Override
@@ -287,14 +295,12 @@ public class RecipeManager {
     }
 
     // Returns the Shopping List
-    public static List<String> getShoppingList() {
+    public static List<ShoppingListItem> getShoppingList() {
         return shoppingList;
     }
 
     // Saves the Shopping List to the Database.
-    public static void saveShoppingList(List<String> shoppingItems) {
-        shoppingList = shoppingItems;
-
+    public static void saveShoppingList() {
         if (dbRefShoppingList == null) {
             Log.d("dbRefCategory", "Database reference not available.");
             return;

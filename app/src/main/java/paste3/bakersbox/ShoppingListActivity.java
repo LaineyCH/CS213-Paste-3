@@ -17,24 +17,19 @@ import android.widget.Spinner;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ShoppingListActivity extends AppCompatActivity {
 
     ListView shoppingListData;
-    ArrayAdapter<String> shoppingListAdapter;
-
-    public void setShoppingItems(List<String> shoppingItems) {
-        this.shoppingItems = shoppingItems;
-    }
-
-    List<String> shoppingItems = RecipeManager.getShoppingList();
+    ShoppingListAdapter shoppingListAdapter;
+    List<ShoppingListItem> shoppingItems = RecipeManager.getShoppingList();
     Spinner recipeSpinner;
     Spinner ingredientSpinner;
     Recipe recipe = new Recipe();
     String ingredientSpinnerSelection;
     List<String> ingredientList = new ArrayList<>();
     List<RecipeIngredient> recipeIngredientList = new ArrayList<>();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +40,10 @@ public class ShoppingListActivity extends AppCompatActivity {
 
         // Create Shopping List Adapter
         shoppingListData = findViewById(R.id.shoppingList);
-        shoppingListAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, shoppingItems);
+        shoppingListAdapter = new ShoppingListAdapter(this, shoppingItems);
+        shoppingListAdapter.setOnClickListener(this::saveIngredientChecked);
         shoppingListData.setAdapter(shoppingListAdapter);
+        RecipeManager.setOnShoppingListLoaded(shoppingListAdapter::notifyDataSetChanged);
 
         // RECIPE SPINNER
         recipeSpinner = findViewById(R.id.recipeSpinner);
@@ -104,9 +101,14 @@ public class ShoppingListActivity extends AppCompatActivity {
 
     // Adds Ingredient, including quantity and unit, to the shopping list.
     public void addIngredientToShoppingList(View view) {
-        shoppingItems.add(ingredientSpinnerSelection);
+        ShoppingListItem item = new ShoppingListItem(ingredientSpinnerSelection, false);
+        shoppingItems.add(item);
         shoppingListData.setAdapter(shoppingListAdapter);
-        RecipeManager.saveShoppingList(shoppingItems);
+        RecipeManager.saveShoppingList();
+    }
+
+    public void saveIngredientChecked(View view) {
+        RecipeManager.saveShoppingList();
     }
 
     // Clears shopping list
@@ -118,14 +120,9 @@ public class ShoppingListActivity extends AppCompatActivity {
 
     // Clears all the checked items from the list.
     public void clearCheckedItems(View view) {
-        for (int i=0; i < shoppingListData.getCount(); i++) {
-            if (shoppingListData.isItemChecked(i)) {
-                Object item = shoppingListData.getItemAtPosition(i);
-                shoppingItems.remove(item);
-            }
-        }
-        shoppingListData.setAdapter(shoppingListAdapter);
-        RecipeManager.saveShoppingList(shoppingItems);
+        shoppingItems.removeIf(ShoppingListItem::isChecked);
+        shoppingListAdapter.notifyDataSetChanged();
+        RecipeManager.saveShoppingList();
     }
 
     public void goBack(View view) {
