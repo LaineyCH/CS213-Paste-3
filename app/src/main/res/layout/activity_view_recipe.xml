@@ -50,6 +50,8 @@
                 android:layout_marginEnd="24dp"
                 android:layout_marginRight="24dp"
                 android:textSize="200sp"
+                android:backgroundTint="@android:color/white"
+                android:background="@android:color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
@@ -132,7 +134,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/totalPriceOutput" />
 
             <TextView
-                android:id="@+id/totalQuantityOutput"
+                android:id="@+id/prepTimeOutput"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="116dp"
@@ -252,7 +254,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/totalPrice" />
 
             <TextView
-                android:id="@+id/costOutput"
+                android:id="@+id/ingredientCostOuput"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
@@ -261,7 +263,7 @@
                 android:textSize="22sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/unitLabelOutput" />
+                app:layout_constraintTop_toBottomOf="@+id/cookTimeOutput" />
 
             <TextView
                 android:id="@+id/totalPrice"
@@ -278,7 +280,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/totalQuantityOutput" />
+                app:layout_constraintTop_toBottomOf="@+id/prepTimeOutput" />
 
             <TextView
                 android:id="@+id/ingredientName14"
@@ -289,11 +291,11 @@
                 android:textColor="#000000"
                 android:textSize="32sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/costOutput"
-                app:layout_constraintTop_toBottomOf="@+id/unitLabelOutput" />
+                app:layout_constraintEnd_toStartOf="@+id/ingredientCostOuput"
+                app:layout_constraintTop_toBottomOf="@+id/cookTimeOutput" />
 
             <TextView
-                android:id="@+id/unitLabelOutput"
+                android:id="@+id/cookTimeOutput"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="110dp"
@@ -317,6 +319,8 @@
                 android:layout_marginEnd="32dp"
                 android:layout_marginRight="32dp"
                 android:ems="10"
+                android:backgroundTint="@android:color/white"
+                android:background="@android:drawable/edit_text"
                 android:inputType="textPersonName"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"

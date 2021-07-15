@@ -20,6 +20,7 @@
         android:backgroundTint="#7A06AC"
         android:onClick="submitIngredient"
         android:text="Add Ingredient"
+
         android:textSize="22sp"
         android:textColor="#ffffff"
         android:textStyle="bold"
@@ -101,6 +102,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title4" />
 
+    <TextView
+        android:id="@+id/ingredientName11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:textColor="#000000"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.528"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ingredientNameInput" />
+
     <EditText
         android:id="@+id/ingredientNameInput"
         android:layout_width="wrap_content"
@@ -110,9 +127,11 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
+        android:backgroundTint="@android:color/white"
+        android:background="@android:drawable/edit_text"
         android:ems="10"
-        android:textStyle="bold"
         android:inputType="textPersonName"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ingredientName1" />
@@ -123,15 +142,15 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="26dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:text="Ingredient Type:"
-        android:textStyle="bold"
         android:textSize="22sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ingredientNameInput" />
+        app:layout_constraintTop_toBottomOf="@+id/ingredientName11" />
 
 
     <RadioGroup
@@ -142,6 +161,8 @@
         android:layout_marginLeft="32dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="32dp"
+        android:backgroundTint="@android:color/white"
+        android:background="@android:color/white"
         android:layout_marginRight="32dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
@@ -239,6 +260,8 @@
         android:layout_marginLeft="33dp"
         android:layout_marginTop="10dp"
         android:ems="10"
+        android:backgroundTint="@android:color/white"
+        android:background="@android:drawable/edit_text"
         android:inputType="numberDecimal"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -253,6 +276,8 @@
         android:layout_marginRight="33dp"
         android:ems="10"
         android:inputType="numberDecimal"
+        android:backgroundTint="@android:color/white"
+        android:background="@android:drawable/edit_text"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/price1" />
@@ -277,6 +302,8 @@
         android:layout_marginLeft="8dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="8dp"
+        android:backgroundTint="@android:color/white"
+        android:background="@android:color/white"
         android:layout_marginRight="8dp"
         app:layout_constraintEnd_toStartOf="@+id/priceInput"
         app:layout_constraintStart_toEndOf="@+id/quantityNumber1"
