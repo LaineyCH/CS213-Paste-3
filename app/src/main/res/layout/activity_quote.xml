@@ -2,8 +2,406 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/quoteActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".QuoteActivity">
+
+    <ScrollView
+        android:id="@+id/scrollView3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/ingredientName6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginRight="32dp"
+                android:text="Scale Amount"
+                android:textColor="#000000"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ingredientName12" />
+
+            <TextView
+                android:id="@+id/ingredientName13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginRight="32dp"
+                android:text="Batches"
+                android:textColor="#000000"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/scaleAmount" />
+
+            <Spinner
+                android:id="@+id/ingredientSpinner2"
+                android:layout_width="355dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="24dp"
+                android:backgroundTint="@android:color/white"
+                android:background="@android:color/white"
+                android:layout_marginRight="24dp"
+                android:textSize="200sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginRight="32dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/bblogosmall" />
+
+            <TextView
+                android:id="@+id/totalQuantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="116dp"
+                android:layout_marginLeft="116dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="116dp"
+                android:layout_marginRight="116dp"
+                android:text="Preparation time:"
+                android:textColor="#000000"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ingredientNameHere" />
+
+            <TextView
+                android:id="@+id/ingredientNameHere"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginRight="32dp"
+                android:text="recipeName"
+                android:textColor="#000000"
+                android:textSize="42sp"
+                android:textStyle="bold"
+                android:gravity="center_horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ingredientSpinner2" />
+
+            <Button
+                android:id="@+id/backButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#7A06AC"
+                android:onClick="goBack"
+                android:text="Back"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/unitLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="100dp"
+                android:layout_marginLeft="100dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="100dp"
+                android:layout_marginRight="100dp"
+                android:text="Cook/Baking Time:"
+                android:textColor="#000000"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/personalRatePerHour" />
+
+            <TextView
+                android:id="@+id/unitLabel3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="100dp"
+                android:layout_marginLeft="100dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="100dp"
+                android:layout_marginRight="100dp"
+                android:text="Number of Servings:"
+                android:textColor="#000000"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ovenRatePerHour" />
+
+            <TextView
+                android:id="@+id/prepTimeOutput"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="116dp"
+                android:layout_marginLeft="116dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="116dp"
+                android:layout_marginRight="116dp"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/totalQuantity" />
+
+            <Button
+                android:id="@+id/scaleRecipe2"
+                android:layout_width="325dp"
+                android:layout_height="62dp"
+                android:layout_marginStart="45dp"
+                android:layout_marginLeft="45dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="45dp"
+                android:layout_marginRight="45dp"
+                android:backgroundTint="#7A06AC"
+                android:onClick="scaleRecipe"
+                android:text="Update Scale/Batches"
+                android:textColor="#ffffff"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/batchesInput" />
+
+            <TextView
+                android:id="@+id/ingredientCostOuput"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/ingredientName14"
+                app:layout_constraintTop_toBottomOf="@+id/servingsOutput" />
+
+            <TextView
+                android:id="@+id/totalCostOutput"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="19dp"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/ingredientName12"
+                app:layout_constraintTop_toBottomOf="@+id/ingredientName14" />
+
+            <TextView
+                android:id="@+id/totalPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="100dp"
+                android:layout_marginLeft="100dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="100dp"
+                android:layout_marginRight="100dp"
+                android:text="Prep Time Hourly Rate:"
+                android:textColor="#000000"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/prepTimeOutput" />
+
+            <TextView
+                android:id="@+id/totalPrice2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="100dp"
+                android:layout_marginLeft="100dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="100dp"
+                android:layout_marginRight="100dp"
+                android:text="Cook/Bake Time Hourly Rate:"
+                android:textColor="#000000"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cookTimeOutput" />
+
+            <TextView
+                android:id="@+id/ingredientName14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="90dp"
+                android:layout_marginLeft="90dp"
+                android:layout_marginTop="16dp"
+                android:text="Raw Cost:"
+                android:textColor="#000000"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/servingsOutput" />
+
+            <TextView
+                android:id="@+id/ingredientName12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="90dp"
+                android:layout_marginLeft="90dp"
+                android:layout_marginTop="12dp"
+                android:text="Total Cost:"
+                android:textColor="#000000"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ingredientName14" />
+
+            <TextView
+                android:id="@+id/cookTimeOutput"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="110dp"
+                android:layout_marginLeft="110dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="110dp"
+                android:layout_marginRight="110dp"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/unitLabel" />
+
+            <TextView
+                android:id="@+id/servingsOutput"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="110dp"
+                android:layout_marginLeft="110dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="110dp"
+                android:layout_marginRight="110dp"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/unitLabel3" />
+
+            <EditText
+                android:id="@+id/scaleAmount"
+                android:layout_width="81dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginRight="32dp"
+                android:ems="10"
+                android:text="1"
+                android:backgroundTint="@android:color/white"
+                android:background="@android:drawable/edit_text"
+                android:inputType="textPersonName"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ingredientName6" />
+
+            <EditText
+                android:id="@+id/batchesInput"
+                android:layout_width="81dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginRight="32dp"
+                android:ems="10"
+                android:text="1"
+                android:backgroundTint="@android:color/white"
+                android:background="@android:drawable/edit_text"
+                android:inputType="textPersonName"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ingredientName13" />
+
+            <EditText
+                android:id="@+id/personalRatePerHour"
+                android:layout_width="114dp"
+                android:layout_height="38dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginRight="32dp"
+                android:ems="10"
+                android:text="10.00"
+                android:backgroundTint="@android:color/white"
+                android:background="@android:drawable/edit_text"
+                android:inputType="textPersonName"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/totalPrice" />
+
+            <EditText
+                android:id="@+id/ovenRatePerHour"
+                android:layout_width="114dp"
+                android:layout_height="38dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginRight="32dp"
+                android:ems="10"
+                android:text="0.14"
+                android:backgroundTint="@android:color/white"
+                android:background="@android:drawable/edit_text"
+                android:inputType="textPersonName"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/totalPrice2" />
+
+            <Button
+                android:id="@+id/backButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#7A06AC"
+                android:onClick="editRecipe"
+                android:text="Edit"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

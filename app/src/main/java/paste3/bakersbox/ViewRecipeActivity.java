@@ -43,10 +43,10 @@ public class ViewRecipeActivity extends AppCompatActivity {
         context = this;
         //get all textView output names
         name = findViewById(R.id.ingredientNameHere);
-        prep = findViewById(R.id.totalQuantityOutput);
+        prep = findViewById(R.id.prepTimeOutput);
         bakingTime = findViewById(R.id.totalPriceOutput);
-        servingSize = findViewById(R.id.unitLabelOutput);
-        costOutput = findViewById(R.id.costOutput);
+        servingSize = findViewById(R.id.cookTimeOutput);
+        costOutput = findViewById(R.id.ingredientCostOuput);
         scaleAmount = findViewById(R.id.scaleAmount);
         ingredientsOutput = findViewById(R.id.atomicPriceOutput);
         methodsOutput = findViewById(R.id.unitLabelOutput2);
