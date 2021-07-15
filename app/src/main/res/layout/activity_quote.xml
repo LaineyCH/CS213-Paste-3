@@ -61,13 +61,25 @@
                 android:id="@+id/ingredientSpinner2"
                 android:layout_width="355dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="24dp"
-                android:backgroundTint="@android:color/white"
                 android:background="@android:color/white"
-                android:layout_marginRight="24dp"
+                android:backgroundTint="@android:color/white"
                 android:textSize="200sp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recipeInstruction5" />
+
+            <TextView
+                android:id="@+id/recipeInstruction5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Choose a Recipe:"
+                android:textColor="#000000"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
             <ImageView
