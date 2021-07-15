@@ -324,9 +324,17 @@ public class RecipeManager {
         }
 
         //HashMap<String, String> emptyList = new HashMap<>();
-        initialCategoryMap.put("Bars", Collections.singletonList(" "));
+
+        List<String> bars = new ArrayList<>();
+        bars.add(" ");
+        bars.add("Oat Crunchy Bars");
+        List<String> cakes = new ArrayList<>();
+        cakes.add(" ");
+        cakes.add("Chocolate Cake");
+
+        initialCategoryMap.put("Bars", bars);
         initialCategoryMap.put("Breads", Collections.singletonList(" "));
-        initialCategoryMap.put("Cakes", Collections.singletonList(" "));
+        initialCategoryMap.put("Cakes", cakes);
         initialCategoryMap.put("Cookies", Collections.singletonList(" "));
         initialCategoryMap.put("Cup Cakes", Collections.singletonList(" "));
         initialCategoryMap.put("Desserts", Collections.singletonList(" "));

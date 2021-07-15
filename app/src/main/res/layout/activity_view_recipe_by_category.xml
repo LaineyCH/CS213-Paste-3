@@ -25,21 +25,34 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/recipeInstruction3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="Choose a Recipe:"
+                android:textColor="#000000"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/categorySpinner2" />
+
             <Spinner
                 android:id="@+id/categorySpinner2"
                 android:layout_width="355dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginLeft="32dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="32dp"
-                android:layout_marginRight="32dp"
-                android:backgroundTint="@android:color/white"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
                 android:background="@android:color/white"
+                android:backgroundTint="@android:color/white"
                 android:textSize="200sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+                app:layout_constraintTop_toBottomOf="@+id/recipeInstruction4" />
 
             <TextView
                 android:id="@+id/ingredientName6"
@@ -62,14 +75,15 @@
                 android:id="@+id/ingredientSpinner2"
                 android:layout_width="355dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="24dp"
-                android:layout_marginRight="24dp"
-                android:backgroundTint="@android:color/white"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="16dp"
                 android:background="@android:color/white"
+                android:backgroundTint="@android:color/white"
                 android:textSize="200sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/categorySpinner2" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recipeInstruction3" />
 
             <ImageView
                 android:id="@+id/imageView2"
@@ -107,16 +121,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginLeft="32dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
-                android:layout_marginRight="32dp"
+                android:gravity="center_horizontal"
                 android:text="Recipe"
-                android:textColor="#000000"
+                android:textColor="#B60B04"
                 android:textSize="42sp"
                 android:textStyle="bold"
-                android:gravity="center_horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ingredientSpinner2" />
 
@@ -185,13 +198,11 @@
 
             <TextView
                 android:id="@+id/unitLabelOutput2"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginLeft="32dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="32dp"
-                android:layout_marginRight="32dp"
                 android:autoSizeMaxTextSize="100sp"
                 android:autoSizeMinTextSize="12sp"
                 android:inputType="textMultiLine"
@@ -273,10 +284,10 @@
                 android:id="@+id/ingredientCostOuput"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="13dp"
                 android:layout_marginEnd="152dp"
-                android:layout_marginRight="152dp"
-                android:textSize="22sp"
+                android:textColor="#B60B04"
+                android:textSize="30sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cookTimeOutput" />
@@ -302,12 +313,13 @@
                 android:id="@+id/ingredientName14"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
                 android:text="Cost:"
                 android:textColor="#000000"
                 android:textSize="32sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/ingredientCostOuput"
-                app:layout_constraintTop_toTopOf="@+id/ingredientCostOuput" />
+                app:layout_constraintTop_toBottomOf="@+id/cookTimeOutput" />
 
             <TextView
                 android:id="@+id/cookTimeOutput"
@@ -353,6 +365,21 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/recipeInstruction4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="16dp"
+                android:text="Choose a Category:"
+                android:textColor="#000000"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

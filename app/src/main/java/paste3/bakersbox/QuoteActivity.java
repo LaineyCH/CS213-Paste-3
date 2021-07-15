@@ -88,11 +88,11 @@ public class QuoteActivity extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {}
         });
-        // Creating adapter for Ingredient spinner
+        // Creating adapter for Recipe spinner
         ArrayAdapter<String> recipeDataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, RecipeManager.getRecipeNameList());
         // Drop down layout style
         recipeDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // attaching data adapter to ingredient spinner
+        // attaching data adapter to recipe spinner
         recipeSpinner.setAdapter(recipeDataAdapter);
 
     }
@@ -102,25 +102,6 @@ public class QuoteActivity extends AppCompatActivity {
         recipeScale = Float.parseFloat(recipeScaleString);
         Log.d("scale", String.valueOf(recipeScale));
         displayRecipe();
-
-//        //Recipe scaledRecipe = recipe;
-//        float recipeCost = recipeCopy.cost;
-//        Log.d("Cost", String.valueOf(recipe.cost));
-//        recipeCost *= recipeScale;
-//        float servings = recipeCopy.numberServings;
-//        servings *= recipeScale;
-//        List<RecipeIngredient> ingredients = recipe.recipeItems;
-//        //the scaleRecipe() function returns a new Recipe object that is scaled.
-//        //Recipe scaledRecipe = recipe.scaleRecipe(recipeScale);
-//        //scaledRecipe = scaledRecipe.scaleRecipe(recipeScale);
-//        servingSize.setText(String.valueOf(servings));
-//        roundCost = (float) (Math.round((recipe.cost*recipeScale) * 100.0) / 100.0);
-//        costOutput.setText("£" + String.valueOf(roundCost));
-//        Recipe scaledRecipe = recipe;
-//        scaledRecipe.cost = recipeCost;
-//        scaledRecipe.numberServings = servings;
-//        displayIngredients(scaledRecipe);
-//        //costOutput.setText(String.valueOf(scaledRecipe.cost));
     }
 
     public void displayRecipe() {
@@ -134,7 +115,7 @@ public class QuoteActivity extends AppCompatActivity {
         bakingTime.setText(String.valueOf((recipe.cookTime * batches) * 100.0/100.0) + " minutes");
         servingSize.setText(String.valueOf(recipe.numberServings * recipeScale) + " " + recipe.typeServing);
         roundCost = (float) (Math.round(recipe.cost * recipeScale * 100.00) / 100.00);
-        totalCost = (recipe.cost + (ovenRate * ((recipe.cookTime * batches) / 60.0f)) + (personalRate * ((recipe.prepTime * batches) / 60.0f)));
+        totalCost = (roundCost + (ovenRate * ((recipe.cookTime * batches) / 60.0f)) + (personalRate * ((recipe.prepTime * batches) / 60.0f)));
         costOutput.setText(" £" + String.valueOf(roundCost));
         BigDecimal bigDecimal = new BigDecimal(Float.toString(totalCost));
         bigDecimal = bigDecimal.setScale(2, RoundingMode.HALF_UP);

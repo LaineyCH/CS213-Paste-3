@@ -29,7 +29,7 @@
         android:textStyle="bold"
         android:layout_marginRight="32dp"
         android:text="Ingredients"
-        android:textColor="#000000"
+        android:textColor="#B60B04"
         android:textSize="42sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

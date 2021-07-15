@@ -46,14 +46,13 @@
                 android:id="@+id/ingredientSpinner2"
                 android:layout_width="355dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="24dp"
-                android:layout_marginRight="24dp"
-                android:textSize="200sp"
-                android:backgroundTint="@android:color/white"
                 android:background="@android:color/white"
+                android:backgroundTint="@android:color/white"
+                android:textSize="200sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+                app:layout_constraintTop_toBottomOf="@+id/recipeInstruction2" />
 
             <ImageView
                 android:id="@+id/imageView2"
@@ -96,7 +95,7 @@
                 android:layout_marginEnd="32dp"
                 android:layout_marginRight="32dp"
                 android:text="recipeName"
-                android:textColor="#000000"
+                android:textColor="#B60B04"
                 android:textSize="42sp"
                 android:textStyle="bold"
                 android:gravity="center_horizontal"
@@ -338,6 +337,19 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/recipeInstruction2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Choose a Recipe:"
+                android:textColor="#000000"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
