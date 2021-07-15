@@ -22,19 +22,15 @@ import java.util.concurrent.ConcurrentMap;
 public class RecipeManager {
     private static final ConcurrentMap<String, Recipe> recipeMap = new ConcurrentHashMap<>();
     private static final ConcurrentMap<String, List<String>> categoryMap = new ConcurrentHashMap<>();
+    public static List<String> shoppingList = new ArrayList<>();
     public static DatabaseReference dbRefRecipe = null;
     public static DatabaseReference dbRefCategory = null;
-
+    public static DatabaseReference dbRefShoppingList = null;
 
     // Sets the Database reference and populates the Recipe Map from the Database
     public static void setDbRefRecipe(DatabaseReference dbRef, OnInitialised onInitialised) {
         RecipeManager.dbRefRecipe = dbRef;
         populateRecipeMap(onInitialised);
-
-        // Debugging - print a list of all the ingredient keys in the ingredient map
-//        for (ConcurrentMap.Entry<String, Recipe> recipeEntry : recipeMap.entrySet())  {
-//            Log.d("Recipe Map", recipeEntry.getKey());
-//        } // end Debugging
     }
 
     // Sets the Database reference and populates the Categories Map from the Database
@@ -47,6 +43,13 @@ public class RecipeManager {
 //        for (ConcurrentMap.Entry<String, Recipe> recipeEntry : recipeMap.entrySet())  {
 //            Log.d("Recipe Map", recipeEntry.getKey());
 //        } // end Debugging
+    }
+
+    // Sets the Database reference and populates the Categories Map from the Database
+    public static void setDbRefShoppingList(DatabaseReference dbRef) {
+        RecipeManager.dbRefShoppingList = dbRef;
+        Log.d("dbRefShoppingList", "Created");
+        populateShoppingList();
     }
 
     public static ConcurrentMap<String, Recipe> getRecipeMap() {
@@ -211,6 +214,32 @@ public class RecipeManager {
         });
     }
 
+    public static void populateShoppingList() {
+        // Fetches the Shopping List form the Firebase Cloud Database.
+        if (dbRefShoppingList == null) {
+            return;
+        }
+        dbRefShoppingList.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                shoppingList.clear();
+                //  Loops through the data retrieved from the Database
+                for (DataSnapshot categorySnap : snapshot.getChildren()) {
+                    String item = categorySnap.getValue(String.class);
+                    if (item == null) {
+                        Log.d("Shopping list loaded null", "");
+                        continue;
+                    }
+                    // Adds the item to the shopping list
+                    shoppingList.add(item);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+    }
+
     // Returns a list of the Categories in categoryMap (the key values of categoryMap).
     public static List<String> getCategoryList() {
         List<String> categoryList = new ArrayList<>();
@@ -257,6 +286,32 @@ public class RecipeManager {
         dbRefCategory.setValue(categoryMap);
     }
 
+    // Returns the Shopping List
+    public static List<String> getShoppingList() {
+        return shoppingList;
+    }
+
+    // Saves the Shopping List to the Database.
+    public static void saveShoppingList(List<String> shoppingItems) {
+        shoppingList = shoppingItems;
+
+        if (dbRefShoppingList == null) {
+            Log.d("dbRefCategory", "Database reference not available.");
+            return;
+        }
+        dbRefShoppingList.setValue(shoppingList);
+    }
+
+    // Saves the Shopping List to the Database.
+    public static void clearShoppingList() {
+        Log.d("Saving Shopping List", "To Database");
+
+        if (dbRefShoppingList == null) {
+            Log.d("dbRefCategory", "Database reference not available.");
+            return;
+        }
+        dbRefShoppingList.removeValue();
+    }
 
     // Saves Initial Categories to the Firebase Cloud Database - NOT IN USE
     public static void saveCategoriesToDatabase() {

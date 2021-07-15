@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         DatabaseReference ingredientRef = myRef.child("ingredients");
         DatabaseReference recipeRef = myRef.child("recipes");
         DatabaseReference categoryRef =  myRef.child("categories");
+        DatabaseReference shoppingListRef = myRef.child("shoppingList");
 
         // Set Database reference for Unit storage. The OnInitialised interface ensures that the
         // Unit map is populated before the Ingredient map begins populating.
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
                                 // Set Database reference for Category storage
                                 RecipeManager.setDbRefCategory(categoryRef);
+                                RecipeManager.setDbRefShoppingList(shoppingListRef);
                             }
                         });
                     }

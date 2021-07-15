@@ -174,27 +174,4 @@ public class Recipe {
         this.method = method;
     }
 
-
-
-      // Debugging code
-//    public void testRecipe(){
-//        prepTime = 5;
-//        RecipeIngredient ingredient1 = new RecipeIngredient("Eggs",3.0f,0.9f,"ml");
-//        RecipeIngredient ingredient2 = new RecipeIngredient("bacon",1.0f,1.23f,"kg");
-//        RecipeIngredient ingredient3 = new RecipeIngredient("bacon",3.4f,2.54f,"kg");
-//        RecipeIngredient ingredient4 = new RecipeIngredient("bacon",2.3f,3.59f,"kg");
-//        recipeItems.add(ingredient1);
-//        recipeItems.add(ingredient2);
-//        recipeItems.add(ingredient3);
-//        recipeItems.add(ingredient4);
-//        cookTime = 3;
-//        cost = (float) 5.5;
-//        numberServings = (float) 1.0;
-//        typeServing = "Large";
-//        method = "cook";
-//    }
-//
-
-
-
 }

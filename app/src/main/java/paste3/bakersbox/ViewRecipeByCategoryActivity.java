@@ -64,7 +64,7 @@ public class ViewRecipeByCategoryActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 // On selecting a spinner item
                 categorySpinnerSelection = parent.getItemAtPosition(position).toString();
-                Log.d("Dropdown value", categorySpinnerSelection); // Debugging
+                //Log.d("Dropdown value", categorySpinnerSelection); // Debugging
                 onCategorySelected(parent, position);
             }
 

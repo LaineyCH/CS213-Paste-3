@@ -54,7 +54,7 @@ public class ViewRecipeActivity extends AppCompatActivity {
 
         // RECIPE SPINNER
         recipeSpinner = findViewById(R.id.ingredientSpinner2);
-        // Ingredient Spinner click listener
+        // Recipe Spinner click listener
         recipeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
@@ -78,11 +78,11 @@ public class ViewRecipeActivity extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {}
         });
-        // Creating adapter for Ingredient spinner
+        // Creating adapter for Recipe spinner
         ArrayAdapter<String> recipeDataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, RecipeManager.getRecipeNameList());
         // Drop down layout style
         recipeDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // attaching data adapter to ingredient spinner
+        // attaching data adapter to recipe spinner
         recipeSpinner.setAdapter(recipeDataAdapter);
 
     }
