@@ -88,7 +88,6 @@ public class ShoppingListActivity extends AppCompatActivity {
         ingredientDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // attaching data adapter to ingredient spinner
         ingredientSpinner.setAdapter(ingredientDataAdapter);
-
     }
 
     // Sets display list for Ingredient Spinner based on the Recipe selected.
