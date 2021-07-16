@@ -36,7 +36,6 @@ public class QuoteActivity extends AppCompatActivity {
     float totalCost;
     Spinner recipeSpinner;
     float roundCost;
-    StringBuilder ingredientsOutputString;
     float recipeScale = 1;
 
     Recipe recipe = new Recipe();

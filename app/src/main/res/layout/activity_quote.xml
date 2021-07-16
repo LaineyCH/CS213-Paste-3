@@ -63,8 +63,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="24dp"
-                android:background="@android:color/white"
-                android:backgroundTint="@android:color/white"
                 android:textSize="200sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/recipeInstruction5" />
@@ -268,6 +266,30 @@
                 app:layout_constraintTop_toBottomOf="@+id/cookTimeOutput" />
 
             <TextView
+                android:id="@+id/totalPrice3"
+                android:layout_width="123dp"
+                android:layout_height="36dp"
+                android:layout_marginTop="12dp"
+                android:text="£ Per Hour"
+                android:textColor="#000000"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/personalRatePerHour"
+                app:layout_constraintTop_toBottomOf="@+id/totalPrice" />
+
+            <TextView
+                android:id="@+id/totalPrice5"
+                android:layout_width="123dp"
+                android:layout_height="36dp"
+                android:layout_marginTop="12dp"
+                android:text="£ Per Hour"
+                android:textColor="#000000"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/ovenRatePerHour"
+                app:layout_constraintTop_toBottomOf="@+id/totalPrice2" />
+
+            <TextView
                 android:id="@+id/ingredientName14"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -365,18 +387,18 @@
 
             <EditText
                 android:id="@+id/personalRatePerHour"
-                android:layout_width="114dp"
+                android:layout_width="87dp"
                 android:layout_height="38dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginLeft="32dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginRight="32dp"
-                android:ems="10"
-                android:text="10.00"
-                android:backgroundTint="@android:color/white"
                 android:background="@android:drawable/edit_text"
+                android:backgroundTint="@android:color/white"
+                android:ems="10"
                 android:inputType="textPersonName"
+                android:text="10.00"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -384,18 +406,18 @@
 
             <EditText
                 android:id="@+id/ovenRatePerHour"
-                android:layout_width="114dp"
-                android:layout_height="38dp"
+                android:layout_width="86dp"
+                android:layout_height="35dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginLeft="32dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginRight="32dp"
-                android:ems="10"
-                android:text="0.14"
-                android:backgroundTint="@android:color/white"
                 android:background="@android:drawable/edit_text"
+                android:backgroundTint="@android:color/white"
+                android:ems="10"
                 android:inputType="textPersonName"
+                android:text="0.14"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
