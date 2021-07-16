@@ -92,6 +92,7 @@ public class ShoppingListActivity extends AppCompatActivity {
 
     // Sets display list for Ingredient Spinner based on the Recipe selected.
     public void onRecipeSelected(AdapterView<?> parent, int position) {
+        ingredientList.clear();
         for (RecipeIngredient item : recipe.getRecipeItems()) {
             ingredientList.add(item.getIngredient().getIngredientName() + ", "
                     + item.getQuantity() + " " + item.getUnit().getUnitLabel());
