@@ -25,7 +25,7 @@ public class ViewRecipeActivity extends AppCompatActivity {
     TextView ingredientsOutput;
     TextView methodsOutput;
     Spinner recipeSpinner;
-    float roundCost;
+    String roundCost;
     StringBuilder ingredientsOutputString;
     float recipeScale = 1;
 
@@ -93,32 +93,13 @@ public class ViewRecipeActivity extends AppCompatActivity {
         Log.d("scale", String.valueOf(recipeScale));
         displayRecipe();
         displayIngredients();
-
-//        //Recipe scaledRecipe = recipe;
-//        float recipeCost = recipeCopy.cost;
-//        Log.d("Cost", String.valueOf(recipe.cost));
-//        recipeCost *= recipeScale;
-//        float servings = recipeCopy.numberServings;
-//        servings *= recipeScale;
-//        List<RecipeIngredient> ingredients = recipe.recipeItems;
-//        //the scaleRecipe() function returns a new Recipe object that is scaled.
-//        //Recipe scaledRecipe = recipe.scaleRecipe(recipeScale);
-//        //scaledRecipe = scaledRecipe.scaleRecipe(recipeScale);
-//        servingSize.setText(String.valueOf(servings));
-//        roundCost = (float) (Math.round((recipe.cost*recipeScale) * 100.0) / 100.0);
-//        costOutput.setText("£" + String.valueOf(roundCost));
-//        Recipe scaledRecipe = recipe;
-//        scaledRecipe.cost = recipeCost;
-//        scaledRecipe.numberServings = servings;
-//        displayIngredients(scaledRecipe);
-//        //costOutput.setText(String.valueOf(scaledRecipe.cost));
     }
 
     public void displayRecipe() {
         prep.setText(String.valueOf(recipe.prepTime) + " minutes");
         bakingTime.setText(String.valueOf(recipe.cookTime) + " minutes");
-        servingSize.setText(String.valueOf(recipe.numberServings * recipeScale) + " " + recipe.typeServing);
-        roundCost = (float) (Math.round(recipe.cost * recipeScale * 100.0) / 100.0);
+        servingSize.setText(String.valueOf(recipe.numberServings * recipeScale) + " - " + recipe.typeServing);
+        roundCost = String.format("%.2f", Math.round(recipe.cost * recipeScale * 100.0) / 100.0);
         costOutput.setText(" £" + String.valueOf(roundCost));
     }
 

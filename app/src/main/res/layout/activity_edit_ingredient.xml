@@ -94,7 +94,7 @@
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:textSize="42sp"
-        android:textColor="#000000"
+        android:textColor="#B60B04"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -208,11 +208,13 @@
         android:id="@+id/imageView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="20dp"
+        android:scaleX="0.8"
+        android:scaleY="0.8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/bblogosmall" />
+        app:srcCompat="@drawable/bblogo" />
 
     <EditText
         android:id="@+id/quantityNumber1"
@@ -261,10 +263,8 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
         app:layout_constraintEnd_toStartOf="@+id/priceInput"
         app:layout_constraintStart_toEndOf="@+id/quantityNumber1"
         app:layout_constraintTop_toBottomOf="@+id/userUnit" />

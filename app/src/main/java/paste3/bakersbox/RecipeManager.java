@@ -184,6 +184,7 @@ public class RecipeManager {
         for (Map.Entry<String, Recipe> entry: recipeMap.entrySet()) {
             recipeNameList.add(entry.getValue().getRecipeName());
         }
+        Collections.sort(recipeNameList);
         return recipeNameList;
     }
 

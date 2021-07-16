@@ -43,13 +43,13 @@ public class ViewIngredientActivity extends AppCompatActivity {
                 String IngredientSpinnerSelection = parent.getItemAtPosition(position).toString();
                 ingredient = IngredientManager.getIngredient(IngredientSpinnerSelection);
                 name.setText(ingredient.getIngredientName());
-                String atomicP = "£ " + String.valueOf(ingredient.get_atomicPrice());
+                String atomicP = "£ " + String.format("%.4f",(ingredient.get_atomicPrice()));
                 atomicPrice.setText(atomicP);
                 String unitL = ingredient.getUnit().getUnitLabel();
                 unitLabel.setText(unitL);
-                String countPrice = "£ " + Math.round(ingredient.get_atomicPrice() * 100.0) / 100.0 + " each";
-                String mlPrice = "£ " + Math.round((ingredient.get_atomicPrice() * 100) * 100.0) / 100.0 + " per 100ml";
-                String gPrice = "£ " + Math.round((ingredient.get_atomicPrice() * 100) * 100.0) / 100.0 + " per 100g";
+                String countPrice = "£ " + String.format("%.2f", (Math.round(ingredient.get_atomicPrice() * 100.0) / 100.0)) + " each";
+                String mlPrice = "£ " + String.format("%.2f", (Math.round((ingredient.get_atomicPrice() * 100) * 100.0)) / 100.0) + " per 100ml";
+                String gPrice = "£ " + String.format("%.2f", (Math.round((ingredient.get_atomicPrice() * 100) * 100.0)) / 100.0) + " per 100g";
                 if (unitL.equals("count")) {
                     pricePer.setText(countPrice);
                 } else if (unitL.equals("ml")) {

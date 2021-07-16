@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.text.NumberFormat;
 import java.util.List;
 
 public class ViewRecipeByCategoryActivity extends AppCompatActivity {
@@ -29,7 +30,7 @@ public class ViewRecipeByCategoryActivity extends AppCompatActivity {
     Spinner categorySpinner;
     String categorySpinnerSelection = "Bar";
     Spinner recipeSpinner;
-    float roundCost;
+    String roundCost;
     StringBuilder ingredientsOutputString;
     float recipeScale = 1;
 
@@ -91,13 +92,7 @@ public class ViewRecipeByCategoryActivity extends AppCompatActivity {
                 name.setText(recipe.getRecipeName());
 
                 //outputs
-                //StringBuilder ingredientsOutputString = new StringBuilder();
-
-                prep.setText(String.valueOf(recipe.prepTime) + " minutes");
-                bakingTime.setText(String.valueOf(recipe.cookTime) + " minutes");
-                servingSize.setText(String.valueOf(recipe.numberServings) + " " + recipe.typeServing);
-                roundCost = (float) (Math.round(recipe.cost * 100.0) / 100.0);
-                costOutput.setText(" £" + String.valueOf(roundCost));
+                displayRecipe();
                 recipeCopy = recipe;
                 scaleAmount.setText("1");
 
@@ -145,9 +140,9 @@ public class ViewRecipeByCategoryActivity extends AppCompatActivity {
     public void displayRecipe() {
         prep.setText(String.valueOf(recipe.prepTime) + " minutes");
         bakingTime.setText(String.valueOf(recipe.cookTime) + " minutes");
-        servingSize.setText(String.valueOf(recipe.numberServings * recipeScale) + " " + recipe.typeServing);
-        roundCost = (float) (Math.round(recipe.cost * recipeScale * 100.0) / 100.0);
-        costOutput.setText(" £" + String.valueOf(roundCost));
+        servingSize.setText(String.valueOf(recipe.numberServings * recipeScale) + " - " + recipe.typeServing);
+        roundCost = String.format("%.2f", Math.round(recipe.cost * recipeScale * 100.0) / 100.0);
+        costOutput.setText(" £" + roundCost);
     }
 
     public void displayIngredients() {
