@@ -3,6 +3,7 @@ package paste3.bakersbox;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -43,13 +44,19 @@ public class ViewIngredientActivity extends AppCompatActivity {
                 String IngredientSpinnerSelection = parent.getItemAtPosition(position).toString();
                 ingredient = IngredientManager.getIngredient(IngredientSpinnerSelection);
                 name.setText(ingredient.getIngredientName());
-                String atomicP = "£ " + String.format("%.4f",(ingredient.get_atomicPrice()));
+                @SuppressLint("DefaultLocale") String atomicP = "£ " +
+                        String.format("%.4f",(ingredient.getAtomicPrice()));
                 atomicPrice.setText(atomicP);
                 String unitL = ingredient.getUnit().getUnitLabel();
                 unitLabel.setText(unitL);
-                String countPrice = "£ " + String.format("%.2f", (Math.round(ingredient.get_atomicPrice() * 100.0) / 100.0)) + " each";
-                String mlPrice = "£ " + String.format("%.2f", (Math.round((ingredient.get_atomicPrice() * 100) * 100.0)) / 100.0) + " per 100ml";
-                String gPrice = "£ " + String.format("%.2f", (Math.round((ingredient.get_atomicPrice() * 100) * 100.0)) / 100.0) + " per 100g";
+                @SuppressLint("DefaultLocale") String countPrice = "£ " + String.format("%.2f",
+                        (Math.round(ingredient.getAtomicPrice() * 100.0) / 100.0)) + " each";
+                @SuppressLint("DefaultLocale") String mlPrice = "£ " + String.format("%.2f",
+                        (Math.round((ingredient.getAtomicPrice() * 100) * 100.0)) / 100.0)
+                        + " per 100ml";
+                @SuppressLint("DefaultLocale") String gPrice = "£ " + String.format("%.2f",
+                        (Math.round((ingredient.getAtomicPrice() * 100) * 100.0)) / 100.0)
+                        + " per 100g";
                 if (unitL.equals("count")) {
                     pricePer.setText(countPrice);
                 } else if (unitL.equals("ml")) {
@@ -65,15 +72,13 @@ public class ViewIngredientActivity extends AppCompatActivity {
         });
 
         // Creating adapter for Ingredient spinner
-        ArrayAdapter<String> recipeDataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, IngredientManager.getIngredientNameList());
+        ArrayAdapter<String> recipeDataAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, IngredientManager.getIngredientNameList());
         // Drop down layout style
         recipeDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // attaching data adapter to ingredient spinner
         ingredientSpinner.setAdapter(recipeDataAdapter);
 
-    }
-    public void goBack(View view) {
-        this.finish();
     }
 
     public void goToEditIngredient(View view) {
@@ -81,4 +86,12 @@ public class ViewIngredientActivity extends AppCompatActivity {
         intent.putExtra("ingredientName",ingredient.getIngredientName());
         startActivity(intent);
     }
+
+    /**
+     * Triggered by back button - go back to previous activity layout
+     */
+    public void goBack(View view) {
+        this.finish();
+    }
+
 }

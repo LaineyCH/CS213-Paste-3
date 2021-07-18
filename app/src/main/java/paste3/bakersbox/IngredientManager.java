@@ -91,7 +91,8 @@ public class IngredientManager {
     }
 
     // Used when an Ingredient already exists, but values need to be changed.
-    public static void editIngredient(String ingredientName, String thisUnitLabel, String userUnitLabel, Float quantity, Float price) {
+    public static void editIngredient(String ingredientName, String thisUnitLabel,
+                                      String userUnitLabel, Float quantity, Float price) {
         Ingredient ingredient = ingredientsMap.get(ingredientName);
         Unit thisUnit = UnitManager.getUnit(thisUnitLabel);
         assert ingredient != null; // Debugging

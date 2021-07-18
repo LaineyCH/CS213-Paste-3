@@ -26,6 +26,10 @@ public class IngredientsActivity extends AppCompatActivity {
         Intent intent = new Intent(this,ViewIngredientActivity.class);
         startActivity(intent);
     }
+
+    /**
+     * Triggered by back button - go back to previous activity layout
+     */
     public void goBack(View view) {
         this.finish();
     }

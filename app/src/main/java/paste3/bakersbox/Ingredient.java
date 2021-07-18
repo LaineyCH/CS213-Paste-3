@@ -3,41 +3,45 @@ package paste3.bakersbox;
 import java.util.HashMap;
 import java.util.Map;
 
-/*
- * Ingredient class
+/**
+ * Ingredient Class. Created Ingredient Objects that have a name, an atomic price (the cost of a
+ * single unit of its measurement - 1 g, 1 ml, or 1 count) and a Unit Object (this 'base' Unit
+ *  will have a unit label of "ml" for wet ingredients, "g" for dry ingredients, or "count" for
+ *  counted ingredients).
  */
 public class Ingredient {
 
     private String _ingredientName;
     private float _atomicPrice;
-    private Unit _unit; // "ml" for wet, "g" for dry, or "count"
-    float totalQuantity;
-    float totalPrice;
-    String inputLabel;
+    private Unit _unit;
 
-    // Main Constructor
-    public Ingredient(String ingredientName, String thisUnitLabel, String userUnitLabel, float quantity, float price) {
+    // Main Constructor for creation of new ingredient objects
+    public Ingredient(String ingredientName, String thisUnitLabel, String userUnitLabel,
+                      float quantity, float price) {
         this._ingredientName = ingredientName;
         // the base unit for this ingredient
         this._unit = UnitManager.getUnit(thisUnitLabel);
         // the unit the ingredient was purchased as, or that is required for a specific recipe.
         Unit userUnit = UnitManager.getUnit(userUnitLabel);
-        // the conversion needed to calculate the atomic price for the ingredient, based on it's base unit.
+        // conversion needed to calculate the ingredient's atomic price, based on it's base unit.
         float convertedQuantity = this._unit.convertTo(userUnit, quantity);
+        // the cost of a single unit of the ingredient (1 g, 1 ml or 1 count)
         _atomicPrice = price / convertedQuantity;
-        totalQuantity = quantity;
-        totalPrice = price;
-        inputLabel = userUnitLabel;
     }
 
-    // Blank Constructor
+    /**
+     *  Blank Constructor, creates ingredient with 'empty' attributes
+     */
     public Ingredient() {
         this._ingredientName = "";
         this._atomicPrice = 0;
         this._unit = null;
     }
 
-    // "From Database" Constructor
+    /**
+     * "From Database" Constructor, creates ingredient objects from the data retrieved
+     * @param ingredientMap
+     */
     public Ingredient(Map<String, Object> ingredientMap) {
         this._ingredientName = (String) ingredientMap.get("ingredientName");
         this._atomicPrice = ((Number) ingredientMap.get("atomicPrice")).floatValue();
@@ -45,15 +49,18 @@ public class Ingredient {
         this._unit = UnitManager.getUnit((String) ingredientMap.get("unit"));
     }
 
-    // Turns an ingredient object into a map that doesn't contain unit objects, for saving to the
-    // Database.
+    /**
+     * Turns an ingredient object into a simplified map that doesn't contain any unit objects,
+     * to be saved to the Database.
+     * @return
+     */
     public Map<String, Object> toMap() {
         Map<String, Object> ingredientMap = new HashMap<>();
         ingredientMap.put("ingredientName", _ingredientName);
         ingredientMap.put("atomicPrice", _atomicPrice);
-        //The Unit Object is recorded in the map's key : value structure, with its value
-        // being the string "unitLabel"
+        // The Unit Object is 'stored' by it's unit label
         ingredientMap.put("unit", _unit.getUnitLabel());
+        // Returns the simplified ingredient map
         return ingredientMap;
     }
 
@@ -65,7 +72,7 @@ public class Ingredient {
         this._ingredientName = ingredientName;
     }
 
-    public Float get_atomicPrice() {
+    public Float getAtomicPrice() {
         return _atomicPrice;
     }
 

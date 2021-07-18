@@ -158,13 +158,21 @@ public class ViewRecipeByCategoryActivity extends AppCompatActivity {
         ingredientsOutput.setText(ingredientsOutputString.toString());
     }
 
-    public void goBack(View view) {
-        this.finish();
-    }
-
+    /**
+     * Triggered by the edit button - goes to the edit recipe activity, passing the recipe name in.
+     * @param view
+     */
     public void editRecipe(View view) {
         Intent intent = new Intent(this, EditRecipeActivity.class);
         intent.putExtra("recipeName", recipe.getRecipeName());
         startActivity(intent);
     }
+
+    /**
+     * Triggered by back button - go back to previous activity layout
+     */
+    public void goBack(View view) {
+        this.finish();
+    }
+
 }

@@ -125,6 +125,9 @@ public class ShoppingListActivity extends AppCompatActivity {
         RecipeManager.saveShoppingList();
     }
 
+    /**
+     * Triggered by back button - go back to previous activity layout
+     */
     public void goBack(View view) {
         this.finish();
     }

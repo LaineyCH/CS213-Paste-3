@@ -69,7 +69,7 @@ public class RecipeIngredient {
     // Calculates the price of the recipeIngredient.
     public float calcPrice(){
         float convertedQuantity = _ingredient.getUnit().convertTo(_unit, _quantity);
-        return convertedQuantity * _ingredient.get_atomicPrice();
+        return convertedQuantity * _ingredient.getAtomicPrice();
     }
 
     public Ingredient getIngredient() {
