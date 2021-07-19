@@ -34,10 +34,7 @@ public class EditIngredientActivity extends AppCompatActivity {
     TextView name;
     EditText quantity;
     EditText price;
-    RadioButton dryRadioButton;
-    RadioButton wetradioButton;
-    RadioButton countRadioButton;
-    List<String> units = new ArrayList<String>();
+    List<String> units = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,7 +111,7 @@ public class EditIngredientActivity extends AppCompatActivity {
     }
 
     /**
-     * Thriggered by a radio button selection
+     * Triggered by a radio button selection
      * @param view the current layout view
      */
     @SuppressLint("NonConstantResourceId")
@@ -143,6 +140,8 @@ public class EditIngredientActivity extends AppCompatActivity {
      * Sets the string list for the unit spinner in response to a radio button selection
      */
     public void onRadiobuttonSelected() {
+        // Reset units list
+        units = new ArrayList<>();
         // Spinner Drop down elements
         switch(radioButton) {
             case "ml":
@@ -166,7 +165,7 @@ public class EditIngredientActivity extends AppCompatActivity {
                 break;
         }
         // Creating adapter for unit spinner
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, units);
         // Drop down layout style - list view with radio button
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -181,7 +180,6 @@ public class EditIngredientActivity extends AppCompatActivity {
      */
     public void editIngredientButton(View view) {
         // Get all EditText inputs and parse to string or float as needed
-        EditText inputIngredientName = findViewById(R.id.ingredientNameInput);
         String ingredientName = ingredient.getIngredientName();
         EditText inputQuantity = findViewById(R.id.quantityNumber1);
         float quantity = Float.parseFloat(inputQuantity.getText().toString());
@@ -192,6 +190,7 @@ public class EditIngredientActivity extends AppCompatActivity {
                 quantity, price);
         // Go back to previous activity layout
         this.finish();
+        startActivity(getIntent());
     }
 
     /**

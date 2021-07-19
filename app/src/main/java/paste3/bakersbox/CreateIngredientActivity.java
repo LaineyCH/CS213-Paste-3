@@ -79,7 +79,7 @@ public class CreateIngredientActivity extends AppCompatActivity {
      */
     public void onRadiobuttonSelected() {
         // Spinner Drop down elements
-        List<String> units = new ArrayList<String>();
+        List<String> units = new ArrayList<>();
         switch(radioButton) {
             case "ml":
                 // Wet ingredients selection
@@ -102,7 +102,7 @@ public class CreateIngredientActivity extends AppCompatActivity {
                 break;
         }
         // Creating adapter for unit spinner, using "units" List<String>
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, units);
         // Drop down layout style - list view with radio button
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -114,7 +114,7 @@ public class CreateIngredientActivity extends AppCompatActivity {
      * Triggered by the add ingredient button in the activity_create_ingredient layout.
      * Collects all the user input data then sends it to the Ingredient Manager to add
      * the new ingredient to the ingredientMap.
-     * @param view
+     * @param view the current view
      */
     public void submitIngredient(View view) {
         // Get all EditText inputs and parse to string or float as needed
@@ -128,8 +128,10 @@ public class CreateIngredientActivity extends AppCompatActivity {
         // the Ingredient Map
         IngredientManager.addIngredient(ingredientName, radioButton, unitSpinnerSelection,
                 quantity, price);
+
         // Go back to previous activity layout
         this.finish();
+
     }
 
     /**

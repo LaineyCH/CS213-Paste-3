@@ -1,28 +1,40 @@
 package paste3.bakersbox;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
-
+/**
+ * Recipe Class - creates new recipe objects. Each recipe object has a name, a list of
+ * recipeIngredients, and various other properties.
+ */
 public class Recipe {
     private String _recipeName;
-    List<RecipeIngredient> recipeItems;
-    float prepTime;
-    float cookTime;
-    float numberServings;
-    String typeServing;
-    String method;
-    float cost;  // set via setCost function in the mai constructor
+    private List<RecipeIngredient> recipeIngredients;
+    private float prepTime;
+    private float cookTime;
+    private float numberServings;
+    private String typeServing;
+    private String method;
+    private float cost;  // initialised via setCost function in the main constructor
 
-    // Main Constructor
-    public Recipe(String recipeName, List<RecipeIngredient> recipeItems, float prepTime,
+    /**
+     * Main Constructor - initialises all the properties of a new Recipe object.
+     * @param recipeName the recipe's name
+     * @param recipeIngredients List of recipeIngredients
+     * @param prepTime the preparation time for the recipe
+     * @param cookTime how long the recipe is cooked / baked - a measure of appliance and/or
+     *                 electricity / fue use
+     * @param numberServings the number of servings produced by the recipe
+     * @param typeServing the type of serving (slice, bar, cake, serving, etc)
+     * @param method the recipe's method / instructions
+     */
+    public Recipe(String recipeName, List<RecipeIngredient> recipeIngredients, float prepTime,
                   float cookTime, float numberServings, String typeServing, String method) {
         this._recipeName = recipeName;
-        this.recipeItems = recipeItems;
+        this.recipeIngredients = recipeIngredients;
         this.prepTime = prepTime;
         this.cookTime = cookTime;
         this.numberServings = numberServings;
@@ -31,10 +43,12 @@ public class Recipe {
         setCost();
     }
 
-    // Blank Constructor
+    /**
+     * Blank Constructor - creates a new blank recipe object
+     */
     public Recipe() {
         this._recipeName = "";
-        this.recipeItems = null;
+        this.recipeIngredients = null;
         this.prepTime = 0;
         this.cookTime = 0;
         this.numberServings = 0;
@@ -42,20 +56,28 @@ public class Recipe {
         this.method = "";
     }
 
-    // "From Database" Constructor
+    /**
+     * "From Database" Constructor - takes the data retrieved from the database and constructs a
+     * new Recipe object
+     */
     public Recipe(Map<String, Object> recipeMap) {
         this._recipeName = (String) recipeMap.get("recipeName");
-        this.recipeItems = RecipeIngredient.getRecipeItemList((List<Object>) recipeMap.get("recipeItems"));
-        this.prepTime = ((Number) recipeMap.get("prepTime")).floatValue();
-        this.cookTime = ((Number) recipeMap.get("cookTime")).floatValue();
-        this.cost = ((Number) recipeMap.get("cost")).floatValue();
-        this.numberServings = ((Number) recipeMap.get("numberServings")).floatValue();
+        this.recipeIngredients = RecipeIngredient
+                .getRecipeItemList((List<Map<String, Object>>) recipeMap.get("recipeItems"));
+        this.prepTime = ((Number) Objects.requireNonNull(recipeMap.get("prepTime"))).floatValue();
+        this.cookTime = ((Number) Objects.requireNonNull(recipeMap.get("cookTime"))).floatValue();
+        this.cost = ((Number) Objects.requireNonNull(recipeMap.get("cost"))).floatValue();
+        this.numberServings = ((Number) Objects.requireNonNull(recipeMap.get("numberServings")))
+                .floatValue();
         this.typeServing = (String) recipeMap.get("typeServing");
         this.method = (String) recipeMap.get("method");
     }
 
-    // Turns a Recipe object into a map, so that the recipeIngredients don't contain ingredient and
-    // Unit objects, for saving to the Database.
+    /**
+     * Turns a Recipe object into a simplified map, so that the recipeIngredients list doesn't
+     * contain any ingredient or unit objects, for saving to the Database.
+     * @return the recipeMap
+     */
     public Map<String, Object> toMap() {
         Map<String, Object> recipeMap = new HashMap<>();
         recipeMap.put("recipeName", _recipeName);
@@ -71,38 +93,21 @@ public class Recipe {
         return recipeMap;
     }
 
-    // Simplifies the recipeIngredient List so that it doesn't contain Ingredient and Unit objects.
-    // There are custom toMap() functions for Ingredient and Unit.
+    /**
+     * Simplifies the recipeIngredient List so that it doesn't contain Ingredient and Unit objects.
+     * There are custom toMap() functions for both Ingredient and Unit.
+     */
     public List<Object> getSimplifiedRecipeIngredientList() {
         List<Object> myList = new ArrayList<>();
-        for (RecipeIngredient recipeIngredient : this.getRecipeItems()) {
+        for (RecipeIngredient recipeIngredient : this.getRecipeIngredients()) {
             myList.add(recipeIngredient.toMap());
         }
         return myList;
     }
 
-    // Scales the recipe by a specified amount, increasing the quantities, and effectively the
-    // price as well. Returns the new scaled recipe.
-    public Recipe scaleRecipe(float scale) {
-        //Recipe scaledRecipe = this;
-        //scaledRecipe.numberServings = numberServings * scale;
-
-        float numberOfServings = this.numberServings * scale;
-
-        // Scale each of the recipeItems
-        for(int i = 0; i < recipeItems.size();i++){
-            recipeItems.get(i).setQuantity(scale);
-
-            // Debugging
-            Log.d("Name",recipeItems.get(i).getIngredient().getIngredientName());
-            Log.d("Unit",recipeItems.get(i).getUnit().getUnitLabel());
-            Log.d("Quantity",Float.toString(recipeItems.get(i).getQuantity()));
-            Log.d("Multiplier",Float.toString(recipeItems.get(i).calcPrice() * scale));
-        }
-        Recipe scaledRecipe = new Recipe(this._recipeName,this.recipeItems,this.prepTime,this.cookTime,numberOfServings,this.typeServing,this.method);
-        scaledRecipe.setCost(); // cost for the new scaled recipe
-        return scaledRecipe;
-    }
+    /**
+     * GETTERS AND SETTERS FOR ALL THE RECIPE OBJECT PROPERTIES
+     */
 
     public String getRecipeName() {
         return _recipeName;
@@ -112,12 +117,12 @@ public class Recipe {
         this._recipeName = recipeName;
     }
 
-    public List<RecipeIngredient> getRecipeItems() {
-        return recipeItems;
+    public List<RecipeIngredient> getRecipeIngredients() {
+        return recipeIngredients;
     }
 
-    public void setRecipeItems(List<RecipeIngredient> recipeItems) {
-        this.recipeItems = recipeItems;
+    public void setRecipeIngredients(List<RecipeIngredient> recipeIngredients) {
+        this.recipeIngredients = recipeIngredients;
     }
 
     public float getPrepTime() {
@@ -140,11 +145,13 @@ public class Recipe {
         return cost;
     }
 
-    // Calculates the cost of the recipe by looping through the recipeItem list and add the price
-    // of each item.
+    /**
+     * Calculates the cost of the recipe by looping through the recipeItem list and adding the
+     * price of each item, to get the total ingredient cost for the recipe
+     */
     public void setCost() {
         float totalCost = 0;
-        for (RecipeIngredient recipeIngredient : recipeItems) {
+        for (RecipeIngredient recipeIngredient : recipeIngredients) {
             totalCost += recipeIngredient.calcPrice();
         }
         this.cost = totalCost;

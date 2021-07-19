@@ -32,7 +32,7 @@
 
     <TextView
         android:id="@+id/quantity"
-        android:layout_width="100dp"
+        android:layout_width="95dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="33dp"
         android:layout_marginTop="20dp"
@@ -52,16 +52,14 @@
         android:id="@+id/userUnit"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="5dp"
         android:gravity="center"
         android:text="Unit"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="22sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/price1"
         app:layout_constraintStart_toEndOf="@+id/quantity"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
@@ -199,7 +197,6 @@
         android:id="@+id/price1"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="145dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="43dp"
         android:gravity="center"
@@ -209,9 +206,22 @@
         android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.8"
-        app:layout_constraintStart_toEndOf="@+id/quantity"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+    <TextView
+        android:id="@+id/price3"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="10dp"
+        android:gravity="center"
+        android:text="£"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/priceInput"
+        app:layout_constraintTop_toTopOf="@+id/priceInput" />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -228,14 +238,13 @@
 
     <EditText
         android:id="@+id/quantityNumber1"
-        android:layout_width="100dp"
+        android:layout_width="95dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="33dp"
-        android:layout_marginLeft="33dp"
         android:layout_marginTop="10dp"
-        android:ems="10"
-        android:backgroundTint="@android:color/white"
         android:background="@android:drawable/edit_text"
+        android:backgroundTint="@android:color/white"
+        android:ems="10"
         android:inputType="numberDecimal"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -247,11 +256,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="33dp"
-        android:layout_marginRight="33dp"
+        android:background="@android:drawable/edit_text"
+        android:backgroundTint="@android:color/white"
         android:ems="10"
         android:inputType="numberDecimal"
-        android:backgroundTint="@android:color/white"
-        android:background="@android:drawable/edit_text"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/price1" />
@@ -270,12 +278,10 @@
 
     <Spinner
         android:id="@+id/unitSpinner2"
-        android:layout_width="100dp"
+        android:layout_width="105dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toStartOf="@+id/priceInput"
         app:layout_constraintStart_toEndOf="@+id/quantityNumber1"
         app:layout_constraintTop_toBottomOf="@+id/userUnit" />
 

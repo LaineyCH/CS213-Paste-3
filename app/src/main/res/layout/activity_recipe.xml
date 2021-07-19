@@ -76,7 +76,7 @@
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:backgroundTint="#7A06AC"
-        android:onClick="viewRecipeCatagory"
+        android:onClick="viewRecipeCategory"
         android:text="Find Recipe by Category"
         android:textColor="#ffffff"
         android:textSize="22sp"

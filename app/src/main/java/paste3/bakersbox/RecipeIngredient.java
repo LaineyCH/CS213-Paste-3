@@ -6,31 +6,48 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
-
+/**
+ * The RecipeIngredient class, creates new RecipeIngredient objects. Each recipeIngredient object
+ * has an Ingredient object, a quantity, and a Unit object.
+ */
 public class RecipeIngredient {
 
-    Ingredient _ingredient;
-    float _quantity;
-    Unit _unit;
+    private Ingredient _ingredient;
+    private float _quantity;
+    private Unit _unit;
 
-
-    // Main Constructor
+    /**
+     * Main constructor for creating a new recipeIngredient object
+     * @param ingredient an ingredient object
+     * @param quantity the quantity of the ingredient needed for the recipe
+     * @param unit the Unit specified by the recipe
+     */
     public RecipeIngredient(Ingredient ingredient, float quantity, Unit unit){
         this._ingredient = ingredient;
         this._quantity = quantity;
-        this._unit = unit;  // the Unit specified by the recipe
+        this._unit = unit;
     }
 
-    // "From Database" Constructor
+    /**
+     * "From Database" Constructor - creates a new recipeIngredient from the data retrieved from
+     * the database
+     * @param recipeIngredientMap the map of data retrieved from the database
+     */
     public RecipeIngredient(Map<String, Object> recipeIngredientMap) {
-        this._ingredient = IngredientManager.getIngredient((String) recipeIngredientMap.get("ingredientName"));
-        this._quantity = ((Number) recipeIngredientMap.get("quantity")).floatValue();
+        this._ingredient = IngredientManager.getIngredient((String) recipeIngredientMap
+                .get("ingredientName"));
+        this._quantity = ((Number) Objects.requireNonNull(recipeIngredientMap.get("quantity")))
+                .floatValue();
         this._unit = UnitManager.getUnit((String) recipeIngredientMap.get("unit"));
     }
 
-    // Turns each recipeIngredient object into a map, so that they don't contain ingredient and
-    // Unit objects, for saving to the Database.
+    /**
+     * Turns each recipeIngredient object into a simplified map, so that they don't contain any
+     * ingredient or unit objects, for saving to the Database.
+     * @return recipeIngredientMap
+     */
     public Map<String, Object> toMap() {
         Map<String, Object> recipeIngredientMap = new HashMap<>();
         //The Ingredient Object is recorded in the map's key : value structure, with its value
@@ -43,34 +60,38 @@ public class RecipeIngredient {
         return recipeIngredientMap;
     }
 
-    // Turns a list of recipeItems (simplified map )into a list of recipeIngredient Objects.
-    public static List<RecipeIngredient> getRecipeItemList(List<Object> recipeItem) {
+    /**
+     * Turns a list of object that are maps (received from the database) into a list of
+     * recipeIngredient object
+     * @param recipeIngredientMaps a list of recipeIngredient maps (no ingredient and unit objects)
+     * @return a list of recipeIngredient objects
+     */
+    public static List<RecipeIngredient> getRecipeItemList(List<Map<String, Object>> recipeIngredientMaps) {
         List<RecipeIngredient> recipeIngredientList = new ArrayList<>();
-        if (recipeItem == null) {
+        if (recipeIngredientMaps == null) {
             Log.d("RecipeItemList is null", "");
         } else {
-            for (Object item : recipeItem) {
+            for (Object item : recipeIngredientMaps) {
                 // Loops through the list of recipeItem names
                 Map<String, Object> itemMap = (Map<String, Object>) item;
-//                String ingredientName = (String) itemMap.get("ingredientName");
-//                Ingredient ingredient = IngredientManager.getIngredient(ingredientName);
-//
-//                float quantity = ((Number) itemMap.get("quantity")).floatValue();
-//
-//                String unitLabel = (String) itemMap.get("unit");
-//                Unit unit = UnitManager.getUnit(unitLabel);
-
                 recipeIngredientList.add(new RecipeIngredient(itemMap));
             }
         }
         return recipeIngredientList;
     }
 
-    // Calculates the price of the recipeIngredient.
+    /**
+     * Calculates the price of the recipeIngredient.
+     * @return the price of the recipeIngredient.
+     */
     public float calcPrice(){
         float convertedQuantity = _ingredient.getUnit().convertTo(_unit, _quantity);
         return convertedQuantity * _ingredient.getAtomicPrice();
     }
+
+    /**
+     * GETTERS AND SETTERS
+     */
 
     public Ingredient getIngredient() {
         return _ingredient;

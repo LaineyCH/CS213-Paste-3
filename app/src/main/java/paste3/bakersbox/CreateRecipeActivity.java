@@ -31,7 +31,6 @@ public class CreateRecipeActivity extends AppCompatActivity {
     Spinner unitSpinner;
     String categorySpinnerSelection;
     String unitSpinnerSelection;
-    String unitLabel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +61,7 @@ public class CreateRecipeActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {}
         });
         // Creating adapter for Category spinner using the list RecipeManager.getCategoryList()
-        ArrayAdapter<String> categoryDataAdapter = new ArrayAdapter<String>
+        ArrayAdapter<String> categoryDataAdapter = new ArrayAdapter<>
                 (this, android.R.layout.simple_spinner_item, RecipeManager.getCategoryList());
         // Drop down layout style
         categoryDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -84,14 +83,14 @@ public class CreateRecipeActivity extends AppCompatActivity {
              */
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                onIngredientItemSelected(parent, position);
+                onIngredientItemSelected();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {}
         });
         // Creating adapter for Ingredient spinner
-        ArrayAdapter<String> ingredientDataAdapter = new ArrayAdapter<String>
+        ArrayAdapter<String> ingredientDataAdapter = new ArrayAdapter<>
                 (this, android.R.layout.simple_spinner_item, IngredientManager.getIngredientNameList());
         // Drop down layout style
         ingredientDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -124,14 +123,12 @@ public class CreateRecipeActivity extends AppCompatActivity {
 
     /**
      * Called by the ingredient spinner when a selection is made.
-     * @param parent AdapterView
-     * @param position spinner position
      */
-    public void onIngredientItemSelected(AdapterView<?> parent, int position) {
+    public void onIngredientItemSelected() {
         // Set variables
         String ingredientName = ingredientSpinner.getSelectedItem().toString();
         String ingredientLabel = IngredientManager.getIngredient(ingredientName).getUnit().getUnitLabel();
-        List<String> units = new ArrayList<String>();
+        List<String> units = new ArrayList<>();
 
         // Set spinner Drop down elements according to the unitLabel of the ingredient selected
         switch(ingredientLabel) {
@@ -156,7 +153,7 @@ public class CreateRecipeActivity extends AppCompatActivity {
                 break;
         }
         // Creating adapter for unit spinner - using units list created above
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, units);
         // Drop down layout style - list view with radio button
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -176,7 +173,7 @@ public class CreateRecipeActivity extends AppCompatActivity {
         String ingredientName = ingredientSpinner.getSelectedItem().toString();
         // Fetch Ingredient object
         Ingredient ingredient = IngredientManager.getIngredient(ingredientName);
-//        Log.d("Add I to RecipeIngred", ingredientName); // Debugging
+//        Log.d("Add RecipeIngredient", ingredientName); // Debugging
         // Get input quantity and assign to variable
         EditText inputQuantity = findViewById(R.id.quantityInput);
         float quantity  = Float.parseFloat(inputQuantity.getText().toString());
@@ -185,7 +182,7 @@ public class CreateRecipeActivity extends AppCompatActivity {
         // Fetch Unit object
         Unit unit = UnitManager.getUnit(unitLabel);
 //        Log.d("PrintUnitLabel",unitLabel); // Debugging
-//        Log.d("Add U to RecipeIngred", unit.getUnitLabel());  // Debugging
+//        Log.d("Add RecipeIngredient", unit.getUnitLabel());  // Debugging
 
         // Create a new RecipeIngredient using the Ingredient and Unit objects and quantity
         RecipeIngredient recipeIngredient = new RecipeIngredient(ingredient, quantity, unit);
@@ -195,17 +192,17 @@ public class CreateRecipeActivity extends AppCompatActivity {
         // Display list of all ingredients added to this point
         TextView ingredientsInput = findViewById(R.id.ingredientsInput);
         // Initialise list to be displayed
-        String ingredientsOutputString = "";
+        StringBuilder ingredientsOutputString = new StringBuilder();
         // Loop through the recipeIngredientList, adding each ingredient and details to the list
         for(int i = 0; i < recipeIngredientList.size(); i++){
-            ingredientsOutputString += "" + String.valueOf(recipeIngredientList.get(i)._quantity) +
-                    " " + recipeIngredientList.get(i).getUnit().getUnitLabel() + " " +
-                    recipeIngredientList.get(i).getIngredient().getIngredientName() + "\n";
+            ingredientsOutputString.append("").append(recipeIngredientList.get(i)
+                    .getQuantity()).append(" ").append(recipeIngredientList.get(i).getUnit()
+                    .getUnitLabel()).append(" ").append(recipeIngredientList.get(i).getIngredient()
+                    .getIngredientName()).append("\n");
 //            Log.d("Check ingredients",ingredientsOutputString);
         }
         // Send list to output
-        ingredientsInput.setText(ingredientsOutputString);
-
+        ingredientsInput.setText(ingredientsOutputString.toString());
         // Clear quantity field after "add ingredient" button is clicked
         inputQuantity.setText("");
     }
