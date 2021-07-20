@@ -39,7 +39,7 @@ public class EditRecipeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_recipe);
-        LinearLayout li=(LinearLayout)findViewById(R.id.editRecipe);
+        LinearLayout li = (LinearLayout) findViewById(R.id.editRecipe);
         li.setBackgroundColor(Color.parseColor("#7BEEE4"));
 
         // Saving passed parameter for the recipe name
@@ -73,8 +73,10 @@ public class EditRecipeActivity extends AppCompatActivity {
                 unitSpinnerSelection = parent.getItemAtPosition(position).toString();
                 Log.d("Dropdown value", unitSpinnerSelection); // Debugging
             }
+
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {}
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
         });
 
         // INGREDIENT SPINNER
@@ -85,8 +87,10 @@ public class EditRecipeActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 onIngredientItemSelected();
             }
+
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {}
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
         });
         // Creating adapter for Ingredient spinner
         ArrayAdapter<String> ingredientDataAdapter = new ArrayAdapter<>(this,
@@ -97,7 +101,7 @@ public class EditRecipeActivity extends AppCompatActivity {
         ingredientSpinner.setAdapter(ingredientDataAdapter);
 
         // Loop through the recipeItem list for the given recipe
-        for(int i = 0; i < recipe.getRecipeIngredients().size(); i++){
+        for (int i = 0; i < recipe.getRecipeIngredients().size(); i++) {
             ingredientsOutputString.append("").append(recipe.getRecipeIngredients()
                     .get(i).getQuantity()).append(" ").append(recipe.getRecipeIngredients().get(i)
                     .getUnit().getUnitLabel()).append(" ").append(recipe.getRecipeIngredients()
@@ -121,7 +125,7 @@ public class EditRecipeActivity extends AppCompatActivity {
         // String list for spinner drop down elements
         List<String> units = new ArrayList<>();
         // Set the list according to the unit label of ingredient chosen
-        switch(ingredientLabel) {
+        switch (ingredientLabel) {
             case "ml":
                 // Wet ingredients
                 units.add("ml");
@@ -153,6 +157,7 @@ public class EditRecipeActivity extends AppCompatActivity {
 
     /**
      * Triggered by the add ingredient button in the edit ingredient activity
+     *
      * @param view the current layout view
      */
     public void addRecipeIngredient(View view) {
@@ -173,7 +178,7 @@ public class EditRecipeActivity extends AppCompatActivity {
 
         // Find and cache inputs
         EditText inputQuantity = findViewById(R.id.quantityInput);
-        float quantity  = Float.parseFloat(inputQuantity.getText().toString());
+        float quantity = Float.parseFloat(inputQuantity.getText().toString());
 
 //        Log.d("PrintUnitLabel",unitLabel); // Debugging
 //        Log.d("Add RecipeIngredient", unit.getUnitLabel());  // Debugging
@@ -193,7 +198,7 @@ public class EditRecipeActivity extends AppCompatActivity {
         // Initialise list to be displayed
         StringBuilder ingredientsOutputString = new StringBuilder();
         // Loop through the recipeIngredientList, adding each ingredient and details to the list
-        for(int i = 0; i < recipeIngredientList.size(); i++){
+        for (int i = 0; i < recipeIngredientList.size(); i++) {
             ingredientsOutputString.append("").append(recipeIngredientList.get(i)
                     .getQuantity()).append(" ").append(recipeIngredientList.get(i).getUnit()
                     .getUnitLabel()).append(" ").append(recipeIngredientList.get(i).getIngredient()
@@ -210,6 +215,7 @@ public class EditRecipeActivity extends AppCompatActivity {
     /**
      * Triggered by the remove ingredient button in the activity_edit_recipe layout. Removes
      * an ingredient from the recipeIngredientList.
+     *
      * @param view the current layout view
      */
     public void removeRecipeIngredient(View view) {
@@ -226,7 +232,7 @@ public class EditRecipeActivity extends AppCompatActivity {
         // Initialise list to be displayed
         StringBuilder ingredientsOutputString = new StringBuilder();
         // Loop through the recipeIngredientList, adding each ingredient and details to the list
-        for(int i = 0; i < recipeIngredientList.size(); i++){
+        for (int i = 0; i < recipeIngredientList.size(); i++) {
             ingredientsOutputString.append("").append(recipeIngredientList.get(i).getQuantity())
                     .append(" ").append(recipeIngredientList.get(i).getUnit().getUnitLabel())
                     .append(" ").append(recipeIngredientList.get(i).getIngredient()
@@ -245,34 +251,54 @@ public class EditRecipeActivity extends AppCompatActivity {
      * Triggered by the save changes button in the activity_edit_recipe layout. Collects all the
      * input data and sends it to the Recipe Manager (including the recipeIngredientList) to create
      * the new recipe object and add it to the Recipe Map.
+     *
      * @param view the current layout view
      */
     public void submitRecipe(View view) {
 
         // Find and cache inputs
         EditText inputPrepTime = findViewById(R.id.prepTimeInput);
-        float prepTime  = Float.parseFloat(inputPrepTime.getText().toString());
-//        Log.d("Prep Time", String.format("%f",prepTime));  // Debugging
         EditText inputCookTime = findViewById(R.id.cookTimeInput);
-        float cookTime  = Float.parseFloat(inputCookTime.getText().toString());
-//        Log.d("Cook Time", String.format("%f",cookTime));  // Debugging
         EditText inputServings = findViewById(R.id.servingsInput);
-        float numberServings  = Float.parseFloat(inputServings.getText().toString());
-//        Log.d("Servings", String.format("%f",numberServings));  // Debugging
         EditText inputTypeServing = findViewById(R.id.servingTypeInput);
-        String typeServing  = inputTypeServing.getText().toString();
-//        Log.d("Type of Serving", typeServing);  // Debugging
         EditText inputMethod = findViewById(R.id.methodInput);
-        String method  = inputMethod.getText().toString();
-//        Log.d("Method", method);  // Debugging
+        editRecipe(inputPrepTime, inputCookTime, inputServings, inputTypeServing, inputMethod);
+    }
 
-        // Send retrieved data to the Recipe Manager
-        RecipeManager.addRecipe(recipe.getRecipeName(), recipeIngredientList, prepTime, cookTime,
-                numberServings, typeServing, method);
+    /**
+     * Called by submitRecipe() in response the save changes button being clicked. Parses, then
+     * sends the data to the Recipe Manager (including the recipeIngredientList) to create
+     * the new recipe object and add it to the Recipe Map.
+     * @param inputPrepTime the prep time
+     * @param inputCookTime the cook time
+     * @param inputServings the number of servings
+     * @param inputMethod the recipe method
+     */
+    public void editRecipe(EditText inputPrepTime, EditText inputCookTime,
+                           EditText inputServings, EditText inputTypeServing,
+                           EditText inputMethod) {
+        if (!inputPrepTime.getText().toString().isEmpty()
+                && !inputCookTime.getText().toString().isEmpty()
+                && !inputServings.getText().toString().isEmpty()
+                && !inputTypeServing.getText().toString().isEmpty()
+                && !inputMethod.getText().toString().isEmpty()
+                && recipeIngredientList.size() > 0) {
 
-        // Go back to previous activity layout
-        this.finish();
-        startActivity(getIntent());
+            String recipeName = recipe.getRecipeName();
+            float prepTime = Float.parseFloat(inputPrepTime.getText().toString());
+            float cookTime = Float.parseFloat(inputCookTime.getText().toString());
+            float numberServings = Float.parseFloat(inputServings.getText().toString());
+            String typeServing = inputTypeServing.getText().toString();
+            String method = inputMethod.getText().toString();
+
+            // Send retrieved data to the Recipe Manager
+            RecipeManager.addRecipe(recipeName, recipeIngredientList, prepTime, cookTime,
+                    numberServings, typeServing, method);
+
+            // Go back to previous activity layout - view recipe
+            this.finish();
+            startActivity(getIntent());
+        }
     }
 
     /**

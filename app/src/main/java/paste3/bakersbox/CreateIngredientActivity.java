@@ -117,21 +117,38 @@ public class CreateIngredientActivity extends AppCompatActivity {
      * @param view the current view
      */
     public void submitIngredient(View view) {
-        // Get all EditText inputs and parse to string or float as needed
+        // Get all EditText inputs and then call addNewIngredient()
         EditText inputIngredientName = findViewById(R.id.ingredientNameInput);
-        String ingredientName = inputIngredientName.getText().toString();
         EditText inputQuantity = findViewById(R.id.quantityNumber1);
-        float quantity = Float.parseFloat(inputQuantity.getText().toString());
         EditText inputPrice = findViewById(R.id.priceInput);
-        float price = Float.parseFloat(inputPrice.getText().toString());
-        //Send retrieved data to the Ingredient Manager to create the new ingredient and add it to
-        // the Ingredient Map
-        IngredientManager.addIngredient(ingredientName, radioButton, unitSpinnerSelection,
-                quantity, price);
+        addNewIngredient(inputIngredientName, inputQuantity, inputPrice);
+    }
 
-        // Go back to previous activity layout
-        this.finish();
-
+    /**
+     * Called by submitIngredient(), in response to the add ingredient button being clicked.
+     * Checks that inputs are valid, then parses them and sends them to the Ingredient manager
+     * to create the new Ingredient.
+     * @param inputIngredientName the ingredient's name
+     * @param inputQuantity the quantity of the ingredient
+     * @param inputPrice the purchase price
+     */
+    public void addNewIngredient(EditText inputIngredientName, EditText inputQuantity, EditText inputPrice) {
+        // If all fields are filled out
+        if (!inputIngredientName.getText().toString().isEmpty()
+                && !inputQuantity.getText().toString().isEmpty()
+                && !inputPrice.getText().toString().isEmpty()
+                && !radioButton.isEmpty()
+                && !unitSpinnerSelection.isEmpty()) {
+            String ingredientName = inputIngredientName.getText().toString();
+            float quantity = Float.parseFloat(inputQuantity.getText().toString());
+            float price = Float.parseFloat(inputPrice.getText().toString());
+            //Send retrieved data to the Ingredient Manager to create the new ingredient and add it to
+            // the Ingredient Map
+            IngredientManager.addIngredient(ingredientName, radioButton, unitSpinnerSelection,
+                    quantity, price);
+            // Go back to previous activity layout
+            this.finish();
+        }
     }
 
     /**

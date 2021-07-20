@@ -19,7 +19,7 @@ public class ShoppingListItem {
     }
 
     /**
-     * Blank constructor
+     * Blank constructor - needed for application to run. Do not delete.
      */
     public ShoppingListItem() {
         this._itemDescription = "";

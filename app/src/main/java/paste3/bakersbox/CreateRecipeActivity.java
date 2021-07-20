@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -12,7 +11,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -213,47 +211,70 @@ public class CreateRecipeActivity extends AppCompatActivity {
      * RecipeManager that will create a new Recipe object and add it to the recipeMap. The recipe
      * name is also added to the appropriate key in the categoryMap.
      * @param view the current layout view
-     * @throws InterruptedException Thrown when a thread is waiting, sleeping, or otherwise
-     * occupied, and the thread is interrupted, either before or during the activity.
      */
-    public void submitRecipe(View view) throws InterruptedException {
-        // Get all EditText inputs and parse to string or float as needed
+    public void submitRecipe(View view) {
+        // Get all EditText inputs and call addNewRecipe()
         EditText inputRecipeName = findViewById(R.id.recipeName);
-        String recipeName  = inputRecipeName.getText().toString();
-        Log.d("Recipe Name", recipeName);
-
-        // Add the recipe name to the categoryMap (categorySpinnerSelection being the key).
-        RecipeManager.addRecipeToCategory(recipeName, categorySpinnerSelection);
-        RecipeManager.saveCategories();
-
-        // Collect, format and save all user entered data to variables.
         EditText inputPrepTime = findViewById(R.id.prepTimeInput);
-        float prepTime  = Float.parseFloat(inputPrepTime.getText().toString());
-//        Log.d("Prep Time", String.format("%f",prepTime));
         EditText inputCookTime = findViewById(R.id.cookTimeInput);
-        float cookTime  = Float.parseFloat(inputCookTime.getText().toString());
-//        Log.d("Cook Time", String.format("%f",cookTime));
         EditText inputServings = findViewById(R.id.servingsInput);
-        float numberServings  = Float.parseFloat(inputServings.getText().toString());
-//        Log.d("Servings", String.format("%f",numberServings));
         EditText inputTypeServing = findViewById(R.id.servingTypeInput);
-        String typeServing  = inputTypeServing.getText().toString();
-//        Log.d("Type of Serving", typeServing);
         EditText inputMethod = findViewById(R.id.methodInput);
-        String method  = inputMethod.getText().toString();
-//        Log.d("Method", method);
+        addNewRecipe(inputRecipeName, inputPrepTime, inputCookTime, inputServings, inputTypeServing,
+                inputMethod);
+    }
 
-        // Send data as well as the recipeIngredientList to the Recipe Manager
-        RecipeManager.addRecipe(recipeName, recipeIngredientList, prepTime, cookTime,
-                numberServings, typeServing, method);
+    /**
+     *  Called by submitRecipe(), in response to the add recipe button being clicked.
+     * Checks that inputs are valid, then parses them, fetches the  and sends them to the Recipe
+     * manager to create the new Recipe.
+     * @param inputRecipeName the recipe name
+     * @param inputPrepTime teh preparation time
+     * @param inputCookTime the cook /  bake time
+     * @param inputServings number of servings
+     * @param inputTypeServing type of servings
+     * @param inputMethod the method
+     */
+    public void addNewRecipe(EditText inputRecipeName, EditText inputPrepTime,
+                             EditText inputCookTime, EditText inputServings,
+                             EditText inputTypeServing, EditText inputMethod) {
+        // If all fields are filled out
+        if (!inputRecipeName.getText().toString().isEmpty()
+                && !inputRecipeName.getText().toString().isEmpty()
+                && !inputPrepTime.getText().toString().isEmpty()
+                && !inputCookTime.getText().toString().isEmpty()
+                && !inputServings.getText().toString().isEmpty()
+                && !inputTypeServing.getText().toString().isEmpty()
+                && !inputMethod.getText().toString().isEmpty()
+                && !categorySpinnerSelection.isEmpty()
+                && recipeIngredientList.size() > 0 ) {
 
-        // Pop up message to give user feedback that the recipe has been added
-        Toast toast = Toast.makeText(this,"Recipe Created",Toast.LENGTH_SHORT);
-        toast.show();
-        Thread.sleep(2000);
+            // Parse the data, add recipe to the category list, then send data to the Recipe Manager
+            String recipeName = inputRecipeName.getText().toString();
 
-        // Go back to previous activity layout
-        this.finish();
+            // Add the recipe name to the categoryMap (categorySpinnerSelection being the key).
+            RecipeManager.addRecipeToCategory(recipeName, categorySpinnerSelection);
+            RecipeManager.saveCategories();
+
+            // Collect, format and save all user entered data to variables.
+            float prepTime = Float.parseFloat(inputPrepTime.getText().toString());
+            float cookTime = Float.parseFloat(inputCookTime.getText().toString());
+            float numberServings = Float.parseFloat(inputServings.getText().toString());
+            String typeServing = inputTypeServing.getText().toString();
+            String method = inputMethod.getText().toString();
+
+            // Send data as well as the recipeIngredientList to the Recipe Manager
+            RecipeManager.addRecipe(recipeName, recipeIngredientList, prepTime, cookTime,
+                    numberServings, typeServing, method);
+
+//            // Pop up message to give user feedback that the recipe has been added
+//            Toast toast = Toast.makeText(this, "Recipe Created", Toast.LENGTH_SHORT);
+//            toast.show();
+//            Thread.sleep(2000);
+
+            // Go back to previous activity layout
+            this.finish();
+        }
     }
 
     /**
