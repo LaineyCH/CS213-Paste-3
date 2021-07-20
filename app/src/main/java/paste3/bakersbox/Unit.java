@@ -9,7 +9,7 @@ package paste3.bakersbox;
 public class Unit {
 
     private String _unitLabel;
-    private final float _siQuantity;
+    private float _siQuantity;
 
     /**
      * Main constructor for Unit
@@ -53,4 +53,7 @@ public class Unit {
         return _siQuantity;
     }
 
+    public void setSiQuantity(float siQuantity) {
+        this._siQuantity = siQuantity;
+    }
 }
